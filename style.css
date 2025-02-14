@@ -934,7 +934,7 @@ white-space: nowrap;
         border-radius: 10px !important;
         padding: 20px !important;
         border: 1.5px solid var(--customThemeColor) !important;
-        box-shadow: 0 0 10px var(--customThemeColor);
+        box-shadow: 0 0 15px var(--customThemeColor);
     }
 }
 
