@@ -527,9 +527,10 @@ white-space: nowrap;
     z-index: 9000 !important;
     display: inline-flex;
     height: 100%;
-
-    @media screen and (max-width: 1000px) {
-      font-size: calc(var(--mainFontSize) * 1.75);
+}
+@media screen and (max-width: 1000px) {
+    .drawer-icon {
+        font-size: calc(var(--mainFontSize) * 1.75);
     }
 }
 
@@ -545,6 +546,17 @@ white-space: nowrap;
 }
 
 /* Menu Content 選單內容 */
+.drawer-content {
+    background-color: var(--SmartThemeBlurTintColor);
+    padding: 1.2%;
+    overflow-y: scroll !important;
+    position: absolute;
+    top: var(--topBarBlockSize);
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    height: calc(100dvh - var(--bottomInputAreaHeight));
+}
+
 #left-nav-panel,
 #right-nav-panel,
 .drawer-content {
@@ -567,8 +579,13 @@ white-space: nowrap;
 }
 @media screen and (max-width: 1000px) {
     .drawer-content {
+        top: calc(var(--topBarBlockSize)) !important;
+        margin-top: 0 !important;
         padding: 5% !important;
         min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        max-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;;
+        height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        min-width: 100% !important;
     }
 }
 
@@ -605,8 +622,11 @@ white-space: nowrap;
     height: calc(100dvh - var(--topBarBlockSize));
 }
 
-#right-nav-panel {
+#right-nav-panel,
+.fillLeft {
     width: calc((100dvw - var(--sheldWidth)) / 2);
+}
+#right-nav-panel {
     background-color: var(--SmartThemeBlurTintColor);
     padding: 1.2%;
     overflow-y: scroll !important;
@@ -626,6 +646,10 @@ white-space: nowrap;
         padding: 0 !important;
     }
 }
+.fillLeft .scrollableInner {
+    height: fit-content !important;
+    padding: 0px !important;
+}
 
 @media screen and (max-width: 1000px) {
     #right-nav-panel,
@@ -636,6 +660,8 @@ white-space: nowrap;
     #logprobsViewer,
     #movingDivs > div {
         min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        min-width: 100% !important;
     }
 }
 
