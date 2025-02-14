@@ -1,8 +1,8 @@
 # Moonlit Echoes Theme
 
-English｜繁體中文
+[English](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/)｜**繁體中文**
 
-![img](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_screen_demo_preview.jpg)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_screen_demo_preview.jpg)
 
 **「Moonlit Echoes 月下回聲」** 是一款供 SillyTavern 使用的介面主題。依據我的個人喜好進行調整和修改，旨在讓其更加現代、優雅、簡潔，並盡可能提供桌面與行動端的更舒服的使用體驗。
 
@@ -21,12 +21,11 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 ### 螢幕截圖
 截圖來自 **1.0.0 版本**，展示於 MacBook（Chrome），僅供參考。於 iPhone（Safari PWA）展示之更多截圖請見本項目的 [.github 資料夾](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github)。
 
-| Echo 回聲 | Whisper 低語 | Hush 輕聲 |
-|:------:|:--------:|:----------:|
-| ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_echo_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_whisper_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_hush_preview.jpg) |
 | **Flat 扁平** | **Bubble 氣泡** | **Document 文件** |
+|:------:|:--------:|:----------:|
 | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_flat_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_bubble_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_document_preview.jpg) |
-
+| **Echo 回聲** | **Whisper 低語** | **Hush 輕聲** |
+| ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_echo_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_whisper_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_hush_preview.jpg) |
 
 ## 安裝方式
 ### 前提條件
@@ -71,7 +70,6 @@ thumbnails:
 
 ## 特別感謝
 由衷感謝所有人一路上的幫助與喜愛。以及在最開始在 SillyTavern Discord 伺服器上幫助我的 **ceruleandeep**，你是這一切的開始。
-
 
 ## 授權協議
 AGPLv3
