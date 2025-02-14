@@ -738,6 +738,10 @@ white-space: nowrap;
     @media screen and (max-width: 1000px) {
         padding: 0 15px;
         border: 0 !important;
+
+        .mes_buttons {
+            overflow: visible;
+        }
     }
 
     /* --- Max Context Tag 最大上下文標記 --- */
@@ -1073,6 +1077,10 @@ body.documentstyle {
     }
 
     #chat {
+        @media screen and (max-width: 1000px) {
+            padding: 0;
+        }
+
         .swipe_left {
             position: absolute;
             right: 111px !important;
@@ -1370,11 +1378,6 @@ body.whisperstyle #chat {
             z-index: 0;
             border-radius: 0 15px 0 0 !important;
             opacity: 0.8;
-
-            @media screen and (max-width: 1000px) {
-                width: 60%;
-                height: 120px;
-            }
         }
         &.last_mes::before {
             filter: none;
@@ -1388,10 +1391,17 @@ body.whisperstyle #chat {
             height: 50px;
             opacity: 0.9;
             z-index: 3;
-
-            @media screen and (max-width: 1000px) {
-                top: 70px;
+        }
+        @media screen and (max-width: 1000px) {
+            &::before {
+                top: 0;
+                width: 55%;
+                min-height: 125px !important;
             }
+            &::after {
+                top: 75px;
+            }
+
         }
 
         /* Whisper: User Message 低語：使用者訊息 */
