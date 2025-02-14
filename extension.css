@@ -1,0 +1,433 @@
+/* --- Quick Replies 快速回覆 --- */
+
+.qr--bar {
+    > .qr--buttons {
+        padding: 5px !important;
+
+        &.qr--color {
+        background-color: unset;
+        gap: 3px;
+        margin-top: 10px;
+        }
+
+        .qr--button {
+        font-size: calc(var(--mainFontSize) * 0.9);
+        }
+    }
+}
+
+#qr--popout {
+    > .qr--body {
+        > .qr--buttons {
+        &.qr--color {
+            background-color: unset;
+            gap: 3px;
+        }
+        }
+    }
+}
+
+.ctx-menu {
+    position: absolute;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    min-width: 200px;
+    padding: 5px 8px;
+}
+
+.ctx-blocker {
+    li {
+        margin-bottom: 0px !important;
+        font-size: var(--mainFontSize);
+    }
+}
+
+
+/* --- Chat Info 聊天資訊 --- */
+
+#extensionTopBar {
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: auto;
+    padding-top: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px !important;
+    background-color: var(--SmartThemeBlurTintColor);
+    backdrop-filter: blur(var(--SmartThemeBlurStrength));
+    height: var(--bottomFormBlockSize);
+    gap: 10px;
+    font-size: calc(var(--mainFontSize) * 0.9);
+    position: fixed;
+    transition: all 0.8s ease;
+    z-index: 3005;
+    opacity: 0.7;
+    width: calc(var(--sheldWidth) - 10%) !important;
+
+    &:hover {
+        opacity: 0.9;
+        box-shadow: 0 0px 3px var(--SmartThemeShadowColor);
+    }
+
+    @media (max-width: 1000px) {
+        opacity: 0.8;
+        width: calc(100% - 4%) !important;
+    }
+}
+
+#extensionSideBar {
+    top: var(--topBarBlockSize) !important;
+    max-height: calc(100dvh - var(--topBarBlockSize)) !important;
+    min-height: calc(100dvh - var(--topBarBlockSize)) !important;
+    border-radius: 0 !important;
+
+    &.visible {
+        display: flex;
+        padding: 15px;
+        border: 0;
+        border-top: 2px solid var(--customThemeColor);
+    }
+
+    #extensionSideBarContainer {
+        padding: 10px;
+    }
+}
+
+#select_chat_popup {
+    padding: 10px;
+    box-shadow: 0px 0px 20px var(--SmartThemeBorderColor);
+
+    @media screen and (max-width: 1000px) {
+        align-items: start;
+        height: 90dvh;
+        max-height: 90dvh;
+        align-content: start;
+        max-width: unset;
+        overflow-y: auto;
+    }
+}
+
+.select_chat_block {
+    margin: 5px 0;
+    padding: 10px;
+}
+
+#extensionConnectionProfiles {
+    width: calc(100% - 20%) !important;
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+    transform: translateX(-50%);
+    left: 50% !important;
+    right: auto !important;
+    position: relative !important;
+    opacity: 0.6;
+    transition: all 0.8s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+#extensionSideBar #extensionSideBarContainer .sideBarItem .chatStats .counterBlock::after {
+    color: var(--SmartThemeBodyColor) !important;
+    font-size: calc(var(--mainFontSize)* 0.85);
+    opacity: 0.6;
+}
+
+body.waifuMode {
+    #extensionConnectionProfiles {
+        border-radius: 10px !important;
+        margin-top: 10px !important;
+        margin-bottom: 0px !important;
+    }
+}
+
+/* --- Dialogue Colorizer 對話顏色 --- */
+
+.dc-color-picker-wrapper {
+    border: 0px !important;
+}
+.dc-color-settings-group {
+    border: 0px solid var(--SmartThemeBodyColor) !important;
+}
+
+label[for="xdc-char_color_override"] b {
+    padding: 10px 0;
+    background-image: none !important;
+    border-radius: 0px !important;
+    letter-spacing: 1px;
+    display: inline-block;
+    font-weight: bold;
+    border: none;
+}
+
+/* --- Image Captioning 圖片解析 --- */
+
+.mes_img_controls {
+    .right_menu_button {
+        color: var(--customThemeColor);
+        text-shadow: 0 0 5px #FFF !important;
+        filter: none;
+
+        &:hover {
+        filter: none;
+        color: #FFF;
+        text-shadow: 0 0 5px var(--customThemeColor) !important;
+        }
+    }
+}
+
+table.img_metadata {
+    text-align: left;
+    max-height: 30dvh !important;
+    border-radius: 10px;
+    margin-top: 30px !important;
+    padding: 10px 20px;
+}
+
+.img_enlarged_container {
+    pre {
+        max-height: 30dvh;
+
+        code {
+        text-align: left;
+        border-radius: 10px;
+        }
+    }
+}
+
+/* --- Prome (Visual Novel Extension) 進階視覺小說模式 --- */
+
+.promeChatHistoryList {
+    .mes_text {
+        max-height: 30dvh !important;
+        text-align: left !important;
+    }
+}
+
+/* --- Quick Persona 使用者快速切換 --- */
+
+@media screen and (max-width: 1000px) {
+    #quickPersona {
+        margin: 0 calc(var(--bottomFormBlockSize) / 4) !important;
+    }
+}
+
+#quickPersonaMenu {
+    backdrop-filter: none !important;
+    border-radius: 10px !important;
+
+    .list-group {
+        backdrop-filter: none;
+        border-radius: 0;
+        box-shadow: none;
+        transition: all 0.5s ease;
+        background-color: unset !important;
+        opacity: 1;
+    }
+
+    ul {
+        gap: 8px;
+    }
+    li {
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+}
+
+.quickPersonaMenuImg {
+    opacity: 1;
+    transition: all 0.5s ease;
+
+    &:hover {
+        box-shadow: 0 0 5px var(--customThemeColor);
+        filter: brightness(1.1);
+    }
+    &.default {
+        outline-color: var(--customThemeColor) !important;
+    }
+}
+
+/* --- Codex 法典 --- */
+
+.stcdx--root {
+    top: var(--topBarBlockSize) !important;
+    padding: 1%;
+    border-radius: 0px !important;
+
+    > .stcdx--content.stcdx--entry {
+        section {
+            padding: 10px;
+        }
+    }
+
+    > .stcdx--content,
+    > .stcdx--editor {
+        text-align: left !important;
+    }
+}
+
+/* --- More Flexible Continues 彈性回覆 --- */
+
+.mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
+    padding-bottom: 25px !important;
+}
+body.echostyle {
+    .mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
+        padding-bottom: 0 !important;
+    }
+}
+
+.mfc--ctx-blocker:has(.mfc--tree) {
+    > .mfc--tree {
+        min-width: calc(var(--sheldWidth) - 15%) !important;
+        width: calc(var(--sheldWidth) - 15%) !important;
+        max-width: calc(var(--sheldWidth) - 15%) !important;
+        max-height: calc(80vh - 1em - var(--triggerTop));
+        background-color: var(--SmartThemeBlurTintColor);
+        white-space: normal;
+        word-wrap: break-word;
+        overflow: auto;
+        border-radius: 15px;
+        padding: 10px 15px;
+        backdrop-filter: blur(calc(var(--SmartThemeBlurStrength)));
+        transition: all 0.5s ease;
+
+        &.mfc--flipV {
+            top: unset;
+            bottom: calc(100vh - var(--triggerTop));
+            max-height: 75dvh !important;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        > .mfc--tree {
+            min-width: 60dvw !important;
+            max-width: 60dvw !important;
+        }
+    }
+
+    .mfc--treeText {
+        white-space: pre-line;
+        padding: 10px 15px;
+
+        &:hover {
+            text-decoration: none !important;
+        }
+    }
+
+    .mfc--active {
+        > .mfc--tree {
+            border: 1.5px solid var(--customThemeColor);
+
+            > .mfc--treeText {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.lacommon--quickActions {
+    margin-left: 20px;
+
+    &[data-lacommon--anchor="bottom"] {
+        position: absolute;
+        bottom: 20px !important;
+        left: calc(var(--custom-ChatAvatar, 40px) + 2% + 50px) !important;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin: 5px 0;
+    }
+}
+body.echostyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.echostyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+    left: 0 !important;
+    bottom: 10px !important;
+}
+body.whisperstyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.whisperstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.hushstyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.hushstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+    left: 25px !important;
+    bottom: 10px !important;
+}
+body.hideChatAvatars .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.hideChatAvatars .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+    bottom: 30px !important;
+}
+body.documentstyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
+body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+    left: 20px !important;
+    bottom: 20px !important;
+    margin: 0 !important;
+}
+
+.mfc--root {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .mfc--undo,
+    .mfc--regen,
+    .mfc--swipes,
+    .mfc--cont,
+    .mfc--fav {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 1em;
+        color: inherit;
+        margin-right: 10px;
+        opacity: 0.5;
+        transition: all 0.5s ease;
+
+        &:hover {
+            opacity: 1 !important;
+        }
+    }
+
+    .mfc--undo::before {
+        content: "\f3e5";
+    }
+    .mfc--regen::before {
+        content: "\f021";
+    }
+    .mfc--swipes::before {
+        content: "\f4ad";
+    }
+    .mfc--cont::before {
+        content: "\f178";
+    }
+    .mfc--fav::before {
+        content: "\f004";
+    }
+
+    .mfc--action {
+        visibility: hidden;
+        position: relative;
+
+        &::before {
+            visibility: visible;
+            position: absolute;
+            left: 0;
+        }
+    }
+}
+
+/* --- Custom Theme Style Inputs 自定義樣式輸入 --- */
+
+.ctsi-flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.ctsi-button-container {
+    padding: 5px;
+}
