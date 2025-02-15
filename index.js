@@ -1,4 +1,4 @@
-const settingsKey = 'SillyTavernMoonlitEchosTheme';
+const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const EXTENSION_NAME = 'Moonlit Echos Theme';
 
 /**
@@ -140,12 +140,6 @@ function renderExtensionSettings() {
     console.debug(`[${EXTENSION_NAME}]`, 'Extension initialized');
 })();
 
-
-/*
- * Chat Display Switcher (聊天外觀切換器)
- * Dynamically toggles chat display styles (e.g., Echo, Whisper) based on the selected theme.
- * Also stores and restores user preferences via localStorage.
- */
 
 /*
  * Chat Display Switcher (聊天外觀切換器)
