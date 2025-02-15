@@ -1,5 +1,5 @@
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
-const EXTENSION_NAME = 'Moonlit Echos Theme';
+const EXTENSION_NAME = 'Moonlit Echoes Theme';
 
 /**
  * @typedef {Object} SillyTavernMoonlitechosThemeSettings
