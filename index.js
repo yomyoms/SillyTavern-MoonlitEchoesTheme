@@ -156,51 +156,26 @@ var newEchoOption = null;
 var newWhisperOption = null;
 var newHushOption = null;
 
-// === (2) 根據主題動態新增/移除 echo、whisper、hush 選項 ===
+// === (2) 永遠新增 echo、whisper、hush 選項 ===
 function checkAndToggleEchoOption() {
-    if (themeSelect.value === "Moonlit Echoes - by Rivelle") {
-        // 當主題為 "Moonlit Echoes - by Rivelle" 時，如下選項不存在就新增
-
-        // Echo
-        if (!newEchoOption) {
-            newEchoOption = document.createElement("option");
-            newEchoOption.value = "3"; // 使用值 3 表示 echo 風格
-            newEchoOption.text = "Echo";
-            chatDisplaySelect.appendChild(newEchoOption);
-        }
-
-        // Whisper
-        if (!newWhisperOption) {
-            newWhisperOption = document.createElement("option");
-            newWhisperOption.value = "4"; // 使用值 4 表示 whisper 風格
-            newWhisperOption.text = "Whisper";
-            chatDisplaySelect.appendChild(newWhisperOption);
-        }
-
-        // Hush
-        if (!newHushOption) {
-            newHushOption = document.createElement("option");
-            newHushOption.value = "5"; // 使用值 5 表示 hush 風格
-            newHushOption.text = "Hush";
-            chatDisplaySelect.appendChild(newHushOption);
-        }
-
-    } else {
-        // 若主題不是 "Moonlit Echoes - by Rivelle"，移除 echo、whisper、hush 選項（若存在）
-        if (newEchoOption) {
-            chatDisplaySelect.removeChild(newEchoOption);
-            newEchoOption = null;
-        }
-        if (newWhisperOption) {
-            chatDisplaySelect.removeChild(newWhisperOption);
-            newWhisperOption = null;
-        }
-        if (newHushOption) {
-            chatDisplaySelect.removeChild(newHushOption);
-            newHushOption = null;
-        }
-        // 確保 body 上不帶有 echo、whisper、hush 風格
-        document.body.classList.remove("echostyle", "whisperstyle", "hushstyle");
+    // 永遠確保新增 echo、whisper、hush 選項 (若不存在)
+    if (!newEchoOption) {
+        newEchoOption = document.createElement("option");
+        newEchoOption.value = "3"; // 使用值 3 表示 echo 風格
+        newEchoOption.text = "Echo";
+        chatDisplaySelect.appendChild(newEchoOption);
+    }
+    if (!newWhisperOption) {
+        newWhisperOption = document.createElement("option");
+        newWhisperOption.value = "4"; // 使用值 4 表示 whisper 風格
+        newWhisperOption.text = "Whisper";
+        chatDisplaySelect.appendChild(newWhisperOption);
+    }
+    if (!newHushOption) {
+        newHushOption = document.createElement("option");
+        newHushOption.value = "5"; // 使用值 5 表示 hush 風格
+        newHushOption.text = "Hush";
+        chatDisplaySelect.appendChild(newHushOption);
     }
 }
 
@@ -211,29 +186,23 @@ function applyChatDisplayStyle() {
 
     // 根據選擇的值來新增對應的風格 class
     switch (chatDisplaySelect.value) {
-        case "0": // Flat: 完全移除其他風格，這邊可選擇不加其他樣式或加上 flatchat 樣式（依需求而定）
+        case "0": // Flat: 套用 flatchat
             document.body.classList.add("flatchat");
             break;
-        case "1": // bubble: 只保留 bubblechat
+        case "1": // bubble: 套用 bubblechat
             document.body.classList.add("bubblechat");
             break;
-        case "2": // document: 只保留 documentstyle
+        case "2": // document: 套用 documentstyle
             document.body.classList.add("documentstyle");
             break;
-        case "3": // echo: 僅在主題為 "Moonlit Echoes - by Rivelle" 時套用
-            if (themeSelect.value === "Moonlit Echoes - by Rivelle") {
-                document.body.classList.add("echostyle");
-            }
+        case "3": // echo: 套用 echostyle，不再依賴主題
+            document.body.classList.add("echostyle");
             break;
-        case "4": // whisper: 同上，僅在主題為 "Moonlit Echoes - by Rivelle" 時套用
-            if (themeSelect.value === "Moonlit Echoes - by Rivelle") {
-                document.body.classList.add("whisperstyle");
-            }
+        case "4": // whisper: 套用 whisperstyle，不再依賴主題
+            document.body.classList.add("whisperstyle");
             break;
-        case "5": // hush: 同上，僅在主題為 "Moonlit Echoes - by Rivelle" 時套用
-            if (themeSelect.value === "Moonlit Echoes - by Rivelle") {
-                document.body.classList.add("hushstyle");
-            }
+        case "5": // hush: 套用 hushstyle，不再依賴主題
+            document.body.classList.add("hushstyle");
             break;
         default:
             // 其他值的情況，可視需求處理
