@@ -10,6 +10,8 @@ const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 const THEME_VERSION = "2.0.0"; // 主題版本號
 
+import { t } from '../../../i18n.js';
+
 /**
  * 主題設定設定
  * 此設定定義了所有可自定義的設定項
