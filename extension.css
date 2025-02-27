@@ -53,7 +53,7 @@ input[type="range"].neo-range-input {
     border-radius: 3px;
 }
 input[type="number"].neo-range-input {
-    width: 60px;
+    min-width: 60px;
     text-align: center;
 }
 

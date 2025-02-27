@@ -240,7 +240,85 @@ const themeCustomSettings = [
         "default": true,
         "category": "features",
         "description": t`A message input field designed for mobile, providing a wider input box`,
-        "cssFile": "css/mobile-send_form.css"
+        "cssBlock":  `
+            /* Mobile Input Field 手機端輸入欄位 */
+            @media screen and (max-width: 1000px) {
+                /* Mobile Chat Input Overall 聊天輸入欄位整體 */
+                #send_form {
+                    margin-bottom: 0 !important;
+                    border: none !important;
+                    border-top: 2px solid var(--SmartThemeBodyColor) !important;
+                    box-shadow: 0 0 15px var(--SmartThemeBodyColor);
+                    min-height: 100% !important;
+                    padding: 10px 25px;
+                    border-radius: 30px 30px 0 0 !important;
+                    transition: all 0.5s ease;
+
+                    &:focus-within {
+                        border: none !important;
+                        border-top: 2px solid var(--customThemeColor) !important;
+                        box-shadow: 0 0 15px var(--customThemeColor);
+                    }
+
+                    &.compact {
+                        #leftSendForm,
+                        #rightSendForm {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-wrap: nowrap;
+                            width: unset;
+                        }
+                    }
+                }
+
+                /* Mobile Chat Menu 聊天輸選單 */
+                #nonQRFormItems {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: auto auto;
+                    grid-template-areas:
+                    "textarea textarea"
+                    "left right";
+                    gap: 0;
+                    padding: 0;
+
+                    #send_textarea {
+                        grid-area: textarea;
+                        box-sizing: border-box;
+                        width: 100%;
+                        padding: 5px 0;
+                    }
+                }
+
+                /* Mobile Left & Right Chat Menu 左右側聊天選單 */
+                #leftSendForm,
+                #rightSendForm {
+                    margin: 5px 0;
+                }
+                #leftSendForm {
+                    grid-area: left;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start !important;
+                }
+                #rightSendForm {
+                    grid-area: right;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end !important;
+                }
+
+                #rightSendForm > div,
+                #leftSendForm > div,
+                #nonQRFormItems #options_button {
+                    font-size: 16px;
+                }
+                #nonQRFormItems #options_button {
+                    margin-right: 10px;
+                }
+            }
+    `
     },
 ];
 
