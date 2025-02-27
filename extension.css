@@ -1,3 +1,74 @@
+/* --- Moonlit Echoes Theme 月下回聲 --- */
+
+.theme-category-content {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.colors-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.theme-setting-item {
+    margin-bottom: 12px;
+}
+
+.theme-category-header {
+    padding: 8px 0 !important;
+    margin-bottom: 5px !important;
+}
+
+.theme-setting-container label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.95em;
+    font-weight: bold;
+}
+
+.theme-setting-container small {
+    display: block;
+    margin-bottom: 6px;
+    opacity: 0.7;
+    font-size: 0.85em;
+}
+
+.theme-color-picker {
+    max-width: 480px;
+}
+
+.moonlit-select {
+    min-width: 186px !important;
+    padding: 5px 8px !important;
+}
+
+.theme-setting-container {
+    max-width: 480px;
+}
+
+input[type="range"].neo-range-input {
+    height: 6px;
+    border-radius: 3px;
+}
+input[type="number"].neo-range-input {
+    width: 60px;
+    text-align: center;
+}
+
+.color-preview {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.moonlit-input {
+    padding: 5px 8px !important;
+    background-color: rgba(30, 30, 30, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px !important;
+    max-width: 480px !important;
+}
+
 /* --- Quick Replies 快速回覆 --- */
 
 .qr--bar {
@@ -430,4 +501,25 @@ body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bott
 
 .ctsi-button-container {
     padding: 5px;
+}
+
+
+/* --- Notebook 筆記本 --- */
+
+#notebookPanel {
+    top: var(--topBarBlockSize) !important;
+    max-height: calc(100dvh - var(--topBarBlockSize)) !important;
+    height: calc(100dvh - var(--topBarBlockSize)) !important;
+    padding-top: 30px;
+    padding-left: 1.2%;
+    padding-right: 1.2%;
+    border-radius: 0;
+    border: 0;
+    border-top: 2px solid var(--customThemeColor) !important;
+}
+
+/* --- Qvink Memory（進階聊天記憶） --- */
+
+.qvink_memory_display.qvink_short_memory {
+    color: var(--customThemeColor2) !important;
 }

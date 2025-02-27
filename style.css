@@ -1410,14 +1410,14 @@ body.whisperstyle #chat {
             position: absolute;
             top: 0;
             right: 0;
-            width: 50%;
+            width: var(--customWhisperAvatarWidth, 50%);
             height: 100px;
-            background: var(--mes-avatar-url) center no-repeat;
+            background: var(--mes-avatar-url) var(--customWhisperAvatarAlign) no-repeat;
             background-size: cover;
-            mask-image: linear-gradient(to bottom, black 70%, rgba(0, 0, 0, 0) 100%);
+            mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0) 100%);
             mask-size: 100% 100%;
             mask-repeat: no-repeat;
-            -webkit-mask-image: linear-gradient(to left, black 70%, rgba(0, 0, 0, 0) 100%);
+            -webkit-mask-image: linear-gradient(to left, black 50%, rgba(0, 0, 0, 0) 100%);
             -webkit-mask-size: 100% 100%;
             -webkit-mask-repeat: no-repeat;
             z-index: 0;
@@ -1836,84 +1836,6 @@ body.echostyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
     }
 }
 
-/* Mobile Input Field 手機端輸入欄位 */
-@media screen and (max-width: 1000px) {
-    /* Mobile Chat Input Overall 聊天輸入欄位整體 */
-    #send_form {
-        margin-bottom: 0 !important;
-        border: none !important;
-        border-top: 2px solid var(--SmartThemeBodyColor) !important;
-        box-shadow: 0 0 15px var(--SmartThemeBodyColor);
-        min-height: 100% !important;
-        padding: 10px 25px;
-        border-radius: 30px 30px 0 0 !important;
-        transition: all 0.5s ease;
-
-        &:focus-within {
-            border: none !important;
-            border-top: 2px solid var(--customThemeColor) !important;
-            box-shadow: 0 0 15px var(--customThemeColor);
-        }
-
-        &.compact {
-            #leftSendForm,
-            #rightSendForm {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-wrap: nowrap;
-                width: unset;
-            }
-        }
-    }
-
-    /* Mobile Chat Menu 聊天輸選單 */
-    #nonQRFormItems {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-        "textarea textarea"
-        "left right";
-        gap: 0;
-        padding: 0;
-
-        #send_textarea {
-            grid-area: textarea;
-            box-sizing: border-box;
-            width: 100%;
-            padding: 5px 0;
-        }
-    }
-
-    /* Mobile Left & Right Chat Menu 左右側聊天選單 */
-    #leftSendForm,
-    #rightSendForm {
-        margin: 5px 0;
-    }
-    #leftSendForm {
-        grid-area: left;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start !important;
-    }
-    #rightSendForm {
-        grid-area: right;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end !important;
-    }
-
-    #rightSendForm > div,
-    #leftSendForm > div,
-    #nonQRFormItems #options_button {
-        font-size: 16px;
-    }
-    #nonQRFormItems #options_button {
-        margin-right: 10px;
-    }
-}
-
 /* --- Chat Bar Menu 聊天選單 --- */
 
 #logprobsViewer,
@@ -1952,8 +1874,8 @@ body.echostyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
 
 .expression-holder {
     position: absolute;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+    mask-image: var(--VN-expression-holder);
+    -webkit-mask-image: var(--VN-expression-holder);
     mask-size: 100% 100%;
     -webkit-mask-size: 100% 100%;
     mask-repeat: no-repeat;
@@ -2324,7 +2246,7 @@ span.select2.select2-container {
 }
 @media screen and (max-width: 1000px) {
     .list-group .list-group-item.ctx-item {
-        padding: 5px;
+        padding: 5px !important;
     }
 }
 
@@ -2371,6 +2293,28 @@ span.select2.select2-container {
 
 /* PERSONA MANAGEMENT 使用者角色管理
 - - - - - - - - - - - - - - - - - */
+
+/* 使用者角色名稱 */
+#persona_controls .persona_name {
+    color: var(--customThemeColor);
+    opacity: 1 !important;
+}
+
+/* 項目標題 */
+.standoutHeader {
+    margin: 12px 0 10px 0;
+    padding: 5px;
+    padding-left: 10px !important;
+    background-color: var(--SmartThemeBlurTintColor);
+    background-image: none !important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    border-bottom: 2px solid var(--customThemeColor);
+}
 
 #user_avatar_block {
     .avatar-container {
