@@ -12,13 +12,21 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 |----------------------|-------------------|
 | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ui_overview_preview.jpg)     | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/visual_novel_mode_preview.jpg)    |
 
-### 功能與特色
+## 功能與特色
+
+### 核心功能
 - 與 SillyTavern 預設主題兼容，並確保與其他 SillyTavern 擴充功能協作順暢。
 - 適配桌機與行動裝置，針對行動設備優化，提供更寬敞的輸入欄位與其他適配調整，致力為介面美觀強迫症帶來更舒適的排版體驗。
-- 新增多種聊天訊息風格，除了 SillyTavern 內建的「扁平」、「氣泡」、「文件」外，還提供：「Echo」（回聲）、「Whisper」（低語）、「Hush」（輕聲）等風格⋯⋯未來仍可能新增更多風格！
+- 新增多種聊天風格，除了 SillyTavern 內建的 「Flat」、「Bubble」、「Document」 之外，還有 「Echo」（回音）、「Whisper」（低語）、「Hush」（靜默），以及全新的隱藏款「Ripple」（漣漪）。
 - 提供多項自訂設定，可根據個人喜好自由調整。
+  
+### Moonlit Echoes 主題預設設定檔
+使用者現在可以輕鬆分享基於 Moonlit Echoes Theme 的配色與主題，並與 SillyTavern 內建 UI 主題無縫切換。
 
-### 螢幕截圖
+<img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/Moonlit%20Echoes%20Theme%20Presets.png" width="500">  
+
+
+## 螢幕截圖
 截圖來自 **1.0.0 版本**，展示於 MacBook（Chrome），僅供參考。於 iPhone（Safari PWA）展示之更多截圖請見本項目的 [.github 資料夾](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github)。
 
 | **Flat 扁平** | **Bubble 氣泡** | **Document 文件** |
@@ -32,44 +40,29 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 建議使用 **最新版** 的 SillyTavern（無論是 Release 或 Staging 版本）與 Chrome 瀏覽器。
 
 ### 安裝步驟
-1. **安裝必要擴充功能**：透過 [SillyTavern Extension Manager](https://docs.sillytavern.app/extensions/) 安裝由 **IceFog** 製作的 **[Custom Theme Style Inputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs)**。此擴充可提供更便捷的自訂樣式選項，請務必安裝。
-2. **安裝 Moonlit Echoes Theme**：在 **SillyTavern 擴充管理器**中，使用「Install from URL」，貼入以下 Git URL：
+1. **安裝 Moonlit Echoes Theme**：在 **SillyTavern 擴充管理器**中，使用「Install from URL」，貼入以下 Git URL：
    ```
    https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
    ```
-3. **載入並啟用主題**：下載或直接匯入 `Moonlit Echoes - by Rivelle.json` 至 **User Settings**，並將其設為 UI 主題。**請勿更改檔案名稱**，否則擴充將無法正確識別。
-   ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/installation_guide.png)
-### 額外設定（建議）
-「Echo（回聲）」與「Whisper（低語）」訊息風格會在背景顯示角色頭貼，而 SillyTavern 預設開啟縮圖功能，可能導致模糊問題。如需關閉縮圖，請修改 `config.yaml`（位於 `/SillyTavern/config.yaml`），將 `thumbnails.enabled` 設為 `false`：
-```
-thumbnails:
-  enabled: false
-```
-
-
-## 使用說明
-- 在 SillyTavern 的擴充功能選單自由開關啟用。若你想切換到其他自定義風格，請先關閉此擴充以避免額外問題和嚴重跑版。
-- 特殊訊息風格「Echo」（回聲）、「Whisper」（低語）、「Hush」（輕聲）選項，僅在主題選為 `Moonlit Echoes - by Rivelle` 時才會出現。
-### 常見問題
-- 介面跑版 / 顏色未正確載入？請確認已安裝 **[Custom Theme Style Inputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs)**，並將 **Moonlit Echoes - by Rivelle** 設為 UI 主題。
-- 上方留白過大 / 背景漸層模糊過重？可在 **使用者設定 > Custom Theme Inputs** 調整，目前支援的調整包括：
-  * Theme Primary Color（主題主要色）
-  * Theme Secondary Color（主題次要色）
-  * Top Bar Color（導航列背景顏色）
-  * Drawer Icon Color（導航列圖示顏色）
-  * Background Image Blur Strength（背景模糊程度）
-  * Chat Background Color（聊天區背景顏色）
-  * Chat Gradient Blur（聊天區漸層模糊程度）
-  * Chat Avatar Size（頭像大小）
-  * Echo Message Background Avatar Width（「回聲」風格的訊息背景角色圖片寬度）
-  * Visual Novel Mode Chat Height（視覺小說模式的聊天欄高度）
+2. **關閉縮圖縮放（建議）**：某些訊息風格會將角色頭像顯示於背景中，而 SillyTavern 預設開啟縮圖縮放，可能導致影像模糊。若要關閉此功能，請修改 `config.yaml`（位於 `/SillyTavern/config.yaml`），將 `thumbnails.enabled` 設為 `false`：
+   ```
+   thumbnails:
+     enabled: false
+   ```
+3. **下載並啟用主題（可選）**：Moonlit Echoes Theme 安裝後即可使用。若要使用 預覽圖中的樣式，請下載 `Moonlit Echoes - by Rivelle.json`，並匯入 User Settings 的 UI Theme。請勿更改檔名，否則可能導致擴充無法正常運作。
 
 ## 回饋與建議
-若有任何問題或功能建議，歡迎透過此專案的 Issues 按照問題模板填寫回饋。
-
+若有任何問題或功能建議，請在 Issues 頁面提交回饋，並使用提供的模板填寫詳細資訊。
 
 ## 特別感謝
-由衷感謝所有人一路上的幫助與喜愛。以及在最開始在 SillyTavern Discord 伺服器上幫助我的 **ceruleandeep**，你是這一切的開始。
+由衷感謝所有人一路上的幫助與喜愛。
+
+- 感謝 ceruleandeep 在 SillyTavern Discord 群組的初期支援——這一切都是從你開始的。
+- 特別感謝 IceFog72 鼓勵我製作 SillyTavern 主題，並開發了 [SillyTavern-CustomThemeStyleInputs](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme)，這讓我在初期省去了許多麻煩。
+- 感謝 Bronya-Rand 的開源貢獻，讓我從你的 SillyTavern 擴充 中學到了許多，並參考了功能排版設計。
+- 感謝 vesper，我從你的自定義主題中得到了設計 Ripple 訊息風格的靈感。
+
+最後，特別、特別感謝 Wolfsblvt 和 Cohee，為 SillyTavern 增加了 讓第三方擴充能夠使用 SillyTavern i18n（國際化系統） 的功能。這極大地改善了非英語使用者的體驗，真的非常感謝！
 
 ## 授權協議
 AGPLv3
