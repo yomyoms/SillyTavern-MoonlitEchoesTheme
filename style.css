@@ -20,6 +20,7 @@
     --customThemeMenuColor: var(--SmartThemeChatTintColor);
     --active: var(--customThemeColor);
     --SmartThemeCheckboxTickColor: var(--SmartThemeBlurTintColor);
+    --customRippleAvatarRatio: 1.5;
 
     /* Secondary Colors 次要顏色 */
     --fullred: rgb(229, 57, 53);
@@ -762,7 +763,7 @@ white-space: nowrap;
         padding: 10px;
         margin-bottom: 5px;
 
-        /* General Avatar 一般頭貼 */
+        /* General Avatar 一般頭像 */
         .avatar {
             display: flex;
             justify-content: center;
@@ -782,7 +783,7 @@ white-space: nowrap;
                 border: 0 !important;
             }
         }
-        /* User Avatar 使用者頭貼 */
+        /* User Avatar 使用者頭像 */
         &[is_user="true"] .avatar {
             border: 1px solid var(--customThemeColor) !important;
         }
@@ -946,10 +947,10 @@ white-space: nowrap;
     }
 }
 
-/* --- Chat Avatar Styles 聊天訊息角色頭貼樣式 --- */
+/* --- Chat Avatar Styles 聊天訊息角色頭像樣式 --- */
 
 
-/* Avatar: Rectangle 頭貼：「矩形」（大頭貼） */
+/* Avatar: Rectangle 頭像：「矩形」（大頭像） */
 body.big-avatars #chat .mes {
     .mes_block {
         border-radius: 10px;
@@ -981,7 +982,7 @@ body.big-avatars #chat .mes[is_user="true"] {
 }
 body.big-avatars {
     &.echostyle,
-    &.whisperstyle,
+    &.ripplestylestyle,
     &.hushstyle {
         #chat .mes {
             .ch_name .flex-container {
@@ -1008,7 +1009,7 @@ body.big-avatars {
     }
 }
 
-/* Avatar: Hidden 頭貼：「隱藏角色頭貼」 */
+/* Avatar: Hidden 頭像：「隱藏角色頭像」 */
 body.hideChatAvatars #chat {
     .ch_name {
         margin-left: 10px;
@@ -1177,6 +1178,7 @@ body.echostyle #chat {
             calc(var(--custom-ChatAvatar) * (-1 + 0.325))
             ) !important;
             background-color: unset !important;
+            box-shadow: none !important;
         }
 
         .mes_text {
@@ -1390,7 +1392,7 @@ body.echostyle #chat {
     }
 }
 
-/* --- Chat Style: Whisper 聊天風格：「低語」 --- */
+/* --- Chat Style: ripplestyle 聊天風格：「低語」 --- */
 
 body.whisperstyle #chat {
     .mes {
@@ -1684,7 +1686,7 @@ body.hushstyle #chat {
         opacity: 0.8;
     }
     .timestamp {
-    font-size: calc(var(--mainFontSize) * 0.7);
+        font-size: calc(var(--mainFontSize) * 0.7);
         font-weight: 400;
         white-space: nowrap;
         margin-right: 5px;
@@ -1731,8 +1733,98 @@ body.hushstyle #chat {
     }
 }
 
+/* --- Chat Style: Ripple 聊天風格：「漣漪」 --- */
+
+body.ripplestyle #chat {
+    .mes {
+        background: var(--SmartThemeBotMesBlurTintColor) !important;
+        border-radius: 15px;
+        padding: 0 !important;
+        margin-bottom: 15px !important;
+
+        .mesAvatarWrapper {
+            position: sticky;
+            top: 0;
+            padding-bottom: 45px;
+
+            /* General Avatar 一般頭像 */
+            .avatar {
+                display: flex;
+                top: 0;
+                justify-content: center;
+                align-items: center;
+                width: var(--customRippleAvatarWidth);
+                height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio));
+                min-width:var(--customRippleAvatarWidth);
+                min-height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio));
+                aspect-ratio: 2 / 3;
+                border: none !important;
+                margin-right: 5px;
+                border-radius: 15px 0 0 0 !important;
+                overflow: hidden;
+                flex: unset !important;
+
+                img {
+                    width: var(--customRippleAvatarWidth);
+                    height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio));
+                    min-width:var(--customRippleAvatarWidth);
+                    min-height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio));
+                    border: 0 !important;
+                    border-radius: 15px 0 0 0 !important;
+                    -webkit-mask-image:
+                        linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                        linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                        linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                        linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    mask-image:
+                        linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                        linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                        linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                        linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    -webkit-mask-composite: destination-in;
+                    mask-composite: intersect;
+                }
+            }
+        }
+
+        .mes_block {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding-top: 30px;
+            padding-left: 0;
+        }
+    }
+
+    .last_mes {
+        .swipeRightBlock,
+        .swipe_left {
+            bottom: 10px !important;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .mes .avatar {
+            width: var(--customRippleAvatarMobileWidth) !important;
+            height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+            min-width:var(--customRippleAvatarMobileWidth) !important;
+            min-height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+
+            img {
+                width: var(--customRippleAvatarMobileWidth) !important;
+                height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+                min-width: var(--customRippleAvatarMobileWidth) !important;
+                min-height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+            }
+        }
+    }
+}
+body.ripplestyle:not(.no-mesIDDisplay):not(.no-timer):not(.no-tokenCount) .mesAvatarWrapper {
+    padding-bottom: 0;
+}
+
 /* Character Name Field Fix 角色名稱欄位修正 */
-body:not(.echostyle):not(.whisperstyle) .name_text {
+body:not(.echostyle):not(.whisperstyle):not(.ripplestyle) .name_text {
     display: inline-block !important;
 }
 @media (max-width: 1000px) {
@@ -1745,7 +1837,8 @@ body:not(.echostyle):not(.whisperstyle) .name_text {
 
 /* System Message Display Fix 系統訊息顯示修正 */
 body.whisperstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"],
-body.hushstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
+body.hushstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"],
+body.ripplestyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
     .mesAvatarWrapper {
         visibility: hidden;
     }
@@ -2435,7 +2528,7 @@ body.charListGrid {
     }
 }
 
-/* --- Character Avatar 頭貼 --- */
+/* --- Character Avatar 頭像 --- */
 
 #avatar_controls {
     height: auto;
