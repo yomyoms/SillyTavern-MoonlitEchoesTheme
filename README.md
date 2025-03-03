@@ -57,11 +57,12 @@ If you have any issues or feature requests, feel free to submit them via the Iss
 
 A heartfelt thank you to everyone who has supported and contributed to this project.
 
-- Thank you ceruleandeep for your early support in the SillyTavern Discord—this all started because of you.
-- Thank you IceFog72 for encouraging me to create SillyTavern themes and for developing [SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs), which saved me a lot of hassle in the early stages.
-- Thank you Bronya-Rand for your open-source work—I learned a lot from your SillyTavern extension and took inspiration from its feature layout.
+- A big thank you to ceruleandeep for your early support in the SillyTavern Discord—this all started because of you.
+- Huge thanks to IceFog72 for encouraging me to create SillyTavern themes and for developing SillyTavern-CustomThemeStyleInputs, which saved me a lot of hassle in the early stages.
+- Much appreciation to Bronya-Rand for your open-source work—I learned a lot from your SillyTavern extension and took inspiration from its feature layout.
+- Thanks to vesper—I drew inspiration from your custom themes when designing the Ripple message style.
 
-Finally, a huge, huge thank you to Wolfsblvt and Cohee for adding i18n support for third-party extensions in SillyTavern. This has greatly improved the experience for non-English users, and I truly appreciate it!
+Finally, endless gratitude to Wolfsblvt and Cohee for adding i18n support for third-party extensions in SillyTavern. This has greatly improved the experience for non-English users, and I truly appreciate it!
 
 ## License
 AGPLv3
