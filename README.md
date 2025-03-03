@@ -12,11 +12,18 @@ Moonlit Echoes was first released on the SillyTavern Discord server on November 
 |----------------------|-------------------|
 | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ui_overview_preview.jpg)     | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/visual_novel_mode_preview.jpg)    |
 
-### Features
+## Features
+
+### Core Features
 - Fully compatible with SillyTavern's default themes and ensures seamless integration with other SillyTavern extensions.
 - Optimized for both desktop and mobile devices, featuring a wider input field and layout adjustments for a better experience, especially for those who are meticulous about UI aesthetics.
-- Includes multiple chat message styles beyond SillyTavern's built-in "Flat," "Bubble," and "Document" styles, such as **"Echo,"** **"Whisper,"** and **"Hush"**—with more styles potentially coming in the future!
+- Includes various chat styles beyond SillyTavern’s built-in "Flat," "Bubble," and "Document" styles. Available styles include "Echo," "Whisper," "Hush," and the newly added "Ripple".
 - Offers extensive customization options to tailor the interface to your liking.
+
+### Moonlit Echoes Theme Presets
+Users can now easily share color schemes and themes based on Moonlit Echoes Theme. These presets can sync with SillyTavern’s built-in UI themes for a seamless transition.
+
+<img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/Moonlit%20Echoes%20Theme%20Presets.png" width="500">
 
 ### Screenshots
 The following screenshots are from **version 1.0.0**, displayed on a MacBook (Chrome). For additional screenshots on iPhone (Safari PWA), check the project's [.github folder](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github).
@@ -32,44 +39,29 @@ The following screenshots are from **version 1.0.0**, displayed on a MacBook (Ch
 It is recommended to use the **latest version** of SillyTavern (either Release or Staging) along with Google Chrome.
 
 ### Installation Steps
-1. **Install the required extension**: Use the [SillyTavern Extension Manager](https://docs.sillytavern.app/extensions/) to install **[Custom Theme Style Inputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs)** by **IceFog**. This extension enables easier customization—make sure to install it.
-2. **Install Moonlit Echoes Theme**: In the **SillyTavern Extension Manager**, use "Install from URL" and paste the following Git URL:
+1. **Install Moonlit Echoes Theme**: In the **SillyTavern Extension Manager**, use "Install from URL" and paste the following Git URL:
    ```
    https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
    ```
-3. **Load and enable the theme**: Download or directly import `Moonlit Echoes - by Rivelle.json` into **User Settings** and set it as the UI theme. **Do not rename the file**, or the extension may not function correctly.
-   ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/installation_guide.png)
-
-### Additional Configuration (Recommended)
-The "Echo" and "Whisper" message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable thumbnails, modify `config.yaml` (located at `/SillyTavern/config.yaml`) and set `thumbnails.enabled` to `false`:
+2. **Disable Thumbnail Scaling (Recommended for Clearer Avatars)**: Some message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable it, modify config.yaml (located at /SillyTavern/config.yaml) and set `thumbnails.enabled` to `false`:
    ```
    thumbnails:
      enabled: false
    ```
-
-## Usage
-- Enable or disable the theme freely in the SillyTavern extension menu. If you want to switch to another custom theme, disable this extension first to prevent layout issues.
-- The special chat styles **"Echo,"** **"Whisper,"** and **"Hush"** will only be available when the UI theme is set to `Moonlit Echoes - by Rivelle`.
-
-### FAQ
-- **UI glitches or incorrect colors?** Ensure that [Custom Theme Style Inputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs) is installed and that **Moonlit Echoes - by Rivelle** is set as the UI theme.
-- **Too much blank space or excessive background blur?** Adjust settings in **User Settings > Custom Theme Inputs**. Available adjustments include:
-  * Theme Primary Color
-  * Theme Secondary Color
-  * Top Bar Color
-  * Drawer Icon Color
-  * Background Image Blur Strength
-  * Chat Background Color
-  * Chat Gradient Blur
-  * Chat Avatar Size
-  * Echo Message Background Avatar Width
-  * Visual Novel Mode Chat Height
+3. **Download and Enable the Theme (Optional)**: The Moonlit Echoes Theme extension is now usable upon installation. However, if you wish to use the styles shown in the preview images, download and import `Moonlit Echoes - by Rivelle.json` into User Settings and set it as the UI theme. Do not rename the file, or the extension may not function correctly.
 
 ## Feedback & Suggestions
 If you have any issues or feature requests, feel free to submit them via the Issues section using the provided template.
 
 ## Special Thanks
-A heartfelt thank you to everyone who has supported and contributed to this project. Special thanks to **ceruleandeep** for the initial support on the SillyTavern Discord server—you were the beginning of all this.
+
+A heartfelt thank you to everyone who has supported and contributed to this project.
+
+- Thank you ceruleandeep for your early support in the SillyTavern Discord—this all started because of you.
+- Thank you IceFog72 for encouraging me to create SillyTavern themes and for developing [SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs), which saved me a lot of hassle in the early stages.
+- Thank you Bronya-Rand for your open-source work—I learned a lot from your SillyTavern extension and took inspiration from its feature layout.
+
+Finally, a huge, huge thank you to Wolfsblvt and Cohee for adding i18n support for third-party extensions in SillyTavern. This has greatly improved the experience for non-English users, and I truly appreciate it!
 
 ## License
 AGPLv3
