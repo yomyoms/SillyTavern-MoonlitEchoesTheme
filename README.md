@@ -4,7 +4,7 @@
 
 ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_screen_demo_preview.jpg)
 
-**Moonlit Echoes 月下回聲** is a UI theme designed for SillyTavern. It has been customized and refined based on my personal preferences to create a more modern, elegant, and minimalist interface while enhancing the user experience across both desktop and mobile platforms.
+**Moonlit Echoes** is a UI theme designed for SillyTavern. It has been customized and refined based on my personal preferences to create a more modern, elegant, and minimalist interface while enhancing the user experience across both desktop and mobile platforms.
 
 Moonlit Echoes was first released on the SillyTavern Discord server on November 25, 2024, and has been continuously updated with valuable feedback and support from the community. Eventually, to improve maintainability and ease of updates—and to satisfy my obsession with well-designed themes—I developed this as a SillyTavern extension and made it open-source on GitHub.
 
@@ -25,7 +25,7 @@ Users can now easily share color schemes and themes based on Moonlit Echoes Them
 
 <img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/Moonlit%20Echoes%20Theme%20Presets.png" width="500">
 
-### Screenshots
+## Screenshots
 The following screenshots are from **version 1.0.0**, displayed on a MacBook (Chrome). For additional screenshots on iPhone (Safari PWA), check the project's [.github folder](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github).
 
 | **Flat** | **Bubble** | **Document** |
@@ -43,7 +43,7 @@ It is recommended to use the **latest version** of SillyTavern (either Release o
    ```
    https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
    ```
-2. **Disable Thumbnail Scaling (Recommended for Clearer Avatars)**: Some message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable it, modify config.yaml (located at `/SillyTavern/config.yaml`) and set `thumbnails.enabled` to `false`:
+2. **Disable Thumbnail Scaling (Recommended for Clearer Avatars)**: Some message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable it, modify config.yaml (located at /SillyTavern/config.yaml) and set `thumbnails.enabled` to `false`:
    ```
    thumbnails:
      enabled: false
@@ -58,7 +58,7 @@ If you have any issues or feature requests, feel free to submit them via the Iss
 A heartfelt thank you to everyone who has supported and contributed to this project.
 
 - A big thank you to ceruleandeep for your early support in the SillyTavern Discord—this all started because of you.
-- Huge thanks to IceFog72 for encouraging me to create SillyTavern themes and for developing [SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs) , which saved me a lot of hassle in the early stages.
+- Huge thanks to IceFog72 for encouraging me to create SillyTavern themes and for developing [SillyTavern-CustomThemeStyleInputs](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme), which saved me a lot of hassle in the early stages.
 - Much appreciation to Bronya-Rand for your open-source work—I learned a lot from your SillyTavern extension and took inspiration from its feature layout.
 - Thanks to vesper—I drew inspiration from your custom themes when designing the Ripple message style.
 
