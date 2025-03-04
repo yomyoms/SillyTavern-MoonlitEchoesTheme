@@ -72,7 +72,7 @@
     "Delete Preset": "刪除預設設定檔",
     "Error importing preset:": "匯入時發生錯誤：",
     "Blurry or thumbnail-sized character images in chat?": "聊天訊息背景的角色圖片顯示縮圖／模糊？",
-    "SillyTavern’s default thumbnail scaling causes avatars to use lower-resolution images. fix this, edit": "由於 SillyTavern 預設啟用縮圖縮放，這將導致角色頭像使用縮圖。請修改",
+    "SillyTavern's default thumbnail scaling causes avatars to use lower-resolution images. fix this, edit": "由於 SillyTavern 預設啟用縮圖縮放，這將導致角色頭像使用縮圖。請修改",
     "and fully restart the SillyTavern server.": "中的設定並完全重啟 SillyTavern 伺服器。",
     "Recommended settings:": "推薦設定：",
     "Ripple": "Ripple（漣漪）",

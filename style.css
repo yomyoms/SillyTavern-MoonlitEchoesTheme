@@ -796,6 +796,9 @@ white-space: nowrap;
                 white-space: nowrap;
             }
         }
+        .mes_edit_buttons {
+            flex-wrap: wrap;
+        }
         .ch_name .flex-container {
             margin-bottom: 5px !important;
         }
@@ -1746,6 +1749,7 @@ body.ripplestyle #chat {
             position: sticky;
             top: 0;
             padding-bottom: 45px;
+            padding-right: 0;
 
             /* General Avatar 一般頭像 */
             .avatar {
@@ -1792,7 +1796,7 @@ body.ripplestyle #chat {
             border: none !important;
             box-shadow: none !important;
             padding-top: 30px;
-            padding-left: 0;
+            padding-left: 10px;
         }
     }
 
@@ -1819,8 +1823,41 @@ body.ripplestyle #chat {
         }
     }
 }
-body.ripplestyle:not(.no-mesIDDisplay):not(.no-timer):not(.no-tokenCount) .mesAvatarWrapper {
-    padding-bottom: 0;
+body.ripplestyle.no-timer.no-mesIDDisplay.no-tokenCount {
+    #chat .mes .mesAvatarWrapper {
+        padding-bottom: 0 !important;
+    }
+}
+body.ripplestyle.big-avatars #chat .mes {
+    .avatar {
+        width: var(--customRippleAvatarWidth) !important;
+        height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio)) !important;
+        min-width:var(--customRippleAvatarWidth) !important;
+        min-height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio)) !important;
+
+        img {
+            width: var(--customRippleAvatarWidth) !important;
+            height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio)) !important;
+            min-width:var(--customRippleAvatarWidth) !important;
+            min-height: calc(var(--customRippleAvatarWidth) * var(--customRippleAvatarRatio)) !important;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .avatar {
+            width: var(--customRippleAvatarMobileWidth) !important;
+            height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+            min-width:var(--customRippleAvatarMobileWidth) !important;
+            min-height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+
+            img {
+                width: var(--customRippleAvatarMobileWidth) !important;
+                height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+                min-width: var(--customRippleAvatarMobileWidth) !important;
+                min-height: calc(var(--customRippleAvatarMobileWidth) * var(--customRippleAvatarRatio)) !important;
+            }
+        }
+    }
 }
 
 /* Character Name Field Fix 角色名稱欄位修正 */

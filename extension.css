@@ -406,13 +406,13 @@ body.echostyle {
 
 .lacommon--quickActions {
     margin-left: 20px;
+    align-items: center !important;
 
     &[data-lacommon--anchor="bottom"] {
         position: absolute;
         bottom: 20px !important;
         left: calc(var(--custom-ChatAvatar, 40px) + 2% + 50px) !important;
         display: flex;
-        align-items: center;
         gap: 0.5em;
         margin: 5px 0;
     }
