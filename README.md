@@ -58,7 +58,7 @@ If you have any issues or feature requests, feel free to submit them via the Iss
 A heartfelt thank you to everyone who has supported and contributed to this project.
 
 - A big thank you to ceruleandeep for your early support in the SillyTavern Discord—this all started because of you.
-- Huge thanks to IceFog72 for encouraging me to create SillyTavern themes and for developing ［SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs), which saved me a lot of hassle in the early stages.
+- Huge thanks to IceFog72 for encouraging me to create SillyTavern themes and for developing [SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs) , which saved me a lot of hassle in the early stages.
 - Much appreciation to Bronya-Rand for your open-source work—I learned a lot from your SillyTavern extension and took inspiration from its feature layout.
 - Thanks to vesper—I drew inspiration from your custom themes when designing the Ripple message style.
 
