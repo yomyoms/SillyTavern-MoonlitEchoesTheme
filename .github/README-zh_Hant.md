@@ -58,7 +58,7 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 由衷感謝所有人一路上的幫助與喜愛。
 
 - 感謝 ceruleandeep 在 SillyTavern Discord 群組的初期支援——這一切都是從你開始的。
-- 特別感謝 IceFog72 鼓勵我製作 SillyTavern 主題，並開發了 [SillyTavern-CustomThemeStyleInputs](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme)，這讓我在初期省去了許多麻煩。
+- 特別感謝 IceFog72 鼓勵我製作 SillyTavern 主題，並開發了 [SillyTavern-CustomThemeStyleInputs](https://github.com/IceFog72/SillyTavern-CustomThemeStyleInputs)，這讓我在初期省去了許多麻煩。
 - 感謝 Bronya-Rand 的開源貢獻，讓我從你的 SillyTavern 擴充 中學到了許多，並參考了功能排版設計。
 - 感謝 vesper，我從你的自定義主題中得到了設計 Ripple 訊息風格的靈感。
 
