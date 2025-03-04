@@ -43,7 +43,7 @@ It is recommended to use the **latest version** of SillyTavern (either Release o
    ```
    https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
    ```
-2. **Disable Thumbnail Scaling (Recommended for Clearer Avatars)**: Some message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable it, modify config.yaml (located at /SillyTavern/config.yaml) and set `thumbnails.enabled` to `false`:
+2. **Disable Thumbnail Scaling (Recommended for Clearer Avatars)**: Some message styles display character avatars in the background. Since SillyTavern enables thumbnail scaling by default, this may cause blurriness. To disable it, modify `config.yaml` (located at `/SillyTavern/config.yaml`) and set `thumbnails.enabled` to `false`:
    ```
    thumbnails:
      enabled: false
