@@ -50,6 +50,23 @@ It is recommended to use the **latest version** of SillyTavern (either Release o
    ```
 3. **Download and Enable the Theme (Optional)**: The Moonlit Echoes Theme extension is now usable upon installation. However, if you wish to use the styles shown in the preview images, download and import `Moonlit Echoes - by Rivelle.json` into User Settings and set it as the UI theme. Do not rename the file, or the extension may not function correctly.
 
+### For SillyTavern Users via Termux 📱
+If you’re using SillyTavern via Termux, here’s how you can modify `config.yaml`.
+
+> [!Warning]
+> I don’t have experience with Android devices or Termux, so I can’t answer related questions, test the steps, or guarantee results. The following methods are provided by other users.
+
+> [!NOTE]
+> You may find two config.yaml files inside the SillyTavern folder. Make sure to edit the one in the root directory: `/SillyTavern/config.yaml.` **Do NOT modify** `/SillyTavern/default/config.yaml` or anything inside the default folder.
+
+### Method 1: Edit via Termux
+1. Open Termux and enter: `cd SillyTavern`
+2. Then, run: `nano config.yaml` to edit the file.
+### Method 2: Use Material Files (Android File Manager)
+1. **Open Material Files** > **Add Storage** > **Navigate to Termux** > **SillyTavern**
+2. Once added, you should see a structure like `/SillyTavern and /data/user/0/com.winlator`
+3. Open the **SillyTavern** folder and edit `config.yaml` directly
+
 ## Feedback & Suggestions
 If you have any issues or feature requests, feel free to submit them via the Issues section using the provided template.
 
