@@ -51,6 +51,23 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
    ```
 3. **下載並啟用主題（可選）**：Moonlit Echoes Theme 安裝後即可使用。若要使用 預覽圖中的樣式，請下載 `Moonlit Echoes - by Rivelle.json`，並匯入 User Settings 的 UI Theme。請勿更改檔名，否則可能導致擴充無法正常運作。
 
+### 給 Termux 使用者 📱
+如果你透過 Termux 使用 SillyTavern，以下是修改 `config.yaml` 的方法。
+
+> [!Warning]
+> 我對 Android 設備或 Termux 沒有經驗，因此無法解答相關問題、測試步驟或保證結果。以下方法由其他使用者提供。
+
+> [!NOTE]
+> SillyTavern 資料夾內可能會有兩個 `config.yaml` 檔案。請務必編輯 ST 根目錄 下的 `/SillyTavern/config.yaml`。**請勿修改** `/SillyTavern/default/config.yaml` 或 default 資料夾內的任何內容。
+
+### 方法 1：透過 Termux 編輯
+1. 打開 Termux，輸入：`cd SillyTavern`
+2. 接著輸入並執行：`nano config.yaml` 以編輯檔案。
+### 方法 2：使用 Material Files（Android 檔案管理器）
+1. 開啟 Material Files > 新增儲存空間 > 前往 Termux > SillyTavern
+2. 新增後，你應該會看到類似 `/SillyTavern` 和 `/data/user/0/com.winlator` 等結構
+3. 打開 SillyTavern 資料夾，直接編輯 `config.yaml`
+
 ## 回饋與建議
 若有任何問題或功能建議，請在 Issues 頁面提交回饋，並使用提供的模板填寫詳細資訊。
 
