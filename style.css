@@ -798,6 +798,7 @@ white-space: nowrap;
         }
         .mes_edit_buttons {
             flex-wrap: wrap;
+            gap: 5px;
         }
         .ch_name .flex-container {
             margin-bottom: 5px !important;
@@ -1395,7 +1396,7 @@ body.echostyle #chat {
     }
 }
 
-/* --- Chat Style: ripplestyle 聊天風格：「低語」 --- */
+/* --- Chat Style: Whisper 聊天風格：「低語」 --- */
 
 body.whisperstyle #chat {
     .mes {
@@ -1745,6 +1746,10 @@ body.ripplestyle #chat {
         padding: 0 !important;
         margin-bottom: 15px !important;
 
+        &[is_user="true"] {
+            background-color: var(--SmartThemeUserMesBlurTintColor) !important;
+        }
+
         .mesAvatarWrapper {
             position: sticky;
             top: 0;
@@ -1795,8 +1800,16 @@ body.ripplestyle #chat {
             background: none !important;
             border: none !important;
             box-shadow: none !important;
-            padding-top: 30px;
+            padding-top: 20px;
             padding-left: 10px;
+
+            .ch_name::after {
+                content: "";
+                width: 100%;
+                border-bottom: 1px solid var(--SmartThemeBodyColor);
+                margin-bottom: 5px;
+                opacity: 0.45;
+            }
         }
     }
 

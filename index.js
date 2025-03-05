@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.1.1";
+const THEME_VERSION = "2.1.2";
 
 import { t } from '../../../i18n.js';
 
@@ -198,7 +198,7 @@ const themeCustomSettings = [
         "type": "text",
         "varId": "customRippleAvatarWidth",
         "displayText": t`[Ripple] Message Avatar Width`,
-        "default": "200px",
+        "default": "180px",
         "category": "chat",
         "description": t`Width of character avatars in the message for the Ripple style`
     },
