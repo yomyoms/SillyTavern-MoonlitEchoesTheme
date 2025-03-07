@@ -79,5 +79,10 @@
     "[Ripple] Message Avatar Width": "[Ripple] 訊息頭像寬度",
     "Width of character avatars in the message for the Ripple style": "Ripple 風格中，訊息中角色頭像的寬度",
     "[Ripple] Mobile Message Avatar Width": "[Ripple] 行動裝置訊息頭像寬度",
-    "Width of character avatars in the message for the mobile Ripple style": "Ripple 行動裝置風格中，訊息中角色頭像的寬度"
+    "Width of character avatars in the message for the mobile Ripple style": "Ripple 行動裝置風格中，訊息中角色頭像的寬度",
+    "Hide Additional Message Details": "隱藏訊息額外資料詳情",
+    "Message additional details (name, ID, time, token counter, etc.) show only on hover or click": "僅在游標懸停或點選時顯示訊息額外詳情（角色名稱、ID、時間、符元計數器⋯等）",
+    "Preset \"${0}\" deleted successfully": "已成功刪除「${0}」月下回聲主題預設設定檔",
+    "[Advanced] Message Details Animation Duration": "[進階設定] 訊息詳情動畫時長",
+    "Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)": "控制訊息額外詳細資訊出現／消失的動畫速度（如：0.5 秒、1.2 秒）"
 }

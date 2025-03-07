@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.1.2";
+const THEME_VERSION = "2.2.0";
 
 import { t } from '../../../i18n.js';
 
@@ -341,27 +341,198 @@ const themeCustomSettings = [
             }
     `
     },
+    {
+        "type": "checkbox",
+        "varId": "enableMessageDetails",
+        "displayText": t`Hide Additional Message Details`,
+        "default": false,
+        "category": "features",
+        "description": t`Message additional details (name, ID, time, token counter, etc.) show only on hover or click`,
+        "cssBlock": `
+            .mes .ch_name,
+            .mes .mesIDDisplay,
+            .mes .mes_timer,
+            .mes .tokenCounterDisplay {
+                visibility: hidden !important;
+                opacity: 0 !important;
+                transition: all var(--messageDetailsAnimationDuration) cubic-bezier(0.4, 0, 0.2, 1),
+                            visibility 0s ease var(--messageDetailsAnimationDuration) !important;
+                z-index: 10 !important;
+                pointer-events: auto !important;
+            }
+
+            .mes:hover .ch_name,
+            .mes:hover .mesIDDisplay,
+            .mes:hover .mes_timer,
+            .mes:hover .tokenCounterDisplay,
+            .mes.active-message .ch_name,
+            .mes.active-message .mesIDDisplay,
+            .mes.active-message .mes_timer,
+            .mes.active-message .tokenCounterDisplay {
+                visibility: visible !important;
+                opacity: 1 !important;
+                transition: all var(--messageDetailsAnimationDuration) cubic-bezier(0.4, 0, 0.2, 1),
+                            visibility var(--messageDetailsAnimationDuration) ease !important;
+            }
+
+            body.flatchat,
+            body.bubblechat,
+            body.ripplestyle {
+                .mes .ch_name,
+                .mes .mesIDDisplay,
+                .mes .mes_timer,
+                .mes .tokenCounterDisplay {
+                    margin-top: -40px;
+                    background: none;
+                }
+
+                .mes:hover .ch_name,
+                .mes:hover .mesIDDisplay,
+                .mes:hover .mes_timer,
+                .mes:hover .tokenCounterDisplay,
+                .mes.active-message .ch_name,
+                .mes.active-message .mesIDDisplay,
+                .mes.active-message .mes_timer,
+                .mes.active-message .tokenCounterDisplay {
+                    margin-top: unset;
+                    background: unset;
+                }
+            }
+
+            body.flatchat,
+            body.bubblechat,
+            body.documentstyle,
+            body.ripplestyle {
+                .mes .ch_name,
+                .mes .mesIDDisplay,
+                .mes .mes_timer,
+                .mes .tokenCounterDisplay {
+                    transform: translateY(-40px);
+                }
+
+                .mes:hover .ch_name,
+                .mes:hover .mesIDDisplay,
+                .mes:hover .mes_timer,
+                .mes:hover .tokenCounterDisplay,
+                .mes.active-message .ch_name,
+                .mes.active-message .mesIDDisplay,
+                .mes.active-message .mes_timer,
+                .mes.active-message .tokenCounterDisplay {
+                    transform: translateY(0);
+                }
+            }
+        `
+    },
+    {
+        "type": "text",
+        "varId": "messageDetailsAnimationDuration",
+        "displayText": t`[Advanced] Message Details Animation Duration`,
+        "default": "0.8s",
+        "category": "chat",
+        "description": t`Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)`
+    }
 ];
 
 /**
- * 轉換設定配置為默認設定對象
- * Convert settings configuration to default settings object
- * 從 themeCustomSettings 中提取默認值
- * Extract default values from themeCustomSettings
+ * 訊息詳情顯示控制
+ * Message details display controller
+ * 管理訊息元素的詳情顯示狀態和互動
+ * Manages the display state and interaction of message detail elements
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 初始化訊息詳情顯示系統
+    // Initialize message details display system
+    initMessageDetailsSystem();
+});
+
+/**
+ * 初始化訊息詳情顯示系統
+ * Initialize the message details display system
+ * 為所有訊息元素添加互動控制
+ * Adds interaction controls to all message elements
+ */
+function initMessageDetailsSystem() {
+    // 查找所有訊息元素
+    // Find all message elements
+    const messageElements = document.querySelectorAll('.mes');
+
+    // 為每個訊息元素添加點擊事件
+    // Add click event to each message element
+    messageElements.forEach(message => {
+        // 點擊切換詳情顯示狀態
+        // Toggle details display state on click
+        message.addEventListener('click', function(event) {
+            // 檢查點擊是否發生在詳情元素內部，避免重複觸發
+            // Check if click happened inside details elements to avoid retriggering
+            const isClickInsideDetails = event.target.closest('.ch_name') ||
+                event.target.closest('.mesIDDisplay') ||
+                event.target.closest('.mes_timer') ||
+                event.target.closest('.tokenCounterDisplay');
+
+            // 如果不是點擊詳情元素本身，則切換顯示狀態
+            // Toggle display state if not clicking on detail elements themselves
+            if (!isClickInsideDetails) {
+                this.classList.toggle('show-details');
+
+                // 如果多個訊息同時顯示詳情會造成界面混亂，可以隱藏其他訊息的詳情
+                // Optionally hide details of other messages to prevent UI clutter
+                if (this.classList.contains('show-details')) {
+                    messageElements.forEach(otherMessage => {
+                        if (otherMessage !== this) {
+                            otherMessage.classList.remove('show-details');
+                        }
+                    });
+                }
+            }
+        });
+
+        // 添加雙擊事件用於快速隱藏詳情
+        // Add double-click event for quickly hiding details
+        message.addEventListener('dblclick', function(event) {
+            // 阻止雙擊選中文本
+            // Prevent text selection on double click
+            event.preventDefault();
+            // 隱藏詳情
+            // Hide details
+            this.classList.remove('show-details');
+        });
+    });
+
+    // 點擊頁面其他區域時隱藏所有詳情
+    // Hide all details when clicking elsewhere on the page
+    document.addEventListener('click', function(event) {
+        // 檢查點擊是否發生在訊息元素外部
+        // Check if click happened outside message elements
+        if (!event.target.closest('.mes')) {
+            // 隱藏所有訊息的詳情
+            // Hide details for all messages
+            messageElements.forEach(message => {
+                message.classList.remove('show-details');
+            });
+        }
+    });
+}
+
+/**
+ * 修改 generateDefaultSettings 函數
+ * Modify generateDefaultSettings function
+ * 使用 "Moonlit Echoes - by Rivelle" 作為預設主題名稱
+ * Use "Moonlit Echoes - by Rivelle" as the default theme name
  */
 function generateDefaultSettings() {
     const settings = {
         enabled: true,
         presets: {
-            "Default": {} // 預設配置 (Default preset)
+            "Moonlit Echoes - by Rivelle": {} // 官方預設配置 (Official preset)
         },
-        activePreset: "Default"
+        activePreset: "Moonlit Echoes - by Rivelle"
     };
 
     // 為默認配置添加所有設定 (Add all settings to the default preset)
     themeCustomSettings.forEach(setting => {
         settings[setting.varId] = setting.default;
-        settings.presets["Default"][setting.varId] = setting.default;
+        settings.presets["Moonlit Echoes - by Rivelle"][setting.varId] = setting.default;
     });
 
     return Object.freeze(settings);
@@ -379,31 +550,38 @@ const defaultSettings = generateDefaultSettings();
 (function initExtension() {
     console.debug(`[${EXTENSION_NAME}]`, 'Initializing extension');
 
-    // 獲取SillyTavern上下文 (Get SillyTavern context)
+    // 獲取SillyTavern上下文
+    // Get SillyTavern context
     const context = SillyTavern.getContext();
 
-    // 初始化設定 (Initialize settings)
+    // 初始化設定
+    // Initialize settings
     if (!context.extensionSettings[settingsKey]) {
         context.extensionSettings[settingsKey] = structuredClone(defaultSettings);
     }
 
-    // 確保設定結構是最新的 (Ensure settings structure is up-to-date)
+    // 確保設定結構是最新的
+    // Ensure settings structure is up-to-date
     ensureSettingsStructure(context.extensionSettings[settingsKey]);
 
-    // 確保所有預設設定鍵存在 (Ensure all default setting keys exist)
+    // 確保所有預設設定鍵存在
+    // Ensure all default setting keys exist
     for (const key of Object.keys(defaultSettings)) {
         if (key !== 'presets' && key !== 'activePreset' && context.extensionSettings[settingsKey][key] === undefined) {
             context.extensionSettings[settingsKey][key] = defaultSettings[key];
         }
     }
 
-    // 保存設定 (Save settings)
+    // 保存設定
+    // Save settings
     context.saveSettingsDebounced();
 
-    // 依照設定中的 enabled 狀態自動載入或移除CSS (Automatically load or remove CSS based on enabled status)
+    // 依照設定中的 enabled 狀態自動載入或移除CSS
+    // Automatically load or remove CSS based on enabled status
     toggleCss(context.extensionSettings[settingsKey].enabled);
 
-    // 當DOM完全載入後執行擴展的UI初始化 (Initialize extension UI when DOM is fully loaded)
+    // 當DOM完全載入後執行擴展的UI初始化
+    // Initialize extension UI when DOM is fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initExtensionUI);
     } else {
@@ -424,17 +602,17 @@ function ensureSettingsStructure(settings) {
         settings.presets = {};
     }
 
-    // 如果沒有任何預設，創建默認預設 (If no presets, create default preset)
+    // 如果沒有任何預設，創建官方預設 (If no presets, create official preset)
     if (Object.keys(settings.presets).length === 0) {
-        settings.presets["Default"] = {};
+        settings.presets["Moonlit Echoes - by Rivelle"] = {};
 
-        // 從當前設定複製值到默認預設 (Copy values from current settings to default preset)
+        // 從當前設定複製值到官方預設 (Copy values from current settings to official preset)
         themeCustomSettings.forEach(setting => {
             const { varId } = setting;
             if (settings[varId] !== undefined) {
-                settings.presets["Default"][varId] = settings[varId];
+                settings.presets["Moonlit Echoes - by Rivelle"][varId] = settings[varId];
             } else {
-                settings.presets["Default"][varId] = setting.default;
+                settings.presets["Moonlit Echoes - by Rivelle"][varId] = setting.default;
             }
         });
     }
@@ -442,8 +620,27 @@ function ensureSettingsStructure(settings) {
     // 確保有activePreset屬性 (Ensure activePreset property exists)
     if (!settings.activePreset || !settings.presets[settings.activePreset]) {
         // 如果沒有活動預設或活動預設不存在，使用首個可用預設 (If no active preset or it doesn't exist, use first available preset)
-        const firstPreset = Object.keys(settings.presets)[0] || "Default";
+        const firstPreset = Object.keys(settings.presets)[0] || "Moonlit Echoes - by Rivelle";
         settings.activePreset = firstPreset;
+    }
+
+    // 處理舊的 "Moonlit Echoes" 預設 (Handle old "Moonlit Echoes" preset)
+    if (settings.presets["Moonlit Echoes"]) {
+        // 如果已經有 "Moonlit Echoes - by Rivelle"，不進行任何操作
+        // If "Moonlit Echoes - by Rivelle" already exists, do nothing
+        if (!settings.presets["Moonlit Echoes - by Rivelle"]) {
+            settings.presets["Moonlit Echoes - by Rivelle"] = settings.presets["Moonlit Echoes"];
+        }
+
+        // 刪除舊預設
+        // Delete old preset
+        delete settings.presets["Moonlit Echoes"];
+
+        // 如果活動預設是 "Moonlit Echoes"，更新活動預設名稱
+        // If active preset is "Moonlit Echoes", update active preset name
+        if (settings.activePreset === "Moonlit Echoes") {
+            settings.activePreset = "Moonlit Echoes - by Rivelle";
+        }
     }
 }
 
@@ -454,6 +651,13 @@ function ensureSettingsStructure(settings) {
  * Includes settings panel, chat style, and color picker
  */
 function initExtensionUI() {
+    function loadMessageDetailsModule() {
+        const scriptElement = document.createElement('script');
+        scriptElement.src = `${extensionFolderPath}/message-details.js`;
+        scriptElement.id = 'moonlit-message-details-script';
+        document.head.appendChild(scriptElement);
+    }
+
     // 載入設定HTML和初始化設定面板 (Load settings HTML and initialize settings panel)
     loadSettingsHTML().then(() => {
         renderExtensionSettings();
@@ -480,7 +684,59 @@ function initExtensionUI() {
 
         // 添加主題提示 (Add theme buttons hint)
         addThemeButtonsHint();
+
+        loadMessageDetailsModule();
     });
+
+    function initMessageClickHandlers() {
+        // 處理點擊事件，為每條消息添加點擊切換功能
+        document.addEventListener('click', function(event) {
+            // 找到被點擊的消息元素
+            const messageElement = event.target.closest('.mes');
+
+            // 如果點擊了消息元素
+            if (messageElement) {
+                // 檢查點擊是否發生在詳情元素內部，避免重複觸發
+                const isClickInsideDetails =
+                    event.target.closest('.mesIDDisplay') ||
+                    event.target.closest('.mes_timer') ||
+                    event.target.closest('.tokenCounterDisplay');
+
+                // 檢查是否點擊的是訊息動作或編輯按鈕
+                const isMessageActionButton =
+                event.target.closest('.extraMesButtonsHint') ||
+                event.target.closest('.mes_edit') ||
+                event.target.closest('.mes_edit_buttons');
+
+                // 如果是點擊鏈接、按鈕或操作按鈕，不觸發切換
+                if (event.target.tagName === 'A' ||
+                    event.target.tagName === 'BUTTON' ||
+                    isMessageActionButton) {
+
+                    // 如果點擊的是訊息動作或編輯按鈕，則保持詳情顯示
+                    if (isMessageActionButton) {
+                        messageElement.classList.add('active-message');
+                    }
+                    return;
+                }
+
+                // 如果不是點擊詳情元素本身，則切換顯示狀態
+                if (!isClickInsideDetails) {
+                    messageElement.classList.toggle('active-message');
+                }
+            }
+            // 如果點擊的不是消息元素（即點擊了其他地方）
+            else {
+                // 解除所有消息的鎖定狀態
+                document.querySelectorAll('.mes.active-message').forEach(function(activeMessage) {
+                    activeMessage.classList.remove('active-message');
+                });
+            }
+        });
+    }
+
+    // 在初始化時調用
+    initMessageClickHandlers();
 }
 
 /**
@@ -490,14 +746,14 @@ function initExtensionUI() {
  * Listen to UI theme selector changes and switch presets automatically
  */
 function integrateWithThemeSelector() {
-    // 獲取主題選擇器 (Get theme selector)
+    // 獲取主題選擇器
     const themeSelector = document.getElementById('themes');
     if (!themeSelector) {
         console.warn(`[${EXTENSION_NAME}]`, 'Theme selector not found');
         return;
     }
 
-    // 獲取主題相關按鈕 (Get theme-related buttons)
+    // 獲取主題相關按鈕
     const importButton = document.getElementById('ui_preset_import_button');
     const exportButton = document.getElementById('ui_preset_export_button');
     const deleteButton = document.getElementById('ui-preset-delete-button');
@@ -505,76 +761,84 @@ function integrateWithThemeSelector() {
     const saveButton = document.getElementById('ui-preset-save-button');
     const importFileInput = document.getElementById('ui_preset_import_file');
 
-    // 監聽主題變更事件 (Listen to theme change events)
+    // 監聽主題變更事件
     themeSelector.addEventListener('change', () => {
-        // 獲取選擇的主題名稱 (Get selected theme name)
+        // 獲取選擇的主題名稱
         const selectedTheme = themeSelector.value;
 
-        // 檢查是否是我們的主題格式 (Moonlit Echoes 格式) (Check if it's our theme format)
-        if (selectedTheme.includes('Moonlit Echoes')) {
-            // 從主題名稱提取預設名稱 (Extract preset name from theme name)
-            const presetName = selectedTheme.replace(' - by Rivelle', '').trim();
+        // 檢查是否是我們的預設
+        const context = SillyTavern.getContext();
+        const settings = context.extensionSettings[settingsKey];
 
-            // 嘗試載入此預設 (Try to load this preset)
+        // 檢查選中的主題是否存在於我們的預設中
+        if (settings.presets && Object.keys(settings.presets).includes(selectedTheme)) {
+            // 直接使用選擇的主題名稱作為預設名稱
             try {
-                loadPreset(presetName);
+                loadPreset(selectedTheme);
             } catch (error) {
                 console.error(`[${EXTENSION_NAME}]`, `Error loading preset from theme selection: ${error.message}`);
             }
         }
     });
 
-    // 監聽匯入按鈕 (Listen to import button)
+    // 檢查當前選中的主題是否是我們的預設
+    function isOurPreset() {
+        const context = SillyTavern.getContext();
+        const settings = context.extensionSettings[settingsKey];
+        return settings.presets && Object.keys(settings.presets).includes(themeSelector.value);
+    }
+
+    // 監聽匯入按鈕
     if (importButton && importFileInput) {
         importButton.addEventListener('click', () => {
-            // 如果當前主題是Moonlit Echoes相關，使用我們的匯入功能 (Use our import function if current theme is Moonlit Echoes related)
-            if (themeSelector.value.includes('Moonlit Echoes')) {
+            // 使用更可靠的檢查方法
+            if (isOurPreset()) {
                 importPreset();
             }
         });
     }
 
-    // 監聽匯出按鈕 (Listen to export button)
+    // 監聽匯出按鈕
     if (exportButton) {
         exportButton.addEventListener('click', () => {
-            // 如果當前主題是Moonlit Echoes相關，使用我們的匯出功能 (Use our export function if current theme is Moonlit Echoes related)
-            if (themeSelector.value.includes('Moonlit Echoes')) {
+            // 使用更可靠的檢查方法
+            if (isOurPreset()) {
                 exportActivePreset();
             }
         });
     }
 
-    // 監聽更新按鈕 (Listen to update button)
+    // 監聽更新按鈕
     if (updateButton) {
         updateButton.addEventListener('click', () => {
-            // 如果當前主題是Moonlit Echoes相關，使用我們的更新功能 (Use our update function if current theme is Moonlit Echoes related)
-            if (themeSelector.value.includes('Moonlit Echoes')) {
+            // 使用更可靠的檢查方法
+            if (isOurPreset()) {
                 updateCurrentPreset();
             }
         });
     }
 
-    // 監聽保存按鈕 (Listen to save button)
+    // 監聽保存按鈕
     if (saveButton) {
         saveButton.addEventListener('click', () => {
-            // 如果當前主題是Moonlit Echoes相關，使用我們的保存功能 (Use our save function if current theme is Moonlit Echoes related)
-            if (themeSelector.value.includes('Moonlit Echoes')) {
+            // 使用更可靠的檢查方法
+            if (isOurPreset()) {
                 saveAsNewPreset();
             }
         });
     }
 
-    // 監聽刪除按鈕 (Listen to delete button)
+    // 監聽刪除按鈕
     if (deleteButton) {
         deleteButton.addEventListener('click', () => {
-            // 如果當前主題是Moonlit Echoes相關，使用我們的刪除功能 (Use our delete function if current theme is Moonlit Echoes related)
-            if (themeSelector.value.includes('Moonlit Echoes')) {
+            // 使用更可靠的檢查方法
+            if (isOurPreset()) {
                 deleteCurrentPreset();
             }
         });
     }
 
-    // 處理文件匯入 (Handle file import)
+    // 處理文件匯入
     if (importFileInput) {
         importFileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
@@ -584,11 +848,11 @@ function integrateWithThemeSelector() {
                     try {
                         const jsonData = JSON.parse(e.target.result);
 
-                        // 檢查是否是Moonlit Echoes格式 (Check if it's Moonlit Echoes format)
+                        // 檢查是否是Moonlit Echoes格式
                         if (jsonData.moonlitEchoesPreset) {
-                            // 處理Moonlit Echoes預設 (Handle Moonlit Echoes preset)
+                            // 處理Moonlit Echoes預設
                             handleMoonlitPresetImport(jsonData);
-                            return; // 已處理，不繼續 (Processed, don't continue)
+                            return; // 已處理，不繼續
                         }
                     } catch (error) {
                         console.error(`[${EXTENSION_NAME}]`, 'Error parsing import file:', error);
@@ -706,65 +970,77 @@ function addThemeButtonsHint() {
     const themesContainer = document.getElementById('UI-presets-block');
     if (!themesContainer) return;
 
-    // 獲取設定 (Get settings)
+    // 獲取設定
+    // Get settings
     const context = SillyTavern.getContext();
     const settings = context.extensionSettings[settingsKey];
 
-// 檢查主題是否啟用 (Check if theme is enabled)
-if (!settings.enabled) {
-    // 如果主題未啟用，移除任何已存在的提示 (If theme is not enabled, remove any existing hint)
-    const existingHint = document.getElementById('moonlit-theme-buttons-hint');
-    if (existingHint) existingHint.remove();
-    return;
-}
+    // 檢查主題是否啟用
+    // Check if theme is enabled
+    if (!settings.enabled) {
+        // 如果主題未啟用，移除任何已存在的提示
+        // If theme is not enabled, remove any existing hint
+        const existingHint = document.getElementById('moonlit-theme-buttons-hint');
+        if (existingHint) existingHint.remove();
+        return;
+    }
 
-// 檢查提示是否已存在 (Check if hint already exists)
-if (document.getElementById('moonlit-theme-buttons-hint')) return;
+    // 檢查提示是否已存在
+    // Check if hint already exists
+    if (document.getElementById('moonlit-theme-buttons-hint')) return;
 
-const hintElement = document.createElement('small');
-hintElement.id = 'moonlit-theme-buttons-hint';
-hintElement.style.margin = '5px 0';
-hintElement.style.padding = '5px 10px';
-hintElement.style.display = 'block';
-hintElement.style.lineHeight = '1.5';
+    const hintElement = document.createElement('small');
+    hintElement.id = 'moonlit-theme-buttons-hint';
+    hintElement.style.margin = '5px 0';
+    hintElement.style.padding = '5px 10px';
+    hintElement.style.display = 'block';
+    hintElement.style.lineHeight = '1.5';
 
-// 根據主題選擇器初始值顯示不同提示 (Show different hints based on initial theme selector value)
-const themeSelector = document.getElementById('themes');
-let currentTheme = themeSelector ? themeSelector.value : '';
+    // 根據主題選擇器初始值顯示不同提示
+    // Show different hints based on initial theme selector value
+    const themeSelector = document.getElementById('themes');
+    let currentTheme = themeSelector ? themeSelector.value : '';
 
-if (currentTheme.includes('- by Rivelle')) {
-    // 官方 Moonlit 預設 - 保持原始寫法 (Official Moonlit preset - keep original wording)
-    hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
-    <small><span data-i18n="Thank you for choosing my theme! This extension is unofficial. For issues, please contact">Thank you for choosing my theme! This extension is unofficial. For issues, please contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
-    hintElement.style.borderLeft = '3px solid var(--customThemeColor)';
-} else {
-    // 其他主題 - 保持原始寫法 (Other themes - keep original wording)
-    hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
-    <small><span data-i18n="customThemeIssue">This unofficial extension may not work with all custom themes. Please troubleshoot first; if confirmed, contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
-    hintElement.style.borderLeft = '3px solid var(--SmartThemeBodyColor)';
-}
+    // 仍然保留對 "- by Rivelle" 的判斷，這樣可以識別你創建的預設
+    // Still keep checking for "- by Rivelle" to identify presets created by you
+    if (currentTheme.includes('- by Rivelle')) {
+        // 官方 Moonlit 預設 - 保持原始寫法
+        // Official Moonlit preset - keep original wording
+        hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
+        <small><span data-i18n="Thank you for choosing my theme! This extension is unofficial. For issues, please contact">Thank you for choosing my theme! This extension is unofficial. For issues, please contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
+        hintElement.style.borderLeft = '3px solid var(--customThemeColor)';
+    } else {
+        // 其他主題 - 保持原始寫法
+        // Other themes - keep original wording
+        hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
+        <small><span data-i18n="customThemeIssue">This unofficial extension may not work with all custom themes. Please troubleshoot first; if confirmed, contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
+        hintElement.style.borderLeft = '3px solid var(--SmartThemeBodyColor)';
+    }
 
-themesContainer.appendChild(hintElement);
+    themesContainer.appendChild(hintElement);
 
-if (themeSelector) {
-    themeSelector.addEventListener('change', () => {
-        // 只有在主題啟用時才更新提示 (Only update hint when theme is enabled)
-        if (settings.enabled) {
-            const currentTheme = themeSelector.value;
-            if (currentTheme.includes('- by Rivelle')) {
-                // 官方 Moonlit 預設 (Official Moonlit preset)
-                hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
-                <small><span data-i18n="Thank you for choosing my theme! This extension is unofficial. For issues, please contact">Thank you for choosing my theme! This extension is unofficial. For issues, please contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
-                hintElement.style.borderLeft = '3px solid var(--customThemeColor)';
-            } else {
-                // 其他主題 (Other themes)
-                hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
-                <small><span data-i18n="customThemeIssue">This unofficial extension may not work with all custom themes. Please troubleshoot first; if confirmed, contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
-                hintElement.style.borderLeft = '3px solid var(--SmartThemeBodyColor)';
+    if (themeSelector) {
+        themeSelector.addEventListener('change', () => {
+            // 只有在主題啟用時才更新提示
+            // Only update hint when theme is enabled
+            if (settings.enabled) {
+                const currentTheme = themeSelector.value;
+                if (currentTheme.includes('- by Rivelle')) {
+                    // 官方 Moonlit 預設
+                    // Official Moonlit preset
+                    hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
+                    <small><span data-i18n="Thank you for choosing my theme! This extension is unofficial. For issues, please contact">Thank you for choosing my theme! This extension is unofficial. For issues, please contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
+                    hintElement.style.borderLeft = '3px solid var(--customThemeColor)';
+                } else {
+                    // 其他主題
+                    // Other themes
+                    hintElement.innerHTML = `<i class="fa-solid fa-info-circle"></i>  <b><span data-i18n="You are currently using the third-party extension theme">You are currently using the third-party extension theme</span> Moonlit Echoes Theme <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">${THEME_VERSION}</a></b><br>
+                    <small><span data-i18n="customThemeIssue">This unofficial extension may not work with all custom themes. Please troubleshoot first; if confirmed, contact</span> <a href="https://github.com/RivelleDays" target="_blank">Rivelle</a></small>`;
+                    hintElement.style.borderLeft = '3px solid var(--SmartThemeBodyColor)';
+                }
             }
-        }
-    });
-}
+        });
+    }
 }
 
 /**
@@ -773,41 +1049,55 @@ if (themeSelector) {
 * @param {Object} jsonData - 匯入的JSON數據 (Imported JSON data)
 */
 function handleMoonlitPresetImport(jsonData) {
-if (!jsonData.moonlitEchoesPreset || !jsonData.presetName || !jsonData.settings) {
-    toastr.error('Invalid Moonlit Echoes preset format');
-    return;
+    if (!jsonData.moonlitEchoesPreset || !jsonData.presetName || !jsonData.settings) {
+        toastr.error('Invalid Moonlit Echoes preset format');
+        return;
+    }
+
+    try {
+        // 獲取SillyTavern上下文
+        const context = SillyTavern.getContext();
+        const settings = context.extensionSettings[settingsKey];
+
+        // 獲取預設名稱，並處理可能的前綴
+        let presetName = jsonData.presetName;
+
+        // 如果預設名稱以 "[Moonlit] " 開頭，移除這個前綴
+        if (presetName.startsWith("[Moonlit] ")) {
+            presetName = presetName.substring("[Moonlit] ".length);
+        }
+
+        // 如果預設名稱為空（極罕見的情況），使用默認名稱
+        if (!presetName.trim()) {
+            presetName = "Imported Preset";
+        }
+
+        // 創建新預設
+        settings.presets[presetName] = jsonData.settings;
+
+        // 設為活動預設
+        settings.activePreset = presetName;
+
+        // 將預設設定應用到當前設定
+        applyPresetToSettings(presetName);
+
+        // 更新預設選擇器
+        updatePresetSelector();
+
+        // 選擇性更新主題選擇器（只有在選項已存在時）
+        updateThemeSelector(presetName);
+
+        // 保存設定
+        context.saveSettingsDebounced();
+
+        // 顯示成功訊息
+        toastr.success(t`Preset "${presetName}" imported successfully`);
+    } catch (error) {
+        toastr.error(t`Error importing preset: ${error.message}`);
+        console.error(`[${EXTENSION_NAME}]`, t`Error importing preset:`, error);
+    }
 }
 
-try {
-    // 獲取SillyTavern上下文 (Get SillyTavern context)
-    const context = SillyTavern.getContext();
-    const settings = context.extensionSettings[settingsKey];
-
-    // 獲取預設名稱 (Get preset name)
-    const presetName = jsonData.presetName;
-
-    // 創建新預設 (Create new preset)
-    settings.presets[presetName] = jsonData.settings;
-
-    // 設為活動預設 (Set as active preset)
-    settings.activePreset = presetName;
-
-    // 將預設設定應用到當前設定 (Apply preset settings to current settings)
-    applyPresetToSettings(presetName);
-
-    // 更新主題選擇器 (Update theme selector)
-    updateThemeSelector(presetName);
-
-    // 保存設定 (Save settings)
-    context.saveSettingsDebounced();
-
-    // 顯示成功訊息 (Show success message)
-    toastr.success(t`Preset "${presetName}" imported successfully`);
-} catch (error) {
-    toastr.error(t`Error importing preset: ${error.message}`);
-    console.error(`[${EXTENSION_NAME}]`, t`Error importing preset:`, error);
-}
-}
 
 /**
 * 更新主題選擇器
@@ -815,26 +1105,25 @@ try {
 * @param {string} presetName - 預設名稱 (Preset name)
 */
 function updateThemeSelector(presetName) {
-const themeSelector = document.getElementById('themes');
-if (!themeSelector) return;
+    const themeSelector = document.getElementById('themes');
+    if (!themeSelector) return;
 
-// 檢查是否已存在此預設的選項 (Check if option for this preset already exists)
-const themeName = `${presetName} - by Rivelle`;
-let option = Array.from(themeSelector.options).find(opt => opt.value === themeName);
+    // 只在選項已存在時更新主題選擇器，不添加任何新選項
+    let optionExists = false;
 
-// 如果不存在，創建新選項 (If not exists, create new option)
-if (!option) {
-    option = document.createElement('option');
-    option.value = themeName;
-    option.text = themeName;
-    themeSelector.appendChild(option);
-}
+    // 檢查選項是否已存在
+    for (let i = 0; i < themeSelector.options.length; i++) {
+        if (themeSelector.options[i].value === presetName) {
+            optionExists = true;
+            themeSelector.selectedIndex = i; // 選擇該選項
+            break;
+        }
+    }
 
-// 選擇該選項 (Select the option)
-themeSelector.value = themeName;
-
-// 觸發變更事件 (Trigger change event)
-themeSelector.dispatchEvent(new Event('change'));
+    // 僅在選項存在時觸發變更事件
+    if (optionExists) {
+        themeSelector.dispatchEvent(new Event('change'));
+    }
 }
 
 /**
@@ -1231,48 +1520,50 @@ if (fileInput) {
 }
 
 /**
-* 匯出當前活動預設
-* Export current active preset
-*/
+ * 修改 exportActivePreset 函數
+ * Modify exportActivePreset function
+ * 使用 "[Moonlit] 預設名稱" 格式命名導出文件
+ * Use "[Moonlit] preset_name" format for exported files
+ */
 function exportActivePreset() {
-const context = SillyTavern.getContext();
-const settings = context.extensionSettings[settingsKey];
+    const context = SillyTavern.getContext();
+    const settings = context.extensionSettings[settingsKey];
 
-// 獲取活動預設 (Get active preset)
-const presetName = settings.activePreset;
-const preset = settings.presets[presetName];
+    // 獲取活動預設
+    const presetName = settings.activePreset;
+    const preset = settings.presets[presetName];
 
-if (!preset) {
-    toastr.error(t`Moonlit Echoes theme preset "${presetName}" not found`);
-    return;
-}
+    if (!preset) {
+        toastr.error(t`Preset "${presetName}" not found`);
+        return;
+    }
 
-// 創建匯出JSON (Create export JSON)
-const exportData = {
-    moonlitEchoesPreset: true,
-    presetVersion: THEME_VERSION,
-    presetName: presetName,
-    settings: preset
-};
+    // 創建匯出JSON
+    const exportData = {
+        moonlitEchoesPreset: true,
+        presetVersion: THEME_VERSION,
+        presetName: presetName, // 不在 JSON 數據中添加前綴，只在文件名中使用
+        settings: preset
+    };
 
-// 轉換為JSON字符串 (Convert to JSON string)
-const jsonString = JSON.stringify(exportData, null, 2);
+    // 轉換為JSON字符串
+    const jsonString = JSON.stringify(exportData, null, 2);
 
-// 創建下載blob (Create download blob)
-const blob = new Blob([jsonString], { type: 'application/json' });
-const url = URL.createObjectURL(blob);
+    // 創建下載blob
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
 
-// 創建並觸發下載連結，使用更直觀的命名方式 (Create and trigger download link with intuitive naming)
-const a = document.createElement('a');
-a.href = url;
-a.download = `[Moonlit] ${presetName.replace(/\s+/g, '-')}.json`;
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
+    // 創建並觸發下載連結，使用前綴格式的命名方式
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `[Moonlit] ${presetName.replace(/\s+/g, '-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-// 顯示成功訊息 (Show success message)
-toastr.success(t`Moonlit Echoes theme preset "${presetName}" exported successfully`);
+    // 顯示成功訊息
+    toastr.success(t`Preset "${presetName}" exported successfully`);
 }
 
 /**
@@ -1320,74 +1611,79 @@ toastr.success(t`Moonlit Echoes theme preset "${presetName}" updated successfull
 * Standardize export format as "[Moonlit] preset name"
 */
 function saveAsNewPreset() {
-// 引入彈出窗相關函數 (Import popup-related functions)
-import('../../../popup.js').then(({ POPUP_TYPE, callGenericPopup }) => {
-    // 使用系統對話框代替原生提示 (Use system dialog instead of native prompt)
-    callGenericPopup(
-        `<h3 data-i18n="Save New Moonlit Echoes Theme Preset">Save New Moonlit Echoes Theme Preset</h3>
-        <p data-i18n="Please enter a name for your new Moonlit Echoes theme preset:">Please enter a name for your new Moonlit Echoes theme preset:</p>`,
-        POPUP_TYPE.INPUT,
-        '',
-        'New preset name'
-    ).then((presetName) => {
-        // 檢查是否取消 (Check if cancelled)
-        if (!presetName) return;
+    // 引入彈出窗相關函數
+    import('../../../popup.js').then(({ POPUP_TYPE, callGenericPopup }) => {
+        // 使用系統對話框代替原生提示
+        callGenericPopup(
+            `<h3 data-i18n="Save New Moonlit Echoes Theme Preset">Save New Moonlit Echoes Theme Preset</h3>
+            <p data-i18n="Please enter a name for your new Moonlit Echoes theme preset:">Please enter a name for your new Moonlit Echoes theme preset:</p>`,
+            POPUP_TYPE.INPUT,
+            '',
+            'New preset name'
+        ).then((presetName) => {
+            // 檢查是否取消
+            if (!presetName) return;
 
-        // 檢查名稱是否有效 (Check if name is valid)
-        if (!presetName.trim()) {
-            toastr.error('Preset name cannot be empty');
-            return;
-        }
+            // 檢查名稱是否有效
+            if (!presetName.trim()) {
+                toastr.error('Preset name cannot be empty');
+                return;
+            }
 
+            const context = SillyTavern.getContext();
+            const settings = context.extensionSettings[settingsKey];
+
+            // 檢查是否已存在
+            if (settings.presets[presetName]) {
+                // 使用系統確認對話框
+                import('../../../popup.js').then(({ POPUP_TYPE, callGenericPopup }) => {
+                    callGenericPopup(
+                        `<h3 data-i18n='Confirm Overwrite">Confirm Overwrite</h3>
+                        <p data-i18n='A preset named "${presetName}" already exists. Do you want to overwrite it?'>A preset named "${presetName}" already exists. Do you want to overwrite it?</p>`,
+                        POPUP_TYPE.CONFIRM
+                    ).then((confirmed) => {
+                        if (!confirmed) return;
+                        createNewPreset(presetName);
+                    });
+                });
+            } else {
+                createNewPreset(presetName);
+            }
+        });
+    });
+
+    // 創建新預設的函數
+    function createNewPreset(presetName) {
         const context = SillyTavern.getContext();
         const settings = context.extensionSettings[settingsKey];
 
-        // 檢查是否已存在 (Check if already exists)
-        if (settings.presets[presetName]) {
-            // 使用系統確認對話框 (Use system confirmation dialog)
-            import('../../../popup.js').then(({ POPUP_TYPE, callGenericPopup }) => {
-                callGenericPopup(
-                    `<h3 data-i18n='Confirm Overwrite">Confirm Overwrite</h3>
-                    <p data-i18n='A preset named "${presetName}" already exists. Do you want to overwrite it?'>A preset named "${presetName}" already exists. Do you want to overwrite it?</p>`,
-                    POPUP_TYPE.CONFIRM
-                ).then((confirmed) => {
-                    if (!confirmed) return;
-                    createNewPreset(presetName);
-                });
-            });
-        } else {
-            createNewPreset(presetName);
-        }
-    });
-});
+        // 收集當前設定
+        const currentSettings = {};
+        themeCustomSettings.forEach(setting => {
+            const { varId } = setting;
+            currentSettings[varId] = settings[varId];
+        });
 
-// 創建新預設的函數 (Function to create new preset)
-function createNewPreset(presetName) {
-    const context = SillyTavern.getContext();
-    const settings = context.extensionSettings[settingsKey];
+        // 創建新預設
+        settings.presets[presetName] = currentSettings;
 
-    // 收集當前設定 (Collect current settings)
-    const currentSettings = {};
-    themeCustomSettings.forEach(setting => {
-        const { varId } = setting;
-        currentSettings[varId] = settings[varId];
-    });
+        // 設為活動預設
+        settings.activePreset = presetName;
 
-    // 創建新預設 (Create new preset)
-    settings.presets[presetName] = currentSettings;
+        // 更新 Moonlit 預設選擇器
+        updatePresetSelector();
 
-    // 設為活動預設 (Set as active preset)
-    settings.activePreset = presetName;
+        // 不再更新 UI Theme 選擇器，完全分離兩者
 
-    // 更新預設選擇器 (Update preset selector)
-    updatePresetSelector();
+        // 同步 UI Theme 選擇器中的刪除（但不添加新預設）
+        syncMoonlitPresetsWithThemeList();
 
-    // 保存設定 (Save settings)
-    context.saveSettingsDebounced();
+        // 保存設定
+        context.saveSettingsDebounced();
 
-    // 顯示成功訊息 (Show success message)
-    toastr.success(t`Preset "${presetName}" saved successfully`);
-}
+        // 顯示成功訊息
+        toastr.success(t`Preset "${presetName}" saved successfully`);
+    }
 }
 
 /**
@@ -1395,79 +1691,105 @@ function createNewPreset(presetName) {
 * Delete current preset
 */
 function deleteCurrentPreset() {
-const context = SillyTavern.getContext();
-const settings = context.extensionSettings[settingsKey];
+    const context = SillyTavern.getContext();
+    const settings = context.extensionSettings[settingsKey];
 
-// 獲取活動預設名稱 (Get active preset name)
-const presetName = settings.activePreset;
+    // 獲取活動預設名稱 (Get active preset name)
+    const presetName = settings.activePreset;
 
-// 防止刪除最後一個預設 (Prevent deleting the last preset)
-if (Object.keys(settings.presets).length <= 1) {
-    toastr.error(t`Cannot delete the only preset`);
-    return;
-}
-
-// 確保不是刪除 Moonlit Echoes 預設 (Ensure not deleting Moonlit Echoes preset)
-if (presetName === 'Moonlit Echoes') {
-    toastr.error(t`Cannot delete the Moonlit Echoes theme preset`);
-    return;
-}
-
-// 使用動態導入彈窗模塊，明確使用 callGenericPopup
-// Use dynamic import for popup module, explicitly use callGenericPopup
-import('../../../popup.js').then((popupModule) => {
-    // 檢查模塊中有哪些可用的函數 (Check which functions are available in the module)
-    console.log("Available popup functions:", Object.keys(popupModule));
-
-    // 使用正確的函數名稱 (Use correct function name)
-    const { POPUP_TYPE, callGenericPopup } = popupModule;
-
-    // 使用彈窗確認刪除 (Use popup to confirm deletion)
-    callGenericPopup(
-        `<h3>${t`Delete Theme Preset`}</h3><p>${t`Are you sure you want to delete the preset "${presetName}"?`}</p>`,
-        POPUP_TYPE.CONFIRM
-    ).then((confirmed) => {
-        if (!confirmed) return;
-
-        // 刪除預設 (Delete preset)
-        delete settings.presets[presetName];
-
-        // 切換到 Moonlit Echoes 預設 (Switch to Moonlit Echoes preset)
-        settings.activePreset = 'Moonlit Echoes';
-
-        // 將 Moonlit Echoes 預設設定應用到當前設定 (Apply Moonlit Echoes preset settings to current settings)
-        applyPresetToSettings('Moonlit Echoes');
-
-        // 更新預設選擇器 (Update preset selector)
-        updatePresetSelector();
-
-        // 更新主題選擇器 (Update theme selector)
-        updateThemeSelector(presetName);
-
-        // 保存設定 (Save settings)
-        context.saveSettingsDebounced();
-
-        // 顯示成功訊息 (Show success message)
-        toastr.success(t`Preset "${presetName}" deleted successfully`);
-    });
-}).catch(error => {
-    console.error(`[${EXTENSION_NAME}]`, 'Error loading popup module:', error);
-
-    // 詳細記錄錯誤信息以幫助診斷 (Log detailed error information to help diagnosis)
-    console.error("Error details:", error.message, error.stack);
-
-    // 如果動態導入失敗，回退到原始確認方式 (Fall back to original confirmation method if dynamic import fails)
-    if (confirm(t`Are you sure you want to delete the preset "${presetName}"?`)) {
-        // 執行刪除邏輯... (Execute deletion logic...)
-        delete settings.presets[presetName];
-        settings.activePreset = 'Moonlit Echoes';
-        applyPresetToSettings('Moonlit Echoes');
-        updatePresetSelector();
-        updateThemeSelector(presetName);
-        context.saveSettingsDebounced();
-        toastr.success(t`Preset "${presetName}" deleted successfully`);
+    // 防止刪除最後一個預設 (Prevent deleting the last preset)
+    if (Object.keys(settings.presets).length <= 1) {
+        toastr.error(t`Cannot delete the only preset`);
+        return;
     }
-});
+
+    // 確保不是刪除 Moonlit Echoes 預設 (Ensure not deleting Moonlit Echoes preset)
+    if (presetName === 'Moonlit Echoes') {
+        toastr.error(t`Cannot delete the Moonlit Echoes theme preset`);
+        return;
+    }
+
+    // 使用動態導入彈窗模塊，明確使用 callGenericPopup
+    // Use dynamic import for popup module, explicitly use callGenericPopup
+    import('../../../popup.js').then((popupModule) => {
+        // 檢查模塊中有哪些可用的函數 (Check which functions are available in the module)
+        console.log("Available popup functions:", Object.keys(popupModule));
+
+        // 使用正確的函數名稱 (Use correct function name)
+        const { POPUP_TYPE, callGenericPopup } = popupModule;
+
+        // 使用彈窗確認刪除 (Use popup to confirm deletion)
+        callGenericPopup(
+            `<h3>${t`Delete Theme Preset`}</h3><p>${t`Are you sure you want to delete the preset "${presetName}"?`}</p>`,
+            POPUP_TYPE.CONFIRM
+        ).then((confirmed) => {
+            if (!confirmed) return;
+
+            // 從 UI 主題選擇器中移除對應的主題 (Remove corresponding theme from UI theme selector)
+            const themeSelector = document.getElementById('themes');
+            if (themeSelector) {
+                // 找到並移除對應的選項 (Find and remove corresponding option)
+                const themeName = `${presetName} - by Rivelle`;
+                for (let i = 0; i < themeSelector.options.length; i++) {
+                    if (themeSelector.options[i].value === themeName) {
+                        themeSelector.remove(i);
+                        break;
+                    }
+                }
+            }
+
+            // 刪除預設 (Delete preset)
+            delete settings.presets[presetName];
+
+            // 切換到 Default 預設 (Switch to Default preset)
+            settings.activePreset = 'Default';
+
+            // 將 Default 預設設定應用到當前設定 (Apply Default preset settings to current settings)
+            applyPresetToSettings('Default');
+
+            // 更新預設選擇器 (Update preset selector)
+            updatePresetSelector();
+
+            // 更新 UI 主題列表 (Update UI theme list)
+            syncMoonlitPresetsWithThemeList();
+
+            // 保存設定 (Save settings)
+            context.saveSettingsDebounced();
+
+            // 顯示成功訊息 (Show success message)
+            toastr.success(t`Preset "${presetName}" deleted successfully`);
+        });
+    }).catch(error => {
+        console.error(`[${EXTENSION_NAME}]`, 'Error loading popup module:', error);
+
+        // 詳細記錄錯誤信息以幫助診斷 (Log detailed error information to help diagnosis)
+        console.error("Error details:", error.message, error.stack);
+
+        // 如果動態導入失敗，回退到原始確認方式 (Fall back to original confirmation method if dynamic import fails)
+        if (confirm(t`Are you sure you want to delete the preset "${presetName}"?`)) {
+            // 從 UI 主題選擇器中移除對應的主題 (Remove corresponding theme from UI theme selector)
+            const themeSelector = document.getElementById('themes');
+            if (themeSelector) {
+                // 找到並移除對應的選項 (Find and remove corresponding option)
+                const themeName = `${presetName} - by Rivelle`;
+                for (let i = 0; i < themeSelector.options.length; i++) {
+                    if (themeSelector.options[i].value === themeName) {
+                        themeSelector.remove(i);
+                        break;
+                    }
+                }
+            }
+
+            // 執行刪除邏輯... (Execute deletion logic...)
+            delete settings.presets[presetName];
+            settings.activePreset = 'Default';
+            applyPresetToSettings('Default');
+            updatePresetSelector();
+            syncMoonlitPresetsWithThemeList();
+            context.saveSettingsDebounced();
+            toastr.success(t`Preset "${presetName}" deleted successfully`);
+        }
+    });
 }
 
 /**
@@ -1476,29 +1798,29 @@ import('../../../popup.js').then((popupModule) => {
 * @param {string} presetName - 要載入的預設名稱 (Name of preset to load)
 */
 function loadPreset(presetName) {
-const context = SillyTavern.getContext();
-const settings = context.extensionSettings[settingsKey];
+    const context = SillyTavern.getContext();
+    const settings = context.extensionSettings[settingsKey];
 
-// 檢查預設是否存在 (Check if preset exists)
-if (!settings.presets[presetName]) {
-    toastr.error(t`Moonlit Echoes theme preset "${presetName}" not found`);
-    return;
-}
+    // 檢查預設是否存在
+    if (!settings.presets[presetName]) {
+        toastr.error(t`Preset "${presetName}" not found`);
+        return;
+    }
 
-// 設定活動預設 (Set active preset)
-settings.activePreset = presetName;
+    // 設定活動預設
+    settings.activePreset = presetName;
 
-// 應用預設設定 (Apply preset settings)
-applyPresetToSettings(presetName);
+    // 應用預設設定
+    applyPresetToSettings(presetName);
 
-// 更新預設選擇器 (Update preset selector)
-updatePresetSelector();
+    // 更新 Moonlit 預設選擇器
+    updatePresetSelector();
 
-// 更新主題選擇器 (Update theme selector)
-updateThemeSelector(presetName);
+    // 選擇性更新主題選擇器（只有在選項已存在時）
+    updateThemeSelector(presetName);
 
-// 保存設定 (Save settings)
-context.saveSettingsDebounced();
+    // 保存設定
+    context.saveSettingsDebounced();
 }
 
 /**
@@ -2684,11 +3006,11 @@ function initChatDisplaySwitcher() {
 /**
 * 初始化頭像注入器
 * Initialize avatar injector
-* 將頭像URL注入到消息元素作為CSS變量
+* 將頭像URL注入到訊息元素作為CSS變量
 * Inject avatar URL into message elements as CSS variables
 */
 function initAvatarInjector() {
-    // 更新所有消息的頭像 (Update avatars for all messages)
+    // 更新所有訊息的頭像 (Update avatars for all messages)
     function updateAvatars() {
         document.querySelectorAll('.mes').forEach(mes => {
             // 跳過已處理的元素 (Skip already processed elements)
@@ -3242,33 +3564,50 @@ function syncMoonlitPresetsWithThemeList() {
 
     if (!themeSelector) return;
 
-    // 獲取所有預設 (Get all presets)
+    // 獲取所有預設
     const presets = settings.presets || {};
 
-    // 移除所有舊的 Moonlit 主題選項 (Remove all old Moonlit theme options)
+    // 創建已存在於主題選擇器中的預設選項集合
+    const existingPresetOptions = new Set();
+
+    // 識別哪些預設選項已在主題選擇器中
     Array.from(themeSelector.options).forEach(option => {
-        if (option.value.includes('- by Rivelle')) {
-            themeSelector.removeChild(option);
+        // 檢查這個選項是否對應我們的某個預設
+        if (Object.keys(presets).includes(option.value)) {
+            existingPresetOptions.add(option.value);
         }
     });
 
-    // 添加所有預設作為主題選項 (Add all presets as theme options)
-    for (const presetName in presets) {
-        const themeName = `${presetName} - by Rivelle`;
-        const option = document.createElement('option');
-        option.value = themeName;
-        option.text = themeName;
-        themeSelector.appendChild(option);
+    // 查找並移除已不存在的預設選項（從 UI Theme 選擇器中刪除已刪除的預設）
+    for (let i = themeSelector.options.length - 1; i >= 0; i--) {
+        const option = themeSelector.options[i];
+        const optionValue = option.value;
+
+        // 如果選項對應一個預設，但該預設已被刪除，則從選擇器中移除
+        if (existingPresetOptions.has(optionValue) && !presets[optionValue]) {
+            themeSelector.remove(i);
+        }
     }
 
-    // 如果當前主題是 Moonlit 類型，確保選項存在並選中 (If current theme is Moonlit type, ensure option exists and is selected)
-    if (settings.enabled && themeSelector.value.includes('- by Rivelle')) {
-        const currentPresetName = themeSelector.value.replace(' - by Rivelle', '');
+    // 完全不添加任何預設到主題選擇器，包括官方預設
+    // 這部分代碼已移除
 
-        // 檢查當前預設是否存在 (Check if current preset exists)
-        if (!presets[currentPresetName]) {
-            // 如果不存在，選擇活動預設 (If not exists, select active preset)
-            themeSelector.value = `${settings.activePreset} - by Rivelle`;
+    // 如果當前主題是我們的預設，且它存在於主題選擇器中，確保選擇正確
+    if (settings.enabled) {
+        const activePreset = settings.activePreset;
+
+        // 檢查是否在選擇器中存在這個選項
+        let optionExists = false;
+        for (let i = 0; i < themeSelector.options.length; i++) {
+            if (themeSelector.options[i].value === activePreset) {
+                optionExists = true;
+                break;
+            }
+        }
+
+        // 只有當選項存在時才同步選擇
+        if (optionExists && themeSelector.value !== activePreset) {
+            themeSelector.value = activePreset;
         }
     }
 }

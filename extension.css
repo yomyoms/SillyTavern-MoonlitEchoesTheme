@@ -404,7 +404,7 @@ body.echostyle {
     }
 }
 
-.lacommon--quickActions {
+body.mes:has(.lacommon--quickActions) {
     margin-left: 20px;
     align-items: center !important;
 

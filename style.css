@@ -9,7 +9,6 @@
    - - - - - - - - - - - - - - - - - */
 
 
-
 /* CUSTOM STYLES 自定義樣式
 - - - - - - - - - - - - - - - - - */
 
@@ -986,8 +985,8 @@ body.big-avatars #chat .mes[is_user="true"] {
 }
 body.big-avatars {
     &.echostyle,
-    &.ripplestylestyle,
-    &.hushstyle {
+    &.hushstyle,
+    &.whisperstyle {
         #chat .mes {
             .ch_name .flex-container {
                 margin-left: 3px !important;
@@ -1063,7 +1062,13 @@ body.bubblechat {
             }
         }
 
-        .mes[is_user="true"]{
+        @media screen and (max-width: 1000px) {
+            .mes_block {
+                margin-top: 0px;
+            }
+        }
+
+        .mes[is_user="true"] {
             display: flex;
             flex-direction: row-reverse;
 
@@ -1086,6 +1091,10 @@ body.bubblechat {
                         > .name_text,
                         > .timestamp {
                             order: 0;
+                        }
+
+                        .timestamp {
+                            justify-self: flex-end !important;
                         }
                     }
                 }
@@ -1899,6 +1908,32 @@ body.echostyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
     }
     .mes_text {
         padding: 10px !important;
+    }
+}
+
+/* Message ID Display 訊息計數器（訊息 ID 顯示）*/
+body.flatchat,
+body.bubblechat,
+body.documentstyle,
+body.ripplestyle {
+    .mesAvatarWrapper {
+        display: grid;
+        justify-items: center;
+    }
+}
+body.flatchat,
+body.bubblechat,
+body.documentstyle,
+body.ripplestyle {
+    .mesIDDisplay {
+        background: rgba(255, 255, 255, 0.1) !important;
+        width: fit-content;
+        padding: 0 8px;
+        border-radius: 8px;
+        justify-self: center;
+        text-align: center;
+        margin-top: 5px !important;
+        margin-bottom: 3px;
     }
 }
 
