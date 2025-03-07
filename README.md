@@ -4,7 +4,7 @@
 
 ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_screen_demo_preview.jpg)
 
-**Moonlit Echoes** is a UI theme designed for SillyTavern. It has been customized and refined based on my personal preferences to create a more modern, elegant, and minimalist interface while enhancing the user experience across both desktop and mobile platforms.
+**Moonlit Echoes 月下回聲** is a UI theme designed for SillyTavern. It has been customized and refined based on my personal preferences to create a more modern, elegant, and minimalist interface while enhancing the user experience across both desktop and mobile platforms.
 
 Moonlit Echoes was first released on the SillyTavern Discord server on November 25, 2024, and has been continuously updated with valuable feedback and support from the community. Eventually, to improve maintainability and ease of updates—and to satisfy my obsession with well-designed themes—I developed this as a SillyTavern extension and made it open-source on GitHub.
 
