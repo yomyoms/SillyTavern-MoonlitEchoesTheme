@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.2.0";
+const THEME_VERSION = "2.2.1";
 
 import { t } from '../../../i18n.js';
 
@@ -2428,7 +2428,9 @@ function createColorPicker(container, setting, settings) {
     colorPickerContainer.classList.add('theme-color-picker');
     colorPickerContainer.style.display = 'flex';
     colorPickerContainer.style.alignItems = 'center';
-    colorPickerContainer.style.gap = '8px';
+    colorPickerContainer.style.gap = '10px';
+    colorPickerContainer.style.padding = '2px 0';
+    colorPickerContainer.style.minHeight = '36px';
 
     // 創建顏色預覽方塊 (Create color preview box)
     const colorPreview = document.createElement('div');
@@ -2442,6 +2444,7 @@ function createColorPicker(container, setting, settings) {
     colorPreview.style.border = '1px solid rgba(255, 255, 255, 0.2)';
     colorPreview.style.background = currentValue;
     colorPreview.style.cursor = 'pointer';
+    colorPreview.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.25)';
 
     // 創建文本輸入 - 優先使用HEX格式 (Create text input - prioritize HEX format)
     const textInput = document.createElement('input');
@@ -2452,31 +2455,38 @@ function createColorPicker(container, setting, settings) {
     textInput.value = initialHexValue || currentValue;
     textInput.classList.add('color-input-text');
     textInput.style.flex = '1';
+    textInput.style.minWidth = '80px';
+    textInput.style.minHeight = '28px';
+    textInput.style.padding = '4px 6px';
+    textInput.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+    textInput.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+    textInput.style.borderRadius = '4px';
+    textInput.style.color = '#ffffff';
 
-    // 創建顏色選擇器（隱藏） (Create color picker (hidden))
+    // 創建顏色選擇器 (Create color picker)
     const colorInput = document.createElement('input');
     colorInput.id = `cts-${varId}-color`;
     colorInput.type = 'color';
     colorInput.value = rgbaToHex(currentValue) || '#ffffff';
-    colorInput.style.position = 'absolute';
+    colorInput.style.width = '1px';
+    colorInput.style.height = '1px';
     colorInput.style.opacity = '0';
-    colorInput.style.pointerEvents = 'none';
+    colorInput.style.position = 'absolute';
+    colorInput.style.pointerEvents = 'auto'; // 允許觸控事件 (Allow touch events)
 
     // 創建透明度控制容器 (Create opacity control container)
     const alphaContainer = document.createElement('div');
     alphaContainer.style.display = 'flex';
     alphaContainer.style.flexDirection = 'column';
-    alphaContainer.style.width = '100px';
-    alphaContainer.style.alignItems = 'center';
+    alphaContainer.style.width = '120px';
+    alphaContainer.style.gap = '3px';
 
     // 創建透明度標籤 (Create opacity label)
     const alphaLabel = document.createElement('span');
     alphaLabel.textContent = t`Opacity`;
     alphaLabel.style.fontSize = '10px';
-    alphaLabel.style.opacity = '0.8';
-    alphaLabel.style.marginBottom = '5px';
-    alphaLabel.style.alignSelf = 'flex-start'; // 覆蓋父容器的對齊設定 (Override parent container alignment)
-    alphaLabel.style.width = '100%'; // 確保寬度填滿父容器 (Ensure width fills parent container)
+    alphaLabel.style.opacity = '0.7';
+    alphaLabel.style.alignSelf = 'flex-start';
 
     // 創建透明度控制行 (Create opacity control row)
     const alphaRow = document.createElement('div');
@@ -2494,29 +2504,122 @@ function createColorPicker(container, setting, settings) {
     alphaSlider.step = '1';
     alphaSlider.value = Math.round(getAlphaFromRgba(currentValue) * 100);
     alphaSlider.style.flex = '1';
+    alphaSlider.style.height = '5px';
+    alphaSlider.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+    alphaSlider.style.borderRadius = '2px';
+    alphaSlider.style.appearance = 'none';
+    alphaSlider.style.outline = 'none';
+    alphaSlider.style.cursor = 'pointer';
+
+    // 為滑桿添加更現代的樣式 (Add more modern style for slider)
+    alphaSlider.style.background = 'linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2))';
+    alphaSlider.style.backgroundSize = '100% 3px';
+    alphaSlider.style.backgroundPosition = 'center';
+    alphaSlider.style.backgroundRepeat = 'no-repeat';
+    alphaSlider.style.boxShadow = 'inset 0 0 2px var(--SmartThemeBodyColor, rgba(255, 255, 255, 0.3))';
+
+    // 為滑塊添加樣式 (Add style for slider thumb)
+    const thumbStyle = `
+        #${alphaSlider.id}::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: ${initialHexValue || '#ffffff'};
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        #${alphaSlider.id}::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: ${initialHexValue || '#ffffff'};
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+    `;
+
+    // 添加滑塊樣式到文檔 (Add thumb style to document)
+    const styleElem = document.createElement('style');
+    styleElem.textContent = thumbStyle;
+    document.head.appendChild(styleElem);
 
     // 創建透明度數值顯示 (Create opacity value display)
     const alphaValue = document.createElement('span');
     alphaValue.id = `cts-${varId}-alpha-value`;
-    alphaValue.textContent = alphaSlider.value;
-    alphaValue.style.width = '24px';
+    alphaValue.textContent = alphaSlider.value + '%';
+    alphaValue.style.width = '30px';
     alphaValue.style.textAlign = 'right';
     alphaValue.style.fontSize = '12px';
+    alphaValue.style.opacity = '0.9';
+
+    // 在 createColorPicker 函數內部，定義一個更可靠的觸發函數
+// 這應該放在函數定義部分，其他事件監聽器之前
+
+// 設置點擊預覽區域的多重觸發方式 (Set multiple trigger methods for clicking preview area)
+function triggerColorPicker() {
+    // 多重方式嘗試觸發 (Multiple attempts to trigger)
+    setTimeout(() => {
+        try {
+            colorInput.click();
+
+            // 如果第一次嘗試可能失敗，再嘗試一次
+            setTimeout(() => {
+                colorInput.click();
+            }, 50);
+        } catch (error) {
+            console.error(`[${EXTENSION_NAME}]`, `顏色選擇器觸發失敗: ${error.message}`);
+        }
+    }, 10);
+}
 
     // 點擊顏色預覽時觸發顏色選擇器 (Trigger color picker when clicking color preview)
-    colorPreview.addEventListener('click', () => {
-        colorInput.click();
+    colorPreview.addEventListener('click', (e) => {
+        // 阻止事件冒泡 (Prevent event bubbling)
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 使用更可靠的觸發函數
+        triggerColorPicker();
     });
+
+    // 添加觸控事件支援 (Add touch event support)
+    colorPreview.addEventListener('touchstart', (e) => {
+        // 阻止事件冒泡和默認行為 (Prevent event bubbling and default behavior)
+        e.preventDefault();
+        e.stopPropagation();
+    }, { passive: false });
+
+    colorPreview.addEventListener('touchend', (e) => {
+        // 阻止事件冒泡和默認行為 (Prevent event bubbling and default behavior)
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 使用更可靠的觸發函數
+        triggerColorPicker();
+    }, { passive: false });
 
     // 顏色選擇器變更時更新 (Update when color picker changes)
     colorInput.addEventListener('input', () => {
         updateColor();
     });
 
+    // 顏色選擇器完成選擇時更新 (Update when color picker selection is complete)
+    colorInput.addEventListener('change', () => {
+        updateColor();
+    });
+
     // 透明度滑桿變更時更新 (Update when opacity slider changes)
     alphaSlider.addEventListener('input', () => {
-        alphaValue.textContent = alphaSlider.value;
-        updateColor();
+        const alphaPercent = alphaSlider.value;
+        alphaValue.textContent = alphaPercent + '%';
+        updateColorAndAlpha();
+
+        // 更新滑塊顏色 (Update thumb color)
+        const hexColor = colorInput.value;
+        updateSliderThumbColor(hexColor);
     });
 
     // 文本輸入變更事件 (Text input change event)
@@ -2548,7 +2651,10 @@ function createColorPicker(container, setting, settings) {
                 // 更新透明度滑桿 (Update opacity slider)
                 const alphaPercent = Math.round(alpha * 100);
                 alphaSlider.value = alphaPercent;
-                alphaValue.textContent = alphaPercent;
+                alphaValue.textContent = alphaPercent + '%';
+
+                // 更新滑塊顏色 (Update thumb color)
+                updateSliderThumbColor(hexColor);
 
                 // 生成RGBA顏色 (Generate RGBA color)
                 const r = parseInt(colorInput.value.slice(1, 3), 16);
@@ -2576,6 +2682,35 @@ function createColorPicker(container, setting, settings) {
         }
     });
 
+    // 更新滑塊顏色 (Update slider thumb color)
+    function updateSliderThumbColor(hexColor) {
+        // 生成新的滑塊樣式 (Generate new thumb style)
+        const newThumbStyle = `
+            #${alphaSlider.id}::-webkit-slider-thumb {
+                appearance: none;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: ${hexColor};
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+            #${alphaSlider.id}::-moz-range-thumb {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: ${hexColor};
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+        `;
+
+        // 更新樣式 (Update style)
+        styleElem.textContent = newThumbStyle;
+    }
+
     // 更新顏色的函數 (Function to update color)
     function updateColor() {
         const hexColor = colorInput.value;
@@ -2592,8 +2727,33 @@ function createColorPicker(container, setting, settings) {
         // 更新顏色預覽 (Update color preview)
         colorPreview.style.background = rgbaColor;
 
+        // 更新滑塊顏色 (Update thumb color)
+        updateSliderThumbColor(hexColor);
+
         // 優先顯示HEX格式，但保存RGBA格式 (Prioritize HEX format display, but save RGBA format)
         textInput.value = hexColor;
+
+        // 更新設定並應用 (Update and apply settings)
+        settings[varId] = rgbaColor;
+        applyThemeSetting(varId, rgbaColor);
+        context.saveSettingsDebounced();
+    }
+
+    // 更新顏色和透明度的函數 (Function to update color and alpha)
+    function updateColorAndAlpha() {
+        const hexColor = colorInput.value;
+        const alpha = alphaSlider.value / 100;
+
+        // 從HEX色碼獲取RGB部分 (Get RGB part from HEX code)
+        const r = parseInt(hexColor.slice(1, 3), 16);
+        const g = parseInt(hexColor.slice(3, 5), 16);
+        const b = parseInt(hexColor.slice(5, 7), 16);
+
+        // 生成RGBA顏色字符串 (Generate RGBA color string)
+        const rgbaColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+
+        // 更新顏色預覽 (Update color preview)
+        colorPreview.style.background = rgbaColor;
 
         // 更新設定並應用 (Update and apply settings)
         settings[varId] = rgbaColor;
