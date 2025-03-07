@@ -29,10 +29,10 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 ## 螢幕截圖
 截圖來自 **1.0.0 版本**，展示於 MacBook（Chrome），僅供參考。於 iPhone（Safari PWA）展示之更多截圖請見本項目的 [.github 資料夾](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github)。
 
-| **Flat 扁平** | **Bubble 氣泡** | **Document 文件** |
+| **Flat** | **Bubble** | **Document** |
 |:------:|:--------:|:----------:|
 | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_flat_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_bubble_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_document_preview.jpg) |
-| **Echo 回聲** | **Whisper 低語** | **Hush 輕聲** |
+| **Echo** | **Whisper** | **Hush** |
 | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_echo_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_whisper_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_hush_preview.jpg) |
 
 ## 安裝方式
