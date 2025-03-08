@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.2.1";
+const THEME_VERSION = "2.2.2";
 
 import { t } from '../../../i18n.js';
 
@@ -112,11 +112,11 @@ const themeCustomSettings = [
         "type": "select",
         "varId": "customCSS-top-padding",
         "displayText": t`Chat Field Top Spacing`,
-        "default": "25px",
+        "default": "10px",
         "options": [
             {
                 "label": t`Enabled`,
-                "value": "25px"
+                "value": "10px"
             },
             {
                 "label": t`Disabled`,
