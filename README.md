@@ -67,8 +67,23 @@ If you’re using SillyTavern via Termux, here’s how you can modify `config.ya
 2. Once added, you should see a structure like `/SillyTavern and /data/user/0/com.winlator`
 3. Open the **SillyTavern** folder and edit `config.yaml` directly
 
+## Usage Guide
+
+### How to Use the Moonlit Echoes Theme Preset?
+The Moonlit Echoes theme preset is partially synced with the UI themes in SillyTavern. If there are matching options in the menu, switching either one will sync the settings accordingly.
+
+However, the Moonlit Echoes theme preset is fundamentally separate from SillyTavern’s UI themes. The Moonlit Echoes Theme does NOT create or modify any SillyTavern UI themes.
+
+### Import & Export
+- Moonlit Echoes theme preset files follow the format `[Moonlit] PresetName.json` (e.g., `[Moonlit] Honey Cream.json`). There is a half-width space after `[Moonlit]`
+- This does not affect functionality. You do **NOT** need to remove `[Moonlit] ` before importing—just import the file directly
+- If the imported preset does not sync with SillyTavern UI themes, **reload the page** or **select a different theme** to apply the changes
+
 ## Feedback & Suggestions
-If you have any issues or feature requests, feel free to submit them via the Issues section using the provided template.
+If you encounter any issues or have feature requests, please submit them in the Issues section using the provided template.
+
+You’re also welcome to share your color schemes in the Discussions section!<br>
+Whether it’s a SillyTavern UI theme or a Moonlit Echoes theme preset, I’d love to see your creative designs.
 
 ## Special Thanks
 

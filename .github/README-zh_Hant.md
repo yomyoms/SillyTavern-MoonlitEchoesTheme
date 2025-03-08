@@ -15,10 +15,10 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 ## 功能與特色
 
 ### 核心功能
-- 與 SillyTavern 預設主題兼容，並確保與其他 SillyTavern 擴充功能協作順暢。
-- 適配桌機與行動裝置，針對行動設備優化，提供更寬敞的輸入欄位與其他適配調整，致力為介面美觀強迫症帶來更舒適的排版體驗。
-- 新增多種聊天風格，除了 SillyTavern 內建的 「Flat」、「Bubble」、「Document」 之外，還有 「Echo」（回音）、「Whisper」（低語）、「Hush」（靜默），以及全新的隱藏款「Ripple」（漣漪）。
-- 提供多項自訂設定，可根據個人喜好自由調整。
+- 與 SillyTavern 預設主題兼容，並確保與其他 SillyTavern 擴充功能協作順暢
+- 適配桌機與行動裝置，針對行動設備調整，提供更寬敞的輸入欄位與其他調整，致力為介面美觀強迫症帶來更舒適的使用體驗
+- 新增多種聊天風格，除了 SillyTavern 內建的 「Flat」、「Bubble」、「Document」 之外，還有 「Echo」（回音）、「Whisper」（低語）、「Hush」（靜默），以及全新的隱藏款「Ripple」（漣漪）
+- 提供多項自訂設定，可根據個人喜好自由調整
   
 ### Moonlit Echoes 主題預設設定檔
 使用者現在可以輕鬆分享基於 Moonlit Echoes Theme 的配色與主題，並與 SillyTavern 內建 UI 主題無縫切換。
@@ -62,14 +62,24 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 
 ### 方法 1：透過 Termux 編輯
 1. 打開 Termux，輸入：`cd SillyTavern`
-2. 接著輸入並執行：`nano config.yaml` 以編輯檔案。
+2. 接著輸入並執行：`nano config.yaml` 以編輯檔案
 ### 方法 2：使用 Material Files（Android 檔案管理器）
 1. 開啟 Material Files > 新增儲存空間 > 前往 Termux > SillyTavern
 2. 新增後，你應該會看到類似 `/SillyTavern` 和 `/data/user/0/com.winlator` 等結構
 3. 打開 SillyTavern 資料夾，直接編輯 `config.yaml`
 
+## 使用指南
+Moonlit Echoes 主題預設與 SillyTavern 的 UI 主題「部分同步」。若選單中有對應的選項，切換任一方都會同步設定。
+然而，Moonlit Echoes 主題預設本質上與 SillyTavern 的 UI 主題是獨立的。Moonlit Echoes 主題「不會」創建或修改任何 SillyTavern 的 UI 主題。
+
+### 匯入與匯出
+- Moonlit Echoes 主題預設設定檔的文件名稱格式為 `[Moonlit] 預設名稱.json`（如：`[Moonlit] Honey Cream.json`）。`[Moonlit]` 之後有一個半形空格
+- 這不會影響功能，您**「不需要」**在匯入前移除 `[Moonlit] `前綴，只需直接匯入文件即可
+- 若匯入的預設未與 SillyTavern 的 UI 主題同步，請重新載入頁面或選擇其他主題來套用變更
+
 ## 回饋與建議
 若有任何問題或功能建議，請在 Issues 頁面提交回饋，並使用提供的模板填寫詳細資訊。
+歡迎在 Discussions 區分享配色方案！無論是 SillyTavern UI 主題還是 Moonlit Echoes 主題預設，我都很期待看到美麗的配色。
 
 ## 特別感謝
 由衷感謝所有人一路上的幫助與喜愛。
