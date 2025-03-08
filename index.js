@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.2.2";
+const THEME_VERSION = "2.3.0";
 
 import { t } from '../../../i18n.js';
 
@@ -82,6 +82,14 @@ const themeCustomSettings = [
         "category": "colors",
         "description": t`Background color of the chat field (#sheld)`
     },
+    {
+        "type": "color",
+        "varId": "customScrollbarColor",
+        "displayText": t`Scrollbar Color`,
+        "default": "rgba(255, 255, 255, 0.5)",
+        "category": "colors",
+        "description": t`The scrollbar color on SillyTavern`
+    },
 
     // 背景和模糊設定 (Background and blur settings)
     {
@@ -110,17 +118,17 @@ const themeCustomSettings = [
     // 聊天介面設定 (Chat interface settings)
     {
         "type": "select",
-        "varId": "customCSS-top-padding",
+        "varId": "customCSS-Chat-TopPadding",
         "displayText": t`Chat Field Top Spacing`,
         "default": "10px",
         "options": [
             {
-                "label": t`Enabled`,
+                "label": t`Enable`,
                 "value": "10px"
             },
             {
-                "label": t`Disabled`,
-                "value": "0px"
+                "label": t`None`,
+                "value": "none"
             }
         ],
         "category": "chat",
@@ -1850,32 +1858,41 @@ applyPresetToSettings(settings.activePreset);
 * @param {string} presetName - 預設名稱 (Preset name)
 */
 function applyPresetToSettings(presetName) {
-const context = SillyTavern.getContext();
-const settings = context.extensionSettings[settingsKey];
+    const context = SillyTavern.getContext();
+    const settings = context.extensionSettings[settingsKey];
 
-// 獲取預設 (Get preset)
-const preset = settings.presets[presetName];
-if (!preset) return;
+    // 獲取預設
+    const preset = settings.presets[presetName];
+    if (!preset) return;
 
-// 應用所有設定 (Apply all settings)
-themeCustomSettings.forEach(setting => {
-    const { varId, default: defaultValue } = setting;
+    // 應用所有設定
+    themeCustomSettings.forEach(setting => {
+        const { varId, default: defaultValue } = setting;
+        const value = preset[varId] !== undefined ? preset[varId] : defaultValue;
+        settings[varId] = value;
+        applyThemeSetting(varId, value);
+    });
 
-    // 從預設獲取值，如果不存在則使用默認值 (Get value from preset, or use default if not exists)
-    const value = preset[varId] !== undefined ? preset[varId] : defaultValue;
+    // 應用所有CSS變量
+    applyAllThemeSettings();
 
-    // 更新設定 (Update setting)
-    settings[varId] = value;
+    // 更新UI
+    updateSettingsUI();
 
-    // 應用設定 (Apply setting)
-    applyThemeSetting(varId, value);
-});
-
-// 應用所有CSS變量 (Apply all CSS variables)
-applyAllThemeSettings();
-
-// 更新UI (Update UI)
-updateSettingsUI();
+    // 添加延遲處理顏色設定和選擇器
+    setTimeout(() => {
+        themeCustomSettings.forEach(setting => {
+            const { varId, type } = setting;
+            const value = settings[varId];
+            if (value !== undefined) {
+                if (type === 'color') {
+                    updateColorPickerUI(varId, value);
+                } else if (type === 'select') {
+                    updateSelectUI(varId, value);
+                }
+            }
+        });
+    }, 100);  // 100毫秒延遲確保UI已更新
 }
 
 /**
@@ -1921,42 +1938,48 @@ themeCustomSettings.forEach(setting => {
 * @param {string} value - 顏色值 (Color value)
 */
 function updateColorPickerUI(varId, value) {
-// 更新顏色預覽 (Update color preview)
-const colorPreview = document.querySelector(`#cts-${varId}-preview`);
-if (colorPreview) {
-    colorPreview.style.background = value;
-}
-
-// 更新Tool Cool Color Picker (Update Tool Cool Color Picker)
-const colorPicker = document.querySelector(`#cts-${varId}-color`);
-if (colorPicker) {
-    if (typeof colorPicker.setColor === 'function') {
-        // 如果元件已初始化 (If component is initialized)
-        colorPicker.setColor(value);
-    } else {
-        // 如果元件尚未初始化 (If component is not yet initialized)
-        colorPicker.setAttribute('color', value);
+    // 更新顏色預覽
+    const colorPreview = document.querySelector(`#cts-${varId}-preview`);
+    if (colorPreview) {
+        colorPreview.style.background = value;
     }
-}
 
-// 更新文本輸入欄位 (Update text input field)
-const textInput = document.querySelector(`#cts-${varId}-text`);
-if (textInput) {
-    // 優先顯示HEX格式（如果可能） (Prioritize HEX format display if possible)
-    const hexValue = rgbaToHex(value);
-    textInput.value = hexValue || value;
-}
+    // 更新Tool Cool Color Picker
+    const colorPicker = document.querySelector(`#cts-${varId}-color`);
+    if (colorPicker) {
+        if (typeof colorPicker.setColor === 'function') {
+            colorPicker.setColor(value);
+        } else {
+            colorPicker.setAttribute('color', value);
+        }
+    }
 
-// 更新透明度滑桿和值顯示 (Update opacity slider and value display)
-const alphaSlider = document.querySelector(`#cts-${varId}-alpha`);
-const alphaValue = document.querySelector(`#cts-${varId}-alpha-value`);
+    // 更新文本輸入欄位
+    const textInput = document.querySelector(`#cts-${varId}-text`);
+    if (textInput) {
+        const hexValue = rgbaToHex(value);
+        textInput.value = hexValue || value;
+    }
 
-if (alphaSlider && alphaValue) {
-    const alpha = getAlphaFromRgba(value);
-    const alphaPercent = Math.round(alpha * 100);
-    alphaSlider.value = alphaPercent;
-    alphaValue.textContent = alphaPercent;
-}
+    // 更新透明度滑桿和值顯示
+    const alphaSlider = document.querySelector(`#cts-${varId}-alpha`);
+    const alphaValue = document.querySelector(`#cts-${varId}-alpha-value`);
+
+    if (alphaSlider && alphaValue) {
+        const alpha = getAlphaFromRgba(value);
+        const alphaPercent = Math.round(alpha * 100);
+        alphaSlider.value = alphaPercent;
+        alphaValue.textContent = alphaPercent;
+
+        // 更新滑塊顏色 - 確保一定會執行
+        const hexColor = rgbaToHex(value);
+        if (hexColor) {
+            // 使用延遲確保DOM已更新
+            setTimeout(() => {
+                updateColorSliderThumb(varId, hexColor);
+            }, 10);
+        }
+    }
 }
 
 /**
@@ -1980,16 +2003,33 @@ if (numberInput) {
 }
 
 /**
-* 更新選擇器UI
-* Update selector UI
-* @param {string} varId - 設定變數ID (Setting variable ID)
-* @param {string} value - 選擇值 (Selection value)
-*/
+ * 更新選擇器UI
+ * Update selector UI - enhanced version
+ * @param {string} varId - 設定變數ID (Setting variable ID)
+ * @param {string} value - 選擇值 (Selection value)
+ */
 function updateSelectUI(varId, value) {
-const select = document.querySelector(`#cts-${varId}`);
-if (select) {
+    const select = document.querySelector(`#cts-${varId}`);
+    if (!select) return;
+
+    // 找到對應的設定項
+    const settingConfig = themeCustomSettings.find(s => s.varId === varId);
+    if (!settingConfig || !settingConfig.options) return;
+
+    // 清空現有的選項
+    select.innerHTML = '';
+
+    // 重新創建所有選項
+    settingConfig.options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.value;
+        optionElement.textContent = option.label;
+        optionElement.selected = value === option.value;
+        select.appendChild(optionElement);
+    });
+
+    // 設置當前值
     select.value = value;
-}
 }
 
 /**
@@ -1999,10 +2039,10 @@ if (select) {
 * @param {string} value - 文本值 (Text value)
 */
 function updateTextInputUI(varId, value) {
-const input = document.querySelector(`#cts-${varId}`);
-if (input) {
-    input.value = value;
-}
+    const input = document.querySelector(`#cts-${varId}`);
+    if (input) {
+        input.value = value;
+    }
 }
 
 /**
@@ -2012,10 +2052,10 @@ if (input) {
 * @param {boolean} value - 複選框狀態 (Checkbox state)
 */
 function updateCheckboxUI(varId, value) {
-const checkbox = document.querySelector(`#cts-checkbox-${varId}`);
-if (checkbox) {
-    checkbox.checked = value === true;
-}
+    const checkbox = document.querySelector(`#cts-checkbox-${varId}`);
+    if (checkbox) {
+        checkbox.checked = value === true;
+    }
 }
 
 /**
@@ -2444,7 +2484,7 @@ function createColorPicker(container, setting, settings) {
     colorPreview.style.border = '1px solid rgba(255, 255, 255, 0.2)';
     colorPreview.style.background = currentValue;
     colorPreview.style.cursor = 'pointer';
-    colorPreview.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.25)';
+    colorPreview.style.boxShadow = '0 1px 3px var(--SmartThemeShadowColor)';
 
     // 創建文本輸入 - 優先使用HEX格式 (Create text input - prioritize HEX format)
     const textInput = document.createElement('input');
@@ -2458,7 +2498,7 @@ function createColorPicker(container, setting, settings) {
     textInput.style.minWidth = '80px';
     textInput.style.minHeight = '28px';
     textInput.style.padding = '4px 6px';
-    textInput.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+    textInput.style.backgroundColor = 'var(--black30a)';
     textInput.style.border = '1px solid rgba(255, 255, 255, 0.1)';
     textInput.style.borderRadius = '4px';
     textInput.style.color = '#ffffff';
@@ -2716,27 +2756,32 @@ function triggerColorPicker() {
         const hexColor = colorInput.value;
         const alpha = alphaSlider.value / 100;
 
-        // 從HEX色碼獲取RGB部分 (Get RGB part from HEX code)
+        // 從HEX色碼獲取RGB部分
         const r = parseInt(hexColor.slice(1, 3), 16);
         const g = parseInt(hexColor.slice(3, 5), 16);
         const b = parseInt(hexColor.slice(5, 7), 16);
 
-        // 生成RGBA顏色字符串 (Generate RGBA color string)
+        // 生成RGBA顏色字符串
         const rgbaColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
 
-        // 更新顏色預覽 (Update color preview)
+        // 更新顏色預覽
         colorPreview.style.background = rgbaColor;
 
-        // 更新滑塊顏色 (Update thumb color)
+        // 更新滑塊顏色 - 確保每次都更新
         updateSliderThumbColor(hexColor);
 
-        // 優先顯示HEX格式，但保存RGBA格式 (Prioritize HEX format display, but save RGBA format)
+        // 優先顯示HEX格式，但保存RGBA格式
         textInput.value = hexColor;
 
-        // 更新設定並應用 (Update and apply settings)
+        // 更新設定並應用
         settings[varId] = rgbaColor;
         applyThemeSetting(varId, rgbaColor);
         context.saveSettingsDebounced();
+
+        // 觸發自定義事件，通知顏色已變更
+        document.dispatchEvent(new CustomEvent('colorChanged', {
+            detail: { varId, value: rgbaColor, hexColor }
+        }));
     }
 
     // 更新顏色和透明度的函數 (Function to update color and alpha)
@@ -2744,18 +2789,21 @@ function triggerColorPicker() {
         const hexColor = colorInput.value;
         const alpha = alphaSlider.value / 100;
 
-        // 從HEX色碼獲取RGB部分 (Get RGB part from HEX code)
+        // 從HEX色碼獲取RGB部分
         const r = parseInt(hexColor.slice(1, 3), 16);
         const g = parseInt(hexColor.slice(3, 5), 16);
         const b = parseInt(hexColor.slice(5, 7), 16);
 
-        // 生成RGBA顏色字符串 (Generate RGBA color string)
+        // 生成RGBA顏色字符串
         const rgbaColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
 
-        // 更新顏色預覽 (Update color preview)
+        // 更新顏色預覽
         colorPreview.style.background = rgbaColor;
 
-        // 更新設定並應用 (Update and apply settings)
+        // 確保更新滑塊顏色
+        updateSliderThumbColor(hexColor);
+
+        // 更新設定並應用
         settings[varId] = rgbaColor;
         applyThemeSetting(varId, rgbaColor);
         context.saveSettingsDebounced();
@@ -3779,4 +3827,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 同步Moonlit預設與主題列表 (Sync Moonlit presets with theme list)
     syncMoonlitPresetsWithThemeList();
+});
+
+// 透明度滑桿的顏色更新
+function updateColorSliderThumb(varId, hexColor) {
+    const alphaSlider = document.querySelector(`#cts-${varId}-alpha`);
+    if (!alphaSlider) return;
+
+    // 查找或創建該滑桿的樣式元素
+    let styleElement = document.getElementById(`thumb-style-${varId}`);
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = `thumb-style-${varId}`;
+        document.head.appendChild(styleElement);
+    }
+
+    // 創建新的滑塊樣式
+    const newThumbStyle = `
+        #cts-${varId}-alpha::-webkit-slider-thumb {
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: ${hexColor};
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        #cts-${varId}-alpha::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: ${hexColor};
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+    `;
+
+    // 更新樣式
+    styleElement.textContent = newThumbStyle;
+}
+document.addEventListener('colorChanged', function(event) {
+    const { varId, hexColor } = event.detail;
+    // 更新對應的顏色滑塊
+    updateColorSliderThumb(varId, hexColor);
 });

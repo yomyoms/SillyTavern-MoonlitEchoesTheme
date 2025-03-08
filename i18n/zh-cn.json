@@ -83,5 +83,7 @@
     "Message additional details (name, ID, time, token counter, etc.) show only on hover or click": "仅在游标悬停或点选时显示讯息额外详情（角色名称、ID、时间、符元计数器⋯等）",
     "Preset \"${0}\" deleted successfully": "已成功删除「${0}」月下回声主题预设设定档",
     "[Advanced] Message Details Animation Duration": "[进阶设定] 讯息详情动画时长",
-    "Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)": "控制讯息额外详细资讯出现／消失的动画速度（如：0.5 秒、1.2 秒）"
+    "Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)": "控制讯息额外详细资讯出现／消失的动画速度（如：0.5 秒、1.2 秒）",
+    "Scrollbar Color": "卷轴颜色",
+    "The scrollbar color on SillyTavern": "SillyTavern 上的卷轴颜色"
 }
