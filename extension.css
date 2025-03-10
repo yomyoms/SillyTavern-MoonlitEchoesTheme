@@ -64,7 +64,7 @@ input[type="number"].neo-range-input {
 .moonlit-input {
     padding: 5px 8px !important;
     background-color: var(--black30a) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5)) !important;
     border-radius: 4px !important;
     max-width: 480px !important;
 }

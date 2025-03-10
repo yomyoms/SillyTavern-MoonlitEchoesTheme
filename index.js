@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.3.0";
+const THEME_VERSION = "2.3.1";
 
 import { t } from '../../../i18n.js';
 
@@ -2242,7 +2242,7 @@ styleElement.textContent = `
         text-align: center;
         border-radius: 5px;
         background-color: var(--black30a);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
     }
 
     /* 改進顏色選擇器視覺效果 (Improved color picker visual effects) */
@@ -2254,8 +2254,9 @@ styleElement.textContent = `
     .theme-setting-container input[type="text"] {
         padding: 5px 8px;
         background-color: var(--black30a);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
         border-radius: 5px;
+        color: var(--SmartThemeBodyColor);
     }
 
     /* 預設管理器樣式 (Preset manager style) */
@@ -2281,9 +2282,9 @@ styleElement.textContent = `
         flex: 1;
         padding: 5px 8px;
         background-color: var(--black30a);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
         border-radius: 5px;
-        color: #fff;
+        color: var(--SmartThemeBodyColor);
     }
 `;
 
@@ -2336,7 +2337,7 @@ Object.keys(categories).forEach(category => {
     titleContainer.style.alignItems = 'center';
     titleContainer.style.marginBottom = '5px';
     titleContainer.style.padding = '5px 0';
-    titleContainer.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+    titleContainer.style.borderBottom = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
 
     // 添加展開/收縮圖示 (Add expand/collapse icon)
     const toggleIcon = document.createElement('i');
@@ -2481,7 +2482,7 @@ function createColorPicker(container, setting, settings) {
     colorPreview.style.minWidth = '28px';
     colorPreview.style.minHeight = '28px';
     colorPreview.style.borderRadius = '4px';
-    colorPreview.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+    colorPreview.style.border = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
     colorPreview.style.background = currentValue;
     colorPreview.style.cursor = 'pointer';
     colorPreview.style.boxShadow = '0 1px 3px var(--SmartThemeShadowColor)';
@@ -2499,9 +2500,9 @@ function createColorPicker(container, setting, settings) {
     textInput.style.minHeight = '28px';
     textInput.style.padding = '4px 6px';
     textInput.style.backgroundColor = 'var(--black30a)';
-    textInput.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+    textInput.style.border = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
     textInput.style.borderRadius = '4px';
-    textInput.style.color = '#ffffff';
+    textInput.style.color = 'var(--SmartThemeBodyColor)';
 
     // 創建顏色選擇器 (Create color picker)
     const colorInput = document.createElement('input');
@@ -2566,7 +2567,7 @@ function createColorPicker(container, setting, settings) {
             height: 12px;
             border-radius: 50%;
             background: ${initialHexValue || '#ffffff'};
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -2575,7 +2576,7 @@ function createColorPicker(container, setting, settings) {
             height: 12px;
             border-radius: 50%;
             background: ${initialHexValue || '#ffffff'};
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -2732,7 +2733,7 @@ function triggerColorPicker() {
                 height: 12px;
                 border-radius: 50%;
                 background: ${hexColor};
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 cursor: pointer;
             }
@@ -2741,7 +2742,7 @@ function triggerColorPicker() {
                 height: 12px;
                 border-radius: 50%;
                 background: ${hexColor};
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 cursor: pointer;
             }
@@ -3850,7 +3851,7 @@ function updateColorSliderThumb(varId, hexColor) {
             height: 12px;
             border-radius: 50%;
             background: ${hexColor};
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -3859,7 +3860,7 @@ function updateColorSliderThumb(varId, hexColor) {
             height: 12px;
             border-radius: 50%;
             background: ${hexColor};
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }

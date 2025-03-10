@@ -54,7 +54,6 @@
 }
 
 /* Remove Black Shadow 消除黑色陰影 */
-
 .custom-drawer-icon,
 .inline-drawer-icon,
 .right_menu_button,
@@ -70,6 +69,9 @@ input[type='checkbox'] {
 }
 #options, #extensionsMenu, .popup .popper-modal, .list-group {
     box-shadow: 0 0 10px var(--SmartThemeShadowColor);
+}
+.menu_button {
+    filter: none !important;
 }
 
 /* Loading Animation 載入動畫 */
@@ -567,6 +569,10 @@ white-space: nowrap;
     box-sizing: border-box;
 }
 
+#left-nav-panel {
+    overflow-y: hidden !important;
+}
+
 .drawer-content {
     background-color: var(--SmartThemeBlurTintColor);
     padding: 1.2%;
@@ -616,10 +622,9 @@ white-space: nowrap;
 
 /* --- Left & Right Panels 左右選單 --- */
 
-.fillRight,
-.fillLeft {
+.fillRight {
     top: var(--topBarBlockSize) !important;
-    height: calc(100dvh - var(--topBarBlockSize));
+    height: calc(100dvh - var(--topBarBlockSize)) !important;
 }
 
 #right-nav-panel,
@@ -640,15 +645,11 @@ white-space: nowrap;
     width: calc((100dvw - var(--sheldWidth)) / 2);
     top: var(--topBarBlockSize) !important;
     height: calc(100dvh - var(--topBarBlockSize));
+    padding-bottom: 0 !important;
 
     .scrollableInner {
-        height: fit-content !important;
         padding: 0 !important;
     }
-}
-.fillLeft .scrollableInner {
-    height: fit-content !important;
-    padding: 0px !important;
 }
 
 @media screen and (max-width: 1000px) {
@@ -2102,8 +2103,7 @@ body.waifuMode {
 .editable-slider-notification {
     position: relative;
     width: 100%;
-    padding: 10px 0;
-    top: 0;
+    top: -15px;
     text-align: center;
     color: var(--customThemeColor);
     font-style: italic;
@@ -2116,6 +2116,7 @@ body.waifuMode {
         margin: 12px 0 10px 0;
         padding: 5px;
         padding-left: 10px !important;
+        padding-bottom: 0 !important;
         background-color: var(--SmartThemeBlurTintColor);
         background-image: none !important;
         border-radius: 0px !important;
@@ -2687,6 +2688,11 @@ body.charListGrid {
     box-shadow: none;
     min-height: calc(100dvh - var(--topBarBlockSize));
     border-radius: 0;
+}
+@media screen and (max-width: 1000px) {
+    #character_popup {
+        border: none !important;
+    }
 }
 
 #rm_ch_create_block {
