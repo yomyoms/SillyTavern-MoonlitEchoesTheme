@@ -2686,12 +2686,19 @@ body.charListGrid {
 #character_popup {
     padding: 20px;
     box-shadow: none;
-    min-height: calc(100dvh - var(--topBarBlockSize));
+    min-height: calc(100dvh - var(--topBarBlockSize)) !important;
     border-radius: 0;
+    border: none !important;
+    border-top: 2px solid var(--customThemeColor) !important;
 }
 @media screen and (max-width: 1000px) {
     #character_popup {
+        min-width: 100vw !important;
+        min-height: calc(100dvh - var(--topBarBlockSize)) !important;
+        max-height: calc(100dvh - var(--topBarBlockSize)) !important;
         border: none !important;
+        bottom: 0 !important;
+        border-top: 2px solid var(--customThemeColor) !important;
     }
 }
 
