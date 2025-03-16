@@ -748,17 +748,9 @@ white-space: nowrap;
         }
     }
 
-    /* --- Max Context Tag 最大上下文標記 --- */
-    .lastInContext {
-        margin-top: 15px;
-        border-top: 3px dotted var(--customThemeColor) !important;
-        border-radius: 0;
-        opacity: 1 !important;
-    }
-
     /* --- Chat Messages 聊天訊息 --- */
     .mes {
-        border: none !important;
+        border: none;
         box-shadow: none !important;
         background-color: unset !important;
         padding: 10px;
@@ -2686,12 +2678,19 @@ body.charListGrid {
 #character_popup {
     padding: 20px;
     box-shadow: none;
-    min-height: calc(100dvh - var(--topBarBlockSize));
+    min-height: calc(100dvh - var(--topBarBlockSize)) !important;
     border-radius: 0;
+    border: none !important;
+    border-top: 2px solid var(--customThemeColor) !important;
 }
 @media screen and (max-width: 1000px) {
     #character_popup {
+        min-width: 100vw !important;
+        min-height: calc(100dvh - var(--topBarBlockSize)) !important;
+        max-height: calc(100dvh - var(--topBarBlockSize)) !important;
         border: none !important;
+        bottom: 0 !important;
+        border-top: 2px solid var(--customThemeColor) !important;
     }
 }
 
@@ -2860,4 +2859,16 @@ body.charListGrid {
 #rm_group_members,
 #rm_group_add_members {
     padding: 10px;
+}
+
+
+
+/* MAX CONTEXT TAG 最大上下文標記
+- - - - - - - - - - - - - - - - - */
+
+.lastInContext {
+    margin-top: 15px;
+    border-top: 3px dotted var(--customThemeColor) !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
 }
