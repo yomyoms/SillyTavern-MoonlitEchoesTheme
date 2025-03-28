@@ -85,5 +85,7 @@
     "[Advanced] Message Details Animation Duration": "[进阶设定] 讯息详情动画时长",
     "Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)": "控制讯息额外详细资讯出现／消失的动画速度（如：0.5 秒、1.2 秒）",
     "Scrollbar Color": "卷轴颜色",
-    "The scrollbar color on SillyTavern": "SillyTavern 上的卷轴颜色"
+    "The scrollbar color on SillyTavern": "SillyTavern 上的卷轴颜色",
+    "Maximum Context Marker Style": "最大上下文标记样式",
+    "Line style for the maximum context marker": "最大上下文标记的线条样式"
 }

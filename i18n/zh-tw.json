@@ -86,5 +86,7 @@
     "[Advanced] Message Details Animation Duration": "[進階設定] 訊息詳情動畫時長",
     "Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)": "控制訊息額外詳細資訊出現／消失的動畫速度（如：0.5 秒、1.2 秒）",
     "Scrollbar Color": "捲軸顏色",
-    "The scrollbar color on SillyTavern": "SillyTavern 上的捲軸顏色"
+    "The scrollbar color on SillyTavern": "SillyTavern 上的捲軸顏色",
+    "Maximum Context Marker Style": "最大上下文標記樣式",
+    "Line style for the maximum context marker": "最大上下文標記的線條樣式"
 }

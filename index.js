@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.3.3";
+const THEME_VERSION = "2.4.0";
 
 import { t } from '../../../i18n.js';
 
@@ -166,6 +166,14 @@ const themeCustomSettings = [
     },
     {
         "type": "text",
+        "varId": "custom-lastInContext",
+        "displayText": t`Maximum Context Marker Style`,
+        "default": "4px solid var(--customThemeColor)",
+        "category": "chat",
+        "description": t`Line style for the maximum context marker`
+    },
+    {
+        "type": "text",
         "varId": "custom-EchoAvatarWidth",
         "displayText": t`[Echo] Message Background Avatar Width`,
         "default": "25%",
@@ -279,7 +287,8 @@ const themeCustomSettings = [
                     border-top: 2px solid var(--SmartThemeBodyColor) !important;
                     box-shadow: 0 0 15px var(--SmartThemeBodyColor);
                     min-height: 100% !important;
-                    padding: 10px 25px;
+                    padding: 5px 20px;
+                    padding-top: 10px;
                     border-radius: 30px 30px 0 0 !important;
                     transition: all 0.5s ease;
 
@@ -323,7 +332,7 @@ const themeCustomSettings = [
                 /* Mobile Left & Right Chat Menu 左右側聊天選單 */
                 #leftSendForm,
                 #rightSendForm {
-                    margin: 5px 0;
+                    margin: 3px 0;
                 }
                 #leftSendForm {
                     grid-area: left;

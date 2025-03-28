@@ -40,7 +40,7 @@
 }
 
 .moonlit-select {
-    min-width: 186px !important;
+    min-width: 80% !important;
     padding: 5px 8px !important;
 }
 
@@ -66,7 +66,7 @@ input[type="number"].neo-range-input {
     background-color: var(--black30a) !important;
     border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5)) !important;
     border-radius: 4px !important;
-    max-width: 480px !important;
+    min-width: 80% !important;
 }
 
 /* --- Quick Replies 快速回覆 --- */
@@ -117,7 +117,7 @@ input[type="number"].neo-range-input {
 /* --- Chat Info 聊天資訊 --- */
 
 #extensionTopBar {
-    top: 50px;
+    top: 48px;
     left: 50%;
     transform: translateX(-50%);
     bottom: auto;
@@ -139,7 +139,7 @@ input[type="number"].neo-range-input {
     transition: all 0.8s ease;
     z-index: 3005;
     opacity: 0.7;
-    width: calc(var(--sheldWidth) - 10%) !important;
+    width: calc(var(--sheldWidth) - 20px) !important;
 
     &:hover {
         opacity: 0.9;
@@ -346,6 +346,16 @@ table.img_metadata {
 
 /* --- More Flexible Continues 彈性回覆 --- */
 
+.lacommon--quickActions[data-lacommon--anchor="bottom"] {
+    bottom: 25px;
+    left: calc(var(--custom-ChatAvatar, 40px) + 50px);
+}
+body.bubblechat {
+    .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+        bottom: 25px;
+        left: calc(var(--custom-ChatAvatar, 40px) + 70px);
+    }
+}
 .mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
     padding-bottom: 25px !important;
 }
@@ -524,4 +534,8 @@ body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bott
 
 .qvink_memory_display.qvink_short_memory {
     color: var(--customThemeColor2) !important;
+}
+
+body.bubblechat .qvink_memory_display {
+    margin-bottom: 20px !important;
 }

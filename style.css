@@ -106,7 +106,7 @@ a {
 hr {
     background-image: none !important;
     background-color: var(--SmartThemeBodyColor) !important;
-    margin: 20px 0;
+    margin: 15px 0;
     height: 1px;
     min-height: 1px;
     border: 0;
@@ -471,6 +471,7 @@ white-space: nowrap;
     width: 5px;
     max-width: 5px;
     height: 10px;
+    scrollbar-gutter: stable !important;
 
     /* Scrollbar Track 捲軸軌道 */
     &-track {
@@ -495,11 +496,13 @@ white-space: nowrap;
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
+    scrollbar-gutter: stable !important;
 
     &::-webkit-scrollbar {
         scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
     }
 }
+
 
 /* Mobile Hidden Scrollbar 移動端隱藏捲軸 */
 @media screen and (max-width: 1000px) {
@@ -530,9 +533,18 @@ white-space: nowrap;
     display: inline-flex;
     height: 100%;
 }
+.drawer-icon.openIcon {
+    color: var(--customThemeColor) !important;
+}
 @media screen and (max-width: 1000px) {
+    .drawer {
+        padding: 0 5px !important;
+    }
     .drawer-icon {
-        font-size: calc(var(--mainFontSize) * 1.75);
+        font-size: calc(var(--mainFontSize) * 1.5);
+    }
+    .drawer-icon.fa-fw {
+        width: unset !important;
     }
 }
 
@@ -557,6 +569,7 @@ white-space: nowrap;
     border-radius: 0 !important;
     box-shadow: none !important;
     height: calc(100dvh - var(--bottomInputAreaHeight));
+    scrollbar-gutter: stable !important;
 }
 
 #left-nav-panel,
@@ -646,10 +659,6 @@ white-space: nowrap;
     top: var(--topBarBlockSize) !important;
     height: calc(100dvh - var(--topBarBlockSize));
     padding-bottom: 0 !important;
-
-    .scrollableInner {
-        padding: 0 !important;
-    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -674,9 +683,8 @@ white-space: nowrap;
 /* --- Main Chat Area 主要聊天區域 --- */
 
 #sheld {
-    padding: 0 30px;
+    padding: 0 10px;
     padding-top: calc(var(--topBarBlockSize)) !important;
-    padding-bottom: 5px;
     box-sizing: border-box;
 
     @media screen and (max-width: 1000px) {
@@ -719,7 +727,7 @@ white-space: nowrap;
     max-height: calc(100dvh - calc(var(--topBarBlockSize) + var(--bottomFormBlockSize)));
     overflow-x: hidden;
     overflow-y: scroll;
-    padding: 0 2%;
+    padding: 0 15px;
     padding-bottom: 5px;
     margin-top: var(--customCSS-Chat-TopPadding);
     display: flex;
@@ -738,7 +746,7 @@ white-space: nowrap;
     position: unset !important;
 
     @media screen and (max-width: 1000px) {
-        padding: 0 15px;
+        padding: 0 10px;
         border: 0 !important;
         padding-bottom: 0 !important;
         margin-top: var(--customCSS-Chat-TopPadding);
@@ -782,7 +790,7 @@ white-space: nowrap;
         }
 
         .mesAvatarWrapper {
-            padding-right: 2%;
+            padding-right: 5px;
             .timestamp {
                 font-size: calc(var(--mainFontSize) * 0.7);
                 font-weight: 400;
@@ -804,7 +812,7 @@ white-space: nowrap;
             background-color: var(--SmartThemeBotMesBlurTintColor) !important;
             border: var(--SmartThemeBorderColor) solid 0px;
             border-radius: 15px;
-            padding: 15px 25px;
+            padding: 15px;
             box-shadow: 3px 3px 8px 0px rgba(0,0,0,3%) !important;
         }
         .mes_text {
@@ -1035,7 +1043,8 @@ body.bubblechat {
     #chat {
         .mes {
             border: none;
-            margin-bottom: 0;
+            margin: 5px 0;
+            padding: 0;
 
             @media screen and (max-width: 1000px) {
                 margin-bottom: 5px;
@@ -1046,7 +1055,7 @@ body.bubblechat {
             }
 
             .mes_block {
-                margin-top: 20px;
+                margin-top: 10px;
                 width: auto;
                 max-width: 80%;
                 display: inline-block;
@@ -1168,7 +1177,6 @@ body.echostyle #chat {
         color: var(--SmartThemeBodyColor);
         position: relative;
         padding: 0;
-        padding-top: 10px;
         margin-top: 5px;
         margin-bottom: 0;
         border-radius: 15px;
@@ -1197,7 +1205,7 @@ body.echostyle #chat {
             max-width: 100%;
             min-height: 60px;
             margin-top: calc(var(--custom-ChatAvatar) * 0.4);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             border-radius: 10px;
             backdrop-filter: blur(calc(var(--SmartThemeBlurStrength)));
             -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength)));
@@ -1402,7 +1410,7 @@ body.echostyle #chat {
 
     .lastInContext {
         margin-top: 15px;
-        border-top: 3px solid var(--customThemeColor) !important;
+        border-top: var(--customlastInContext) !important;
         opacity: 1 !important;
     }
 }
@@ -1484,7 +1492,7 @@ body.whisperstyle #chat {
         }
 
         .lastInContext {
-            border: var(--SmartThemeBorderColor) solid 0px;
+            border: 0px;
             box-shadow: none !important;
             padding-top: 10px;
             border-radius: 0;
@@ -1604,7 +1612,7 @@ body.hushstyle #chat {
         width: 100%;
         color: var(--SmartThemeBodyColor);
         position: relative;
-        padding: 20px 25px;
+        padding: 1.3em 1.2em;
         border-radius: 15px;
 
         &.last_mes::before {
@@ -1639,7 +1647,8 @@ body.hushstyle #chat {
         }
 
         .lastInContext {
-            border: var(--SmartThemeBorderColor) solid 0px;
+            border: 0;
+            border-top: var(--customlastInContext) !important;
             box-shadow: none !important;
             padding-top: 10px;
             border-radius: 0;
@@ -1812,7 +1821,7 @@ body.ripplestyle #chat {
             border: none !important;
             box-shadow: none !important;
             padding-top: 20px;
-            padding-left: 10px;
+            padding-left: 5px;
 
             .ch_name::after {
                 content: "";
@@ -1947,7 +1956,7 @@ body.ripplestyle {
     border: 2px solid var(--SmartThemeBodyColor);
     background-color: var(--SmartThemeBlurTintColor);
     opacity: 0.6;
-    margin-bottom: 10px;
+    margin-bottom: 5px !important;
     transition: all 0.5s ease;
 
     &:hover {
@@ -1992,7 +2001,7 @@ body.ripplestyle {
 #nonQRFormItems {
     gap: 5px;
     font-size: calc(var(--mainFontSize) * 0.9);
-    padding: 5px 15px;
+    padding: 5px 10px;
     transition: all 0.8s ease;
     left: 0;
 
@@ -2192,7 +2201,17 @@ body.waifuMode {
 /* --- World Info Entries 世界資訊條目 --- */
 #WorldInfo {
     .standoutHeader {
+        margin: 5px 0;
         padding: 10px;
+        border-radius: 10px !important;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.05);
+        transition: all 0.5s ease;
+        border: 0px solid var(--SmartThemeBodyColor);
+    }
+
+    .select2_multi_sameline+span.select2-container .select2-selection--multiple {
+        margin: 5px 0;
     }
 }
 
@@ -2683,6 +2702,10 @@ body.charListGrid {
 
 /* --- Character Preview 個別角色編輯區 --- */
 
+#form_create {
+    padding-right: 10px;
+}
+
 #character_popup {
     padding: 20px;
     box-shadow: none;
@@ -2706,10 +2729,10 @@ body.charListGrid {
     .avatar {
         img,
         & {
-        width: calc(var(--custom-avatar) * var(--big-avatar-width-factor) * 2);
-        height: calc(var(--custom-avatar) * var(--big-avatar-height-factor) * 2);
+        width: calc(var(--custom-avatar) * var(--big-avatar-width-factor) * 2.5);
+        height: calc(var(--custom-avatar) * var(--big-avatar-height-factor) * 2.5);
         border-radius: 10px !important;
-        margin-top: 11px;
+        margin: 10px 0;
         margin-bottom: 15px;
         }
     }
@@ -2876,6 +2899,6 @@ body.charListGrid {
 
 .lastInContext {
     margin-top: 15px;
-    border-top: 3px solid var(--customThemeColor) !important;
+    border-top: var(--customlastInContext) !important;
     opacity: 1 !important;
 }
