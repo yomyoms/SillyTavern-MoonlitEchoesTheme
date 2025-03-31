@@ -471,6 +471,7 @@ white-space: nowrap;
     width: 5px;
     max-width: 5px;
     height: 10px;
+    scrollbar-gutter: stable !important;
 
     /* Scrollbar Track 捲軸軌道 */
     &-track {
@@ -495,6 +496,7 @@ white-space: nowrap;
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
+    scrollbar-gutter: stable !important;
 
     &::-webkit-scrollbar {
         scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
@@ -511,10 +513,6 @@ white-space: nowrap;
         &::-webkit-scrollbar {
         display: none;
         }
-    }
-
-    .scrollableInner {
-        padding: 0 !important;
     }
 }
 
@@ -571,6 +569,7 @@ white-space: nowrap;
     border-radius: 0 !important;
     box-shadow: none !important;
     height: calc(100dvh - var(--bottomInputAreaHeight));
+    scrollbar-gutter: stable !important;
 }
 
 #left-nav-panel,
@@ -601,7 +600,7 @@ white-space: nowrap;
     .drawer-content {
         top: calc(var(--topBarBlockSize)) !important;
         margin-top: 0 !important;
-        padding: 15px !important;
+        padding: 5% !important;
         min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
         max-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;;
         height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
@@ -673,7 +672,6 @@ white-space: nowrap;
         min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
         height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
         min-width: 100% !important;
-        padding: 15px !important;
     }
 }
 
@@ -686,6 +684,7 @@ white-space: nowrap;
 
 #sheld {
     padding: 0 10px;
+    padding-top: calc(var(--topBarBlockSize)) !important;
     box-sizing: border-box;
 
     @media screen and (max-width: 1000px) {
@@ -730,7 +729,7 @@ white-space: nowrap;
     overflow-y: scroll;
     padding: 0 15px;
     padding-bottom: 5px;
-    margin-top: var(--customCSS-ChatTopPadding);
+    margin-top: var(--customCSS-Chat-TopPadding);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -750,7 +749,7 @@ white-space: nowrap;
         padding: 0 10px;
         border: 0 !important;
         padding-bottom: 0 !important;
-        margin-top: var(--customCSS-ChatTopPadding);
+        margin-top: var(--customCSS-Chat-TopPadding);
 
         .mes_buttons {
             overflow: visible;
@@ -2705,12 +2704,6 @@ body.charListGrid {
 
 #form_create {
     padding-right: 10px;
-}
-@media screen and (max-width: 1000px) {
-    #form_create {
-        padding-right: 0 !important;
-    }
-
 }
 
 #character_popup {
