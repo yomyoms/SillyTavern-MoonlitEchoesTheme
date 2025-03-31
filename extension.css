@@ -116,8 +116,14 @@ input[type="number"].neo-range-input {
 
 /* --- Chat Info 聊天資訊 --- */
 
+body:has(#extensionTopBar) {
+    #sheld {
+        padding-top: calc(var(--topBarBlockSize)) !important;
+    }
+}
+
 #extensionTopBar {
-    top: 48px;
+    top: 45px;
     left: 50%;
     transform: translateX(-50%);
     bottom: auto;
@@ -190,9 +196,7 @@ input[type="number"].neo-range-input {
 }
 
 #extensionConnectionProfiles {
-    width: calc(100% - 20%) !important;
-    margin-top: 4px !important;
-    margin-bottom: 10px !important;
+    width: calc(100% - 10%) !important;
     transform: translateX(-50%);
     left: 50% !important;
     right: auto !important;
