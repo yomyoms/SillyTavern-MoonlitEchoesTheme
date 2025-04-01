@@ -62,10 +62,10 @@ If you’re using SillyTavern via Termux, here’s how you can modify `config.ya
 ### Method 1: Edit via Termux
 1. Open Termux and enter: `cd SillyTavern`
 2. Then, run: `nano config.yaml` to edit the file.
+
 ### Method 2: Use Material Files (Android File Manager)
 1. **Open Material Files** > **Add Storage** > **Navigate to Termux** > **SillyTavern**
-2. Once added, you should see a structure like `/SillyTavern and /data/user/0/com.winlator`
-3. Open the **SillyTavern** folder and edit `config.yaml` directly
+2. Within the SillyTavern directory, edit `config.yaml` directly
 
 ## Usage Guide
 
