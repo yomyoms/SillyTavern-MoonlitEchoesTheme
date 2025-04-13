@@ -595,3 +595,10 @@ body.bubblechat .qvink_memory_display {
     opacity: 0.9;
     text-shadow: 0 0 3px var(--SmartThemeBlurTintColor) !important;
 }
+
+/* --- Dialogue Colorizer 自定義對話顏色 --- */
+
+#xdc-char_color_override label {
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
