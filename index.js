@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.4.1";
+const THEME_VERSION = "2.5.0";
 
 import { t } from '../../../i18n.js';
 
@@ -57,6 +57,22 @@ const themeCustomSettings = [
         "default": "rgba(250, 198, 121, 1)",
         "category": "colors",
         "description": t`A complementary secondary color, used for special highlights`
+    },
+    {
+        "type": "color",
+        "varId": "customBgColor1",
+        "displayText": t`Main Background Color`,
+        "default": "rgba(255, 255, 255, 0.1)",
+        "category": "colors",
+        "description": t`The primary background color used across various menus and buttons`
+    },
+    {
+        "type": "color",
+        "varId": "customBgColor2",
+        "displayText": t`Secondary Background Color`,
+        "default": "rgba(255, 255, 255, 0.05)",
+        "category": "colors",
+        "description": t`The secondary background color used across various menus and buttons`
     },
     {
         "type": "color",
@@ -114,42 +130,31 @@ const themeCustomSettings = [
         "category": "background",
         "description": t`Blur level of the chat field background (#sheld)`
     },
+    {
+        "type": "slider",
+        "varId": "customCSS-bg-opacity",
+        "displayText": t`Background Image Opacity`,
+        "default": "1",
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "category": "background",
+        "description": t`Adjusts the opacity level of the background image`
+    },
 
     // 聊天介面設定 (Chat interface settings)
     {
         "type": "select",
-        "varId": "customCSS-ChatTopPadding",
-        "displayText": t`Chat Field Top Spacing`,
-        "default": "none",
+        "varId": "customCSS-ChatGradientBlur",
+        "displayText": t`Chat Field Gradient Blur`,
+        "default": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%)",
         "options": [
             {
                 "label": t`Enable`,
-                "value": "5px"
+                "value": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%)"
             },
             {
-                "label": t`None`,
-                "value": "none"
-            }
-        ],
-        "category": "chat",
-        "description": t`Sets the top spacing of the chat field (#chat)`
-    },
-    {
-        "type": "select",
-        "varId": "customCSS-chat-gradient-blur",
-        "displayText": t`Chat Field Gradient Blur`,
-        "default": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0) 100%)",
-        "options": [
-            {
-                "label": t`Default`,
-                "value": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 1) 92%, rgba(0, 0, 0, 0) 100%)"
-            },
-            {
-                "label": t`Subtle`,
-                "value": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 96%, rgba(0, 0, 0, 0) 100%)"
-            },
-            {
-                "label": t`None`,
+                "label": t`Disabled`,
                 "value": "none"
             }
         ],
@@ -179,6 +184,14 @@ const themeCustomSettings = [
         "default": "25%",
         "category": "chat",
         "description": t`Width of character avatars in the message background for the Echo style`
+    },
+    {
+        "type": "text",
+        "varId": "custom-EchoAvatarHeight",
+        "displayText": t`[Echo] Message Background Avatar Height`,
+        "default": "350px",
+        "category": "chat",
+        "description": t`Height of character avatars in the message background for the Echo style`
     },
     {
         "type": "text",
@@ -225,6 +238,14 @@ const themeCustomSettings = [
         "default": "100px",
         "category": "chat",
         "description": t`Width of character avatars in the message for the mobile Ripple style`
+    },
+    {
+        "type": "text",
+        "varId": "messageDetailsAnimationDuration",
+        "displayText": t`[Advanced] Message Details Animation Duration`,
+        "default": "0.8s",
+        "category": "chat",
+        "description": t`Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)`
     },
 
     // 視覺小說模式設定 (Visual novel mode settings)
@@ -283,19 +304,18 @@ const themeCustomSettings = [
                 /* Mobile Chat Input Overall 聊天輸入欄位整體 */
                 #send_form {
                     margin-bottom: 0 !important;
-                    border: none !important;
-                    border-top: 2px solid var(--SmartThemeBodyColor) !important;
-                    box-shadow: 0 0 15px var(--SmartThemeBodyColor);
                     min-height: 100% !important;
                     padding: 5px 20px;
                     padding-top: 10px;
-                    border-radius: 30px 30px 0 0 !important;
+                    border-radius: 15px 15px 0 0 !important;
                     transition: all 0.5s ease;
+                    border: 0 !important;
+                    border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
 
                     &:focus-within {
-                        border: none !important;
-                        border-top: 2px solid var(--customThemeColor) !important;
-                        box-shadow: 0 0 15px var(--customThemeColor);
+                        bborder: 0 !important;
+                        border-top: 1.25px solid var(--customThemeColor) !important;
+                        box-shadow: 0 0 5px var(--customThemeColor);
                     }
 
                     &.compact {
@@ -354,6 +374,10 @@ const themeCustomSettings = [
                 }
                 #nonQRFormItems #options_button {
                     margin-right: 10px;
+                }
+
+                #qr--bar > .qr--buttons {
+                    padding: 0px !important;
                 }
             }
     `
@@ -441,12 +465,18 @@ const themeCustomSettings = [
         `
     },
     {
-        "type": "text",
-        "varId": "messageDetailsAnimationDuration",
-        "displayText": t`[Advanced] Message Details Animation Duration`,
-        "default": "0.8s",
-        "category": "chat",
-        "description": t`Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)`
+        "type": "checkbox",
+        "varId": "justifyParagraphText",
+        "displayText": t`Justify Paragraph Text`,
+        "default": false,
+        "category": "features",
+        "description": t`Aligns paragraph text for Chinese, Japanese, and Korean for better readability; not suitable for English layout`,
+        "cssBlock": `
+            p {
+                text-align: justify;
+                text-justify: inter-ideograph;
+                }
+        `
     }
 ];
 
@@ -675,6 +705,14 @@ function initExtensionUI() {
         document.head.appendChild(scriptElement);
     }
 
+    // 載入 Echo 樣式頭像背景注入器
+    function loadEchoAvatarInjector() {
+        const scriptElement = document.createElement('script');
+        scriptElement.src = `${extensionFolderPath}/echo-avatar-injector.js`;
+        scriptElement.id = 'moonlit-echo-avatar-script';
+        document.head.appendChild(scriptElement);
+    }
+
     // 載入設定HTML和初始化設定面板 (Load settings HTML and initialize settings panel)
     loadSettingsHTML().then(() => {
         renderExtensionSettings();
@@ -703,6 +741,9 @@ function initExtensionUI() {
         addThemeButtonsHint();
 
         loadMessageDetailsModule();
+
+        // 載入 Echo 頭像背景注入器
+        loadEchoAvatarInjector();
     });
 
     function initMessageClickHandlers() {
@@ -945,11 +986,7 @@ function addThumbnailTip(container) {
     // 設定提示內容，更簡潔 (Set tip content, more concise)
     tipContent.innerHTML = `
         <div style="line-height: 1.5;">
-            <small><span data-i18n="SillyTavern's default thumbnail scaling causes avatars to use lower-resolution images. fix this, edit">SillyTavern's default thumbnail scaling causes avatars to use lower-resolution images. fix this, edit</span> <code>/SillyTavern/config.yaml</code> <span data-i18n="and fully restart the SillyTavern server.">and fully restart the SillyTavern server.</span>
-            <strong data-i18n="Recommended settings:">Recommended settings:</strong>
-            <div style="background: var(--black30a); padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0;">
-                thumbnails:<br>
-                &nbsp;&nbsp;enabled: <strong>false</strong></small>
+            <small><span data-i18n="Please refer to the">Please refer to the</span> <a href="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme" target="_blank">Moonlit Echoes Theme GitHub README</a> <span data-i18n="and complete the necessary setup.">and complete the necessary setup.</span></small>
             </div>
         </div>
     `;
@@ -2190,6 +2227,8 @@ styleElement.textContent = `
         display: block;
         width: 100%;
         padding: 8px 0;
+        overflow-y: auto;
+        transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
     }
 
     /* 單欄佈局 (Single column layout) */
@@ -2208,6 +2247,10 @@ styleElement.textContent = `
     .theme-category-header {
         padding: 8px 0 !important;
         margin-bottom: 5px !important;
+
+        h4 {
+            font-weight: 700;
+        }
     }
 
     /* 改進標籤和描述 (Improved labels and descriptions) */
@@ -2215,6 +2258,7 @@ styleElement.textContent = `
         display: block;
         margin-bottom: 4px;
         font-size: 0.95em;
+        font-weight: 600;
     }
 
     .theme-setting-container small {
@@ -2231,8 +2275,8 @@ styleElement.textContent = `
 
     /* 改進下拉選單 (Improved dropdown menu) */
     select.widthNatural.flex1.margin0 {
-        min-width: 120px;
-        max-width: 480px;
+        min-width: 185.5px !important;
+        max-width: 480px !important;
     }
 
     /* 設定項統一寬度限制 (Setting item uniform width limit) */
@@ -2251,7 +2295,7 @@ styleElement.textContent = `
         text-align: center;
         border-radius: 5px;
         background-color: var(--black30a);
-        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);;
     }
 
     /* 改進顏色選擇器視覺效果 (Improved color picker visual effects) */
@@ -2263,7 +2307,7 @@ styleElement.textContent = `
     .theme-setting-container input[type="text"] {
         padding: 5px 8px;
         background-color: var(--black30a);
-        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
         border-radius: 5px;
         color: var(--SmartThemeBodyColor);
     }
@@ -2272,8 +2316,10 @@ styleElement.textContent = `
     .moonlit-preset-manager {
         background-color: var(--black30a);
         border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 5px;
+        padding: 15px;
+        margin-bottom: 5px !important;
+        border: 1px solid
+        color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
     }
 
     .moonlit-preset-manager h4 {
@@ -2291,9 +2337,10 @@ styleElement.textContent = `
         flex: 1;
         padding: 5px 8px;
         background-color: var(--black30a);
-        border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
         border-radius: 5px;
         color: var(--SmartThemeBodyColor);
+        margin-bottom: 0 !important;
     }
 `;
 
@@ -2346,7 +2393,7 @@ Object.keys(categories).forEach(category => {
     titleContainer.style.alignItems = 'center';
     titleContainer.style.marginBottom = '5px';
     titleContainer.style.padding = '5px 0';
-    titleContainer.style.borderBottom = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
+    titleContainer.style.borderBottom = '1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent)';
 
     // 添加展開/收縮圖示 (Add expand/collapse icon)
     const toggleIcon = document.createElement('i');
@@ -2383,12 +2430,13 @@ Object.keys(categories).forEach(category => {
     });
 
     // 添加折疊事件 (Add collapse event)
-    titleContainer.addEventListener('click', () => {
-        const isCollapsed = contentContainer.style.maxHeight === '0px';
+    let isCollapsed = true; // 預設為收縮狀態
 
+    titleContainer.addEventListener('click', () => {
         if (isCollapsed) {
             // 展開 (Expand)
-            contentContainer.style.maxHeight = '1000px'; // 足夠高的值以容納所有內容 (Sufficiently high value to accommodate all content)
+            const scrollHeight = contentContainer.scrollHeight;
+            contentContainer.style.maxHeight = scrollHeight + 'px';
             contentContainer.style.opacity = '1';
             toggleIcon.style.transform = 'rotate(0deg)';
         } else {
@@ -2397,6 +2445,9 @@ Object.keys(categories).forEach(category => {
             contentContainer.style.opacity = '0';
             toggleIcon.style.transform = 'rotate(-90deg)';
         }
+
+        // 切換狀態
+        isCollapsed = !isCollapsed;
     });
 
     categoryContainer.appendChild(contentContainer);
@@ -2486,12 +2537,12 @@ function createColorPicker(container, setting, settings) {
     const colorPreview = document.createElement('div');
     colorPreview.id = `cts-${varId}-preview`;
     colorPreview.classList.add('color-preview');
-    colorPreview.style.width = '28px';
-    colorPreview.style.height = '28px';
-    colorPreview.style.minWidth = '28px';
-    colorPreview.style.minHeight = '28px';
+    colorPreview.style.width = '30px';
+    colorPreview.style.height = '30px';
+    colorPreview.style.minWidth = '30px';
+    colorPreview.style.minHeight = '30px';
     colorPreview.style.borderRadius = '4px';
-    colorPreview.style.border = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
+    colorPreview.style.border = '1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent)';
     colorPreview.style.background = currentValue;
     colorPreview.style.cursor = 'pointer';
     colorPreview.style.boxShadow = '0 1px 3px var(--SmartThemeShadowColor)';
@@ -2509,7 +2560,7 @@ function createColorPicker(container, setting, settings) {
     textInput.style.minHeight = '28px';
     textInput.style.padding = '4px 6px';
     textInput.style.backgroundColor = 'var(--black30a)';
-    textInput.style.border = '1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5))';
+    textInput.style.border = '1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent)';
     textInput.style.borderRadius = '4px';
     textInput.style.color = 'var(--SmartThemeBodyColor)';
 
@@ -2576,7 +2627,7 @@ function createColorPicker(container, setting, settings) {
             height: 12px;
             border-radius: 50%;
             background: ${initialHexValue || '#ffffff'};
-            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+            border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -2585,7 +2636,7 @@ function createColorPicker(container, setting, settings) {
             height: 12px;
             border-radius: 50%;
             background: ${initialHexValue || '#ffffff'};
-            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+            border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -2742,7 +2793,7 @@ function triggerColorPicker() {
                 height: 12px;
                 border-radius: 50%;
                 background: ${hexColor};
-                border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+                border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 cursor: pointer;
             }
@@ -2751,7 +2802,7 @@ function triggerColorPicker() {
                 height: 12px;
                 border-radius: 50%;
                 background: ${hexColor};
-                border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+                border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                 cursor: pointer;
             }
@@ -3128,7 +3179,7 @@ function initChatDisplaySwitcher() {
         return;
     }
 
-    let newEchoOption, newWhisperOption, newHushOption, newRippleOption;
+    let newEchoOption, newWhisperOption, newHushOption, newRippleOption, newTideOption, newVeilOption;
 
     // 添加自定義樣式選項 (Add custom style options)
     function addCustomStyleOptions() {
@@ -3163,6 +3214,14 @@ function initChatDisplaySwitcher() {
             newRippleOption.text = t`Ripple`;
             chatDisplaySelect.appendChild(newRippleOption);
         }
+
+        // 檢查並添加Tide選項 (Check and add Tide option)
+        if (!newTideOption) {
+            newTideOption = document.createElement("option");
+            newTideOption.value = "7";
+            newTideOption.text = t`Tide`;
+            chatDisplaySelect.appendChild(newTideOption);
+        }
     }
 
     // 套用聊天樣式 (Apply chat style)
@@ -3175,7 +3234,8 @@ function initChatDisplaySwitcher() {
             "echostyle",
             "whisperstyle",
             "hushstyle",
-            "ripplestyle"
+            "ripplestyle",
+            "tidestyle",
         );
 
         // 根據選擇套用樣式 (Apply style based on selection)
@@ -3187,6 +3247,7 @@ function initChatDisplaySwitcher() {
             case "4": document.body.classList.add("whisperstyle"); break;
             case "5": document.body.classList.add("hushstyle"); break;
             case "6": document.body.classList.add("ripplestyle"); break;
+            case "7": document.body.classList.add("tidestyle"); break;
         }
     }
 
@@ -3860,7 +3921,7 @@ function updateColorSliderThumb(varId, hexColor) {
             height: 12px;
             border-radius: 50%;
             background: ${hexColor};
-            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+            border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
@@ -3869,7 +3930,7 @@ function updateColorSliderThumb(varId, hexColor) {
             height: 12px;
             border-radius: 50%;
             background: ${hexColor};
-            border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5));
+            border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }

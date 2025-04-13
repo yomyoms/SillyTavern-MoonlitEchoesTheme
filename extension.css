@@ -1,89 +1,28 @@
-/* --- Moonlit Echoes Theme 月下回聲 --- */
-
-.theme-category-content {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
-}
-
-.colors-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.theme-setting-item {
-    margin-bottom: 12px;
-}
-
-.theme-category-header {
-    padding: 8px 0 !important;
-    margin-bottom: 5px !important;
-}
-
-.theme-setting-container label {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 0.95em;
-    font-weight: bold;
-}
-
-.theme-setting-container small {
-    display: block;
-    margin-bottom: 6px;
-    opacity: 0.7;
-    font-size: 0.85em;
-}
-
-.theme-color-picker {
-    max-width: 480px;
-}
-
-.moonlit-select {
-    min-width: 80% !important;
-    padding: 5px 8px !important;
-}
-
-.theme-setting-container {
-    max-width: 480px;
-}
-
-input[type="range"].neo-range-input {
-    height: 6px;
-    border-radius: 3px;
-}
-input[type="number"].neo-range-input {
-    min-width: 60px;
-    text-align: center;
-}
-
-.color-preview {
-    box-shadow: 0 0 3px var(--SmartThemeShadowColor);
-}
-
-.moonlit-input {
-    padding: 5px 8px !important;
-    background-color: var(--black30a) !important;
-    border: 1px solid var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.5)) !important;
-    border-radius: 4px !important;
-    min-width: 80% !important;
-}
-
 /* --- Quick Replies 快速回覆 --- */
-
-.qr--bar {
+#qr--bar {
     > .qr--buttons {
+        gap: 2px 5px !important;
         padding: 5px !important;
 
+        @media screen and (max-width: 1000px) {
+            max-height: 60px;
+            overflow: auto;
+            margin-bottom: 5px !important;
+        }
+
         &.qr--color {
-        background-color: unset;
-        gap: 3px;
-        margin-top: 10px;
+            background-color: unset;
+            gap: 3px;
         }
 
         .qr--button {
         font-size: calc(var(--mainFontSize) * 0.9);
         }
+    }
+    > .qr--buttons .qr--button {
+        font-size: calc(var(--mainFontSize) * 0.9);
+        font-weight: 500;
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent);
     }
 }
 
@@ -100,12 +39,19 @@ input[type="number"].neo-range-input {
 
 .ctx-menu {
     position: absolute;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
     min-width: 200px;
     padding: 5px 8px;
+    opacity: 1 !important;
+    background-color: var(--SmartThemeBlurTintColor) !important;
+    backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
 }
-
+.ctx-sub-menu {
+    opacity: 1 !important;
+    background-color: var(--SmartThemeBlurTintColor) !important;
+    backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+}
 .ctx-blocker {
     li {
         margin-bottom: 0px !important;
@@ -120,14 +66,29 @@ body:has(#extensionTopBar) {
     #sheld {
         padding-top: calc(var(--topBarBlockSize)) !important;
     }
+
+    @media screen and (max-width: 1000px) {
+        #sheld {
+            padding-top: calc(var(--topBarBlockSize) - 5px) !important;
+        }
+
+    }
 }
 
 #extensionTopBar {
-    top: 45px;
+    /* 定位 */
+    position: fixed;
+    top: calc(var(--topBarBlockSize) + 5px) !important;
     left: 50%;
-    transform: translateX(-50%);
     bottom: auto;
-    padding-top: 0;
+    transform: translateX(-50%);
+    z-index: 3005;
+
+    /* 尺寸 */
+    width: calc(var(--sheldWidth) - 20px) !important;
+    height: var(--bottomFormBlockSize);
+
+    /* 佈局 */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -135,26 +96,31 @@ body:has(#extensionTopBar) {
     align-content: center;
     align-items: center;
     justify-content: center;
-    border-radius: 10px !important;
+    gap: 10px;
+    padding-top: 0;
+
+    /* 樣式 */
     background-color: var(--SmartThemeBlurTintColor);
     backdrop-filter: blur(var(--SmartThemeBlurStrength));
-    height: var(--bottomFormBlockSize);
-    gap: 10px;
+    border-radius: 10px !important;
     font-size: calc(var(--mainFontSize) * 0.9);
-    position: fixed;
     transition: all 0.8s ease;
-    z-index: 3005;
-    opacity: 0.7;
-    width: calc(var(--sheldWidth) - 20px) !important;
 
-    &:hover {
-        opacity: 0.9;
-        box-shadow: 0 0px 3px var(--SmartThemeShadowColor);
-    }
-
-    @media (max-width: 1000px) {
+    @media screen and (max-width: 1000px) {
+        top: var(--topBarBlockSize) !important;
+        width: 100% !important;
+        border-radius: 0 !important;
         opacity: 0.8;
-        width: calc(100% - 4%) !important;
+        border: none !important;
+        border-top: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
+        border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+    }
+}
+body:has(#extensionConnectionProfiles.visible) #extensionTopBar {
+    border-radius: 10px 10px 0 0 !important;
+
+    @media screen and (max-width: 1000px) {
+        border-radius: 0 !important;
     }
 }
 
@@ -168,11 +134,12 @@ body:has(#extensionTopBar) {
         display: flex;
         padding: 15px;
         border: 0;
-        border-top: 2px solid var(--customThemeColor);
+        border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
     }
 
     #extensionSideBarContainer {
         padding: 10px;
+        margin-bottom: 5px;
     }
 }
 
@@ -189,30 +156,72 @@ body:has(#extensionTopBar) {
         overflow-y: auto;
     }
 }
+#shadow_select_chat_popup {
+    backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    background-color: var(--black70a);
+}
 
 .select_chat_block {
     margin: 5px 0;
-    padding: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent);
+
+    &:hover {
+        background: color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent);
+    }
 }
 
 #extensionConnectionProfiles {
-    width: calc(100% - 10%) !important;
+    width: calc(var(--sheldWidth) - 20px) !important;
     transform: translateX(-50%);
     left: 50% !important;
     right: auto !important;
     position: relative !important;
-    opacity: 0.6;
     transition: all 0.8s ease;
+    margin-left: -2.5px;
 
-    &:hover {
-        opacity: 0.8;
+    @media (max-width: 1000px) {
+        width: 100% !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+        margin-left: 0;
+        opacity: 0.65;
     }
 }
 
+#extensionTopBar,
+#extensionConnectionProfiles {
+    opacity: 0.8;
+    transition: all 0.5s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+#extensionSideBar #extensionSideBarContainer .sideBarItem {
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    background-color: color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+        opacity: 9;
+    }
+}
 #extensionSideBar #extensionSideBarContainer .sideBarItem .chatStats .counterBlock::after {
     color: var(--SmartThemeBodyColor) !important;
     font-size: calc(var(--mainFontSize)* 0.85);
-    opacity: 0.6;
+}
+#extensionSideBar #extensionSideBarContainer .sideBarItem.selected {
+    background-color: transparent !important;
+    border-color: var(--customThemeColor);
+    opacity: 1;
 }
 
 body.waifuMode {
@@ -301,6 +310,7 @@ table.img_metadata {
     .list-group {
         backdrop-filter: none;
         border-radius: 0;
+        border: 0;
         box-shadow: none;
         transition: all 0.5s ease;
         background-color: unset !important;
@@ -349,23 +359,52 @@ table.img_metadata {
 }
 
 /* --- More Flexible Continues 彈性回覆 --- */
+.mes[is_system="false"]:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
+    padding-bottom: 25px !important;
+}
+body.bubblechat .mes[is_user="true"]:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
+    padding-bottom: 0 !important;
 
+    @media screen and (max-width: 1000px) {
+        padding-bottom: 25px !important;
+    }
+}
+body.echostyle,
+body.tidestyle {
+    .mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
+        padding-bottom: 0 !important;
+    }
+}
 .lacommon--quickActions[data-lacommon--anchor="bottom"] {
     bottom: 25px;
     left: calc(var(--custom-ChatAvatar, 40px) + 50px);
 }
-body.bubblechat {
+body.flatchat {
     .lacommon--quickActions[data-lacommon--anchor="bottom"] {
-        bottom: 25px;
-        left: calc(var(--custom-ChatAvatar, 40px) + 70px);
+        bottom: 22px;
+        left: calc(var(--custom-ChatAvatar, 40px) + 35px);
     }
 }
-.mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
-    padding-bottom: 25px !important;
+body.bubblechat {
+    .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+        bottom: 12px;
+        left: calc(var(--custom-ChatAvatar, 40px) + 45px);
+    }
+
+    .mes[is_user="true"] {
+        .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+            left: 0;
+
+            @media screen and (max-width: 1000px) {
+                left: calc(var(--custom-ChatAvatar, 40px) - 5px);
+            }
+        }
+    }
 }
-body.echostyle {
-    .mes:has(.lacommon--quickActions[data-lacommon--anchor="bottom"]) .mes_block {
-        padding-bottom: 0 !important;
+body.tidestyle {
+    .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+        bottom: 10px;
+        left: 0;
     }
 }
 
@@ -442,8 +481,8 @@ body.hushstyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
 body.hushstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"],
 body.ripplestyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
 body.ripplestyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
-    left: 25px !important;
-    bottom: 10px !important;
+    left: var(--customMesPadding) !important;
+    bottom: 15px !important;
 }
 body.hideChatAvatars .lacommon--quickActions[data-lacommon--anchor="bottom"],
 body.hideChatAvatars .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
@@ -451,9 +490,10 @@ body.hideChatAvatars .last_mes .lacommon--quickActions[data-lacommon--anchor="bo
 }
 body.documentstyle .lacommon--quickActions[data-lacommon--anchor="bottom"],
 body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bottom"] {
-    left: 20px !important;
-    bottom: 20px !important;
+    left: 0 !important;
+    bottom: 0 !important;
     margin: 0 !important;
+    margin-bottom: 1px !important;
 }
 
 .mfc--root {
@@ -530,11 +570,11 @@ body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bott
     padding-left: 1.2%;
     padding-right: 1.2%;
     border-radius: 0;
-    border: 0;
-    border-top: 2px solid var(--customThemeColor) !important;
+    border: 0 !important;
+    border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
 }
 
-/* --- Qvink Memory（進階聊天記憶） --- */
+/* --- Qvink Memory 進階聊天記憶 --- */
 
 .qvink_memory_display.qvink_short_memory {
     color: var(--customThemeColor2) !important;
@@ -542,4 +582,16 @@ body.documentstyle .last_mes .lacommon--quickActions[data-lacommon--anchor="bott
 
 body.bubblechat .qvink_memory_display {
     margin-bottom: 20px !important;
+}
+
+/* --- Typing Indicator 角色打字提示 --- */
+
+.typing_indicator {
+    position: sticky;
+    bottom: 0;
+    margin: 5px;
+    font-size: small;
+    letter-spacing: 0.6px;
+    opacity: 0.9;
+    text-shadow: 0 0 3px var(--SmartThemeBlurTintColor) !important;
 }

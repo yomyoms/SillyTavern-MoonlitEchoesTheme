@@ -19,15 +19,16 @@
     --customThemeMenuColor: var(--SmartThemeChatTintColor);
     --active: var(--customThemeColor);
     --SmartThemeCheckboxTickColor: var(--SmartThemeBlurTintColor);
+    --customMesPadding: 1em;
     --customRippleAvatarRatio: 1.5;
 
     /* Secondary Colors 次要顏色 */
     --fullred: rgb(229, 57, 53);
     --crimson70a: rgb(229, 57, 53);
-    --black30a: rgba(0, 0, 0, 0.2);
-    --black50a: rgba(0, 0, 0, 0.3);
-    --black70a: rgba(0, 0, 0, 0.5);
-    --cobalt30a: rgba(255, 255, 255, 0.3);
+    --black30a: color-mix(in srgb, var(--SmartThemeBlurTintColor) 30%, transparent);
+    --black50a: color-mix(in srgb, var(--SmartThemeBlurTintColor) 50%, transparent);
+    --black70a: color-mix(in srgb, var(--SmartThemeBlurTintColor) 70%, transparent);
+    --cobalt30a: color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
     --okGreen70a: rgb(156, 204, 101, 0.8);
     --warning: var(--customThemeColor);
     --golden: var(--customThemeColor);
@@ -54,6 +55,13 @@
 }
 
 /* Remove Black Shadow 消除黑色陰影 */
+button:focus,
+a:focus {
+    outline: none;
+}
+html * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 .custom-drawer-icon,
 .inline-drawer-icon,
 .right_menu_button,
@@ -68,10 +76,14 @@ input[type='checkbox'] {
     filter: drop-shadow(0px 0px 2px var(--SmartThemeBlurTintColor));
 }
 #options, #extensionsMenu, .popup .popper-modal, .list-group {
-    box-shadow: 0 0 10px var(--SmartThemeShadowColor);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--SmartThemeBlurTintColor) 50%, transparent);
 }
 .menu_button {
     filter: none !important;
+    border-width: 1px !important;
+}
+.draggable {
+    filter: drop-shadow(1px 1px 2px transparent) !important;
 }
 
 /* Loading Animation 載入動畫 */
@@ -81,6 +93,7 @@ input[type='checkbox'] {
 
 /* Background Effect 背景模糊 */
 #bg1, #bg_custom {
+    opacity: var(--customCSS-bg-opacity , 1);
     filter: blur(calc(var(--customCSS-bg-blur) * 1px)) !important;
 }
 
@@ -136,29 +149,45 @@ h2 {
 /* H3 Title 三級標題 */
 h3 {
     text-align: left;
-    margin: 15px 0 !important;
-    padding-right: 20px !important;
-    padding: 5px;
-    padding-left: 10px !important;
-    background: linear-gradient(
-        to right,
-        var(--SmartThemeBlurTintColor) 90%,
-        rgba(0, 0, 0, 0) 100%
-    );
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+    padding-left: 10px;
     letter-spacing: 1px;
     border: 0;
-    border-left: 5px solid var(--customThemeColor);
+    border-left: 3.5px solid var(--customThemeColor);
+    white-space: nowrap;
 }
+h4 {
+    letter-spacing: 0.8px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
 /* General Title 普通標題 */
+.standoutHeader,
 .title_restorable {
-    padding: 10px 0;
+    margin: 15px 0;
+    padding: 0;
+    min-height: 33px;
+    padding-bottom: 8px;
     background-image: none !important;
     border-radius: 0px !important;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     display: flex;
     align-items: center;
-    font-weight: bold;
-    border: none;
+    border: 0;
+    border-bottom: 1.25px solid var(--SmartThemeBodyColor);
+    font-weight: 600;
+
+    h3 {
+        margin: unset;
+        padding-left: unset;
+        border-left: unset;
+    }
+}
+.range-block-title {
+    margin: 3px 0;
+    font-weight: 600;
 }
 
 /* --- Lists 列表樣式 --- */
@@ -180,6 +209,7 @@ li {
 }
 
 /* --- Code Tags 程式碼標籤 --- */
+
 code {
     line-height: normal;
     background: var(--SmartThemeBlurTintColor);
@@ -188,7 +218,7 @@ code {
 #sheld code {
     border: 0px;
     border-radius: 4px;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     line-height: normal;
     background: var(--SmartThemeBlurTintColor);
     color: var(--customThemeColor);
@@ -213,10 +243,29 @@ textarea:focus-visible {
     box-shadow: 0 0 3px var(--SmartThemeBlurTintColor);
 }
 
+select,
+#char-management-dropdown,
+#tagInput {
+    padding: 5px 8px;
+}
+#persona_description,
+#context_story_string,
+#sysprompt_content,
+#customCSS,
+.world_entry_form_control textarea,
+#character_popup textarea,
+#logprobsViewer textarea,
+#floatingPrompt textarea,
+#cfgConfig textarea,
+#completion_prompt_manager_popup textarea {
+    padding: 10px;
+}
+
 /* Text Cursor 文字輸入框光標 */
 textarea {
     caret-color: var(--customThemeColor);
     text-decoration-color: var(--customThemeColor);
+    padding: 10px;
 
     ::-webkit-input-method-composition {
         text-decoration-color: var(--customThemeColor);
@@ -316,7 +365,7 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateZ(0);
     -webkit-font-smoothing: subpixel-antialiased;
     --popup-animation-speed: var(--animation-duration-slow);
-    box-shadow: 0px 0px 5px var(--SmartThemeShadowColor);
+    box-shadow: 0px 0px 25px color-mix(in srgb, var(--SmartThemeShadowColor) 90%, transparent);;
 
     &.vertical_scrolling_dialogue_popup {
         .popup-content {
@@ -344,7 +393,12 @@ input[type="range"]::-webkit-slider-thumb {
         }
     }
 }
-
+#shadow_popup,
+.popup[open]::backdrop {
+    backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength))) !important;
+    background-color: var(--black70a);
+}
 @media screen and (max-width: 1000px) {
     .large_dialogue_popup {
         top: 0px;
@@ -362,6 +416,23 @@ input[type="range"]::-webkit-slider-thumb {
     }
 }
 
+.scenario_override {
+    .standoutHeader, .title_restorable {
+        border-bottom: unset;
+        padding-bottom: unset;
+
+        h3 {
+            margin: unset;
+            padding-left: 10px !important;
+            border-left: 3.5px solid var(--customThemeColor) !important;
+        }
+    }
+
+    .range-block-range {
+        margin-top: 10px;
+    }
+}
+
 /* --- Expand & Collapse 展開＆收合 --- */
 
 /* Expand Title 展開標題 */
@@ -369,14 +440,15 @@ input[type="range"]::-webkit-slider-thumb {
     margin: 5px 0;
     padding: 10px;
     border-radius: 10px;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.05);
+    font-weight: 500;
     transition: all 0.5s ease;
+    background: var(--customBgColor2);
     border: 0px solid var(--SmartThemeBodyColor);
+    letter-spacing: 0.6px;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        filter: brightness(1) !important;
+        filter: none !important;
+        background: var(--customBgColor1);
     }
 }
 
@@ -397,34 +469,59 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* --- Menu Buttons 選單按鈕 --- */
 
-/* Base Button 基礎按鈕 */
-.menu_button {
-white-space: nowrap;
-
-    &:hover,
-    &.active {
-        transition: all 0.3s ease;
-    }
+.menu_button,
+.paginationjs-prev,
+.paginationjs-next {
+    min-width: 30px;
+    min-height: 30px;
 }
 .popup-controls {
+    .menu_button {
+        box-shadow: 0 0 5px color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+    }
+}
+.paginationjs-pages li {
+    margin: 0;
+}
+
+/* Base Button 基礎按鈕 */
 .menu_button {
-    width: auto;
-    padding: 8px 16px;
-    margin: 5px;
-    background-color: var(--SmartThemeBlurTintColor);
-    border: 1px solid var(--white30a);
-    border-radius: 8px;
-    color: var(--SmartThemeBodyColor);
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    letter-spacing: 1px;
+    white-space: nowrap;
+    background: color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent) !important;
     transition: all 0.5s ease;
 
     &:hover {
-        border: 1px solid var(--customThemeColor);
+        background: color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+    }
+}
+.menu_button:not(.disabled):hover,
+.menu_button:not(.disabled).active {
+    background: color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+}
+.popup-controls {
+    .menu_button {
+        width: auto;
+        padding: 8px 16px;
+        margin: 5px;
+        background-color: var(--SmartThemeBlurTintColor);
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+        border-radius: 8px;
+        color: var(--SmartThemeBodyColor);
+        cursor: pointer;
+        font-size: 14px;
+        letter-spacing: 0.8px;
+        transition: all 0.5s ease;
+
+        &:hover {
+            border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
         }
     }
+}
+.text_pole {
+    background-color: var(--black30a);
+    min-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* Confirm Button 確認按鈕 */
@@ -432,16 +529,16 @@ white-space: nowrap;
 #dialogue_popup_ok {
     min-width: fit-content;
     color: #fff;
-    letter-spacing: 2px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--white30a) !important;
+    letter-spacing: 0.8px;
+    background-color: var(--customBgColor1);
+    border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
     padding: 5px 20px;
     border-radius: 8px;
     transition: all 0.5s ease;
 
 &:hover {
-        background-color: color-mix(in srgb, var(--customThemeColor) 50%, transparent 50%) !important;
-        border: 1px solid var(--white30a) !important;
+        background-color: color-mix(in srgb, var(--customThemeColor) 50%, transparent) !important;
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
         transition: all 0.5s ease;
     }
 }
@@ -451,8 +548,8 @@ white-space: nowrap;
 #dialogue_popup_cancel {
     min-width: fit-content;
     color: var(--SmartThemeBodyColor);
-    letter-spacing: 2px;
-    border: 1px solid var(--SmartThemeBodyColor);
+    letter-spacing: 0.8px;
+    border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
     padding: 5px 20px;
     border-radius: 8px;
     transition: all 0.5s ease;
@@ -460,8 +557,19 @@ white-space: nowrap;
     &:hover {
         background-color: var(--white30a);
         color: var(--SmartThemeBodyColor);
-        border: 1px solid var(--white30a);
+        border: 1px solid var(--SmartThemeBorderColor);
     }
+}
+
+#dialogue_del_mes .menu_button {
+    padding: 8px 16px;
+    border-radius: 0.8px;
+    color: var(--SmartThemeBodyColor);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.5s ease;
+    border-radius: 8px;
 }
 
 /* --- Scrollbar 捲軸樣式 --- */
@@ -536,7 +644,7 @@ white-space: nowrap;
     height: 100%;
 }
 .drawer-icon.openIcon {
-    color: var(--customThemeColor) !important;
+    color: var(--Drawer-iconColor) !important;
 }
 @media screen and (max-width: 1000px) {
     .drawer {
@@ -564,49 +672,39 @@ white-space: nowrap;
 /* Menu Content 選單內容 */
 .drawer-content {
     background-color: var(--SmartThemeBlurTintColor);
-    padding: 1.2%;
-    overflow-y: scroll !important;
-    position: absolute;
-    top: var(--topBarBlockSize);
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    height: calc(100dvh - var(--bottomInputAreaHeight));
-}
-
-#left-nav-panel,
-#right-nav-panel,
-.drawer-content {
-    border-top: 2px solid var(--customThemeColor);
-    border-right: 0;
-    border-bottom: 0;
-    border-left: 0;
-    box-sizing: border-box;
-}
-
-#left-nav-panel {
-    overflow-y: hidden !important;
-}
-
-.drawer-content {
-    background-color: var(--SmartThemeBlurTintColor);
-    padding: 1.2%;
+    padding: 1em;
     overflow-y: scroll !important;
     position: absolute;
     top: calc(var(--topBarBlockSize));
     border-radius: 0 !important;
     box-shadow: none !important;
-    height: calc(100dvh - var(--bottomInputAreaHeight));
+    max-height: calc(100dvh - var(--topBarBlockSize));
 }
 @media screen and (max-width: 1000px) {
     .drawer-content {
         top: calc(var(--topBarBlockSize)) !important;
         margin-top: 0 !important;
         padding: 15px !important;
-        min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
-        max-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;;
-        height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
         min-width: 100% !important;
     }
+}
+
+#left-nav-panel,
+#right-nav-panel,
+.drawer-content {
+    border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    box-sizing: border-box;
+
+    .right_menu_button {
+        font-size: calc(var(--mainFontSize) * 1.1);
+    }
+}
+
+#left-nav-panel {
+    overflow-y: hidden !important;
 }
 
 /* --- Top Navigation 上方導航選單 --- */
@@ -617,7 +715,7 @@ white-space: nowrap;
     background-color: var(--customTopBarColor) !important;
     width:  auto;
     border-radius: 0px !important;
-    box-shadow: 0 2px 15px 0 var(--SmartThemeShadowColor);
+    box-shadow: 0 1px 15px 0 var(--SmartThemeShadowColor);
     backdrop-filter: blur(var(--SmartThemeBlurStrength));
 }
 
@@ -632,6 +730,7 @@ white-space: nowrap;
     box-sizing: border-box;
     transition: all 0.8s ease;
     width:  auto;
+    border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 5%, transparent);
 }
 
 /* --- Left & Right Panels 左右選單 --- */
@@ -662,21 +761,6 @@ white-space: nowrap;
     padding-bottom: 0 !important;
 }
 
-@media screen and (max-width: 1000px) {
-    #right-nav-panel,
-    #left-nav-panel,
-    #floatingPrompt,
-    #cfgConfig,
-    #WorldInfo,
-    #logprobsViewer,
-    #movingDivs > div {
-        min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
-        height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
-        min-width: 100% !important;
-        padding: 15px !important;
-    }
-}
-
 
 
 /* CHAT AREA 聊天區域
@@ -686,6 +770,7 @@ white-space: nowrap;
 
 #sheld {
     padding: 0 10px;
+    padding-right: 5px;
     box-sizing: border-box;
 
     @media screen and (max-width: 1000px) {
@@ -728,17 +813,18 @@ white-space: nowrap;
     max-height: calc(100dvh - calc(var(--topBarBlockSize) + var(--bottomFormBlockSize)));
     overflow-x: hidden;
     overflow-y: scroll;
-    padding: 0 15px;
+    padding: 0;
+    padding-left: 2px;
+    padding-right: 15px;
     padding-bottom: 5px;
-    margin-top: var(--customCSS-ChatTopPadding);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     flex-wrap: nowrap;
     position: relative;
     border-radius: 0px;
-    mask-image: var(--customCSS-chat-gradient-blur);
-    -webkit-mask-image: var(--customCSS-chat-gradient-blur);
+    mask-image: var(--customCSS-ChatGradientBlur);
+    -webkit-mask-image: var(--customCSS-ChatGradientBlur);
     mask-size: 100% 100%;
     -webkit-mask-size: 100% 100%;
     mask-repeat: no-repeat;
@@ -747,23 +833,61 @@ white-space: nowrap;
     position: unset !important;
 
     @media screen and (max-width: 1000px) {
-        padding: 0 10px;
+        padding: 0 8px !important;
         border: 0 !important;
         padding-bottom: 0 !important;
-        margin-top: var(--customCSS-ChatTopPadding);
 
         .mes_buttons {
             overflow: visible;
+            font-size: calc(var(--mainFontSize) * 1.25) !important;
         }
     }
 
+    /* --- Reasoning 推理 ---  */
+    .mes_reasoning_summary {
+        background: none !important;
+        margin: 0.5em 0px;
+
+        &:hover {
+            background: none !important;
+        }
+    }
+    .mes_reasoning_header_block {
+        background: none !important;
+    }
+
+    .mes_reasoning_header > .icon-svg {
+        display: block;
+        opacity: 1 !important;
+    }
+    .mes_reasoning_header {
+        padding: 8px;
+        padding-right: calc(0.7em + 18px);
+        background: color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+        transition: all 0.5s ease;
+
+        &:hover {
+            background: color-mix(in srgb, var(--SmartThemeBodyColor) 20%, transparent);
+        }
+    }
+    .mes_reasoning {
+        min-width: calc(100% + var(--mes-right-spacing));
+        margin-left: 3px;
+        margin-right: unset;
+        padding: 0;
+        padding-left: 12px;
+        border-radius: 0px;
+        color: color-mix(in srgb, var(--SmartThemeBodyColor) 75%, transparent);
+        border-left: 1.5px solid color-mix(in srgb, var(--SmartThemeBodyColor) 75%, transparent);
+    }
+
     /* --- Chat Messages 聊天訊息 --- */
+
     .mes {
         border: none;
         box-shadow: none !important;
         background-color: unset !important;
-        padding: 10px;
-        margin-bottom: 5px;
+        padding: 10px 0;
 
         /* General Avatar 一般頭像 */
         .avatar {
@@ -775,7 +899,6 @@ white-space: nowrap;
             max-width: calc(var(--custom-ChatAvatar, 40px) + 12px);
             max-height: calc(var(--custom-ChatAvatar, 40px) + 12px);
             border: 1px solid var(--SmartThemeBodyColor) !important;
-            margin-right: 5px;
 
             img {
                 width: var(--custom-ChatAvatar, 40px);
@@ -791,11 +914,28 @@ white-space: nowrap;
         }
 
         .mesAvatarWrapper {
-            padding-right: 5px;
-            .timestamp {
-                font-size: calc(var(--mainFontSize) * 0.7);
-                font-weight: 400;
-                white-space: nowrap;
+            padding-right: 0;
+            margin-right: calc(var(--customMesPadding) / 2);
+        }
+        .mes_button, .extraMesButtons > div {
+            font-size: var(--mainFontSize);
+            filter: drop-shadow(0px 0px 3px var(--SmartThemeBlurTintColor));
+            opacity: 0.4;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            @media screen and (max-width: 1000px) {
+                font-size: calc(var(--mainFontSize) * 1.05);
+                margin-left: -3px;
+            }
+        }
+        .extraMesButtons {
+            @media screen and (max-width: 1000px) {
+                justify-content: flex-start;
+                margin-top: 2px;
+                padding: 0;
             }
         }
         .mes_edit_buttons {
@@ -803,7 +943,15 @@ white-space: nowrap;
             gap: 5px;
         }
         .ch_name .flex-container {
-            margin-bottom: 5px !important;
+            @media screen and (max-width: 1000px) {
+                margin-bottom: 0 !important;
+            }
+        }
+        .timestamp {
+            font-size: calc(var(--mainFontSize) * 0.7);
+            font-weight: 400;
+            white-space: nowrap;
+            min-width: 100px;
         }
         .icon-svg {
             opacity: 0.5;
@@ -813,12 +961,22 @@ white-space: nowrap;
             background-color: var(--SmartThemeBotMesBlurTintColor) !important;
             border: var(--SmartThemeBorderColor) solid 0px;
             border-radius: 15px;
-            padding: 15px;
+            padding: var(--customMesPadding);
             box-shadow: 3px 3px 8px 0px rgba(0,0,0,3%) !important;
         }
         .mes_text {
             padding-right: 0 !important;
             padding-bottom: 10px;
+
+            .edit_textarea {
+                padding: 8px;
+                margin-bottom: 5px;
+            }
+        }
+
+        h3 {
+            margin-top: 15px !important;
+            margin-bottom: 10px !important;
         }
     }
 
@@ -865,18 +1023,12 @@ white-space: nowrap;
                 color: var(--customThemeColor);
             }
         }
-        .swipe_left {
-            position: absolute;
-            right: 111px;
-            left: auto;
-            bottom: 20px;
-        }
         .swipeRightBlock {
             position: absolute;
             display: flex;
             flex-direction: row-reverse;
             justify-content: flex-end;
-            right: 25px;
+            right: var(--customMesPadding);
             bottom: 20px;
         }
 
@@ -884,11 +1036,11 @@ white-space: nowrap;
         .swipes-counter {
             width: 60px;
             text-align: center;
-            overflow: hidden;
+            overflow: visible;
             white-space: nowrap;
             text-overflow: ellipsis;
             opacity: 0.7 !important;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
     }
 }
@@ -948,8 +1100,8 @@ white-space: nowrap;
     pre code {
         border-radius: 10px !important;
         padding: 20px !important;
-        border: 1.5px solid var(--customThemeColor) !important;
-        box-shadow: 0 0 15px var(--customThemeColor);
+        border: 1.25px solid color-mix(in srgb, var(--customThemeColor) 80%, transparent) !important;
+        box-shadow: 0 0 5px color-mix(in srgb, var(--customThemeColor) 50%, transparent);
     }
 }
 
@@ -1044,25 +1196,18 @@ body.bubblechat {
     #chat {
         .mes {
             border: none;
+            border-radius: 0;
             margin: 5px 0;
+            margin-bottom: 10px;
             padding: 0;
 
-            @media screen and (max-width: 1000px) {
-                margin-bottom: 5px;
-            }
-
-            .mesAvatarWrapper {
-                padding-right: 10px;
-            }
-
             .mes_block {
-                margin-top: 10px;
                 width: auto;
                 max-width: 80%;
                 display: inline-block;
                 word-wrap: break-word;
-                border-radius: 0 25px 25px 50px;
                 overflow: hidden;
+                border-radius: 5px 20px 20px 40px;
             }
         }
 
@@ -1105,20 +1250,27 @@ body.bubblechat {
             }
 
             .mesAvatarWrapper {
-                padding-right: 0;
-                padding-left: 10px;
+                margin-right: 0;
+                margin-left: calc(var(--customMesPadding) / 2);
             }
 
             .mes_block {
                 position: relative;
                 text-align: left;
-                border-radius: 25px 0 50px 25px;
+                border-radius: 20px 5px 40px 20px
             }
 
             @media screen and (max-width: 1000px) {
                 .name_text {
                     text-align: right !important;
                 }
+            }
+        }
+
+        .last_mes {
+            .swipeRightBlock {
+                right: calc(var(--customMesPadding) * 2);
+                bottom: 10px;
             }
         }
     }
@@ -1136,16 +1288,12 @@ body.documentstyle {
 
     #chat {
         @media screen and (max-width: 1000px) {
-            padding: 0;
-        }
-
-        .swipe_left {
-            position: absolute;
-            right: 111px !important;
-            left: auto !important;
+            padding: 1em !important;
         }
 
         .mes {
+            padding: 0 !important;
+
             .mes_block {
                 margin-right: 0 !important;
                 background-color: unset !important;
@@ -1159,10 +1307,18 @@ body.documentstyle {
             }
         }
 
-        .mes_text,
-        .last_mes .mes_text {
-            margin: 10px 15px !important;
+        .mes_text {
+            margin: 0 !important;
             margin-bottom: 20px !important;
+        }
+        .last_mes .mes_text {
+            margin-bottom: 15px !important;
+            padding-bottom: 5px;
+        }
+
+        .swipeRightBlock,
+        .swipe_left {
+            bottom: 0;
         }
     }
 }
@@ -1204,9 +1360,9 @@ body.echostyle #chat {
             display: inline-block;
             width: 100%;
             max-width: 100%;
-            min-height: 60px;
-            margin-top: calc(var(--custom-ChatAvatar) * 0.4);
-            margin-bottom: 10px;
+            min-height: 200px;
+            overflow: hidden;
+            margin-top: calc(var(--custom-ChatAvatar) * 0.35);
             border-radius: 10px;
             backdrop-filter: blur(calc(var(--SmartThemeBlurStrength)));
             -webkit-backdrop-filter: blur(calc(var(--SmartThemeBlurStrength)));
@@ -1241,6 +1397,7 @@ body.echostyle #chat {
 
                 .flex-container {
                     flex-direction: row-reverse;
+                    margin-right: 5px;
                 }
             }
 
@@ -1250,6 +1407,7 @@ body.echostyle #chat {
                 position: relative;
                 right: 0;
                 left: auto;
+                margin-bottom: 10px;
                 border-radius: 10px;
                 overflow: hidden;
                 background-color: var(--SmartThemeUserMesBlurTintColor);
@@ -1260,17 +1418,24 @@ body.echostyle #chat {
                     top: 0;
                     left: 0;
                     width: var(--custom-EchoAvatarWidth, 25%);
-                    height: 100%;
+                    height: var(--custom-EchoAvatarHeight, 350px);
                     background: var(--mes-avatar-url) center no-repeat;
                     background-size: cover;
-                    mask-image: linear-gradient(to bottom, black 90%, rgba(0, 0, 0, 0) 100%);
-                    mask-size: 100% 100%;
-                    mask-repeat: no-repeat;
-                    -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0, 0, 0, 0) 100%);
-                    -webkit-mask-size: 100% 100%;
-                    -webkit-mask-repeat: no-repeat;
-                    z-index: -1;
+                    background-attachment: fixed;
+                    -webkit-mask-image:
+                    linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    mask-image:
+                    linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    -webkit-mask-composite: destination-in;
+                    mask-composite: intersect;
                     border-radius: 10px 0 0 10px;
+                    z-index: 3;
                 }
             }
             .name_text {
@@ -1301,17 +1466,24 @@ body.echostyle #chat {
                     top: 0;
                     right: 0;
                     width: var(--custom-EchoAvatarWidth, 25%);
-                    height: 100%;
+                    height: var(--custom-EchoAvatarHeight, 350px);
                     background: var(--mes-avatar-url) center no-repeat;
                     background-size: cover;
-                    mask-image: linear-gradient(to bottom, black 90%, rgba(0, 0, 0, 0) 100%);
-                    mask-size: 100% 100%;
-                    mask-repeat: no-repeat;
-                    -webkit-mask-image: linear-gradient(to left, black 70%, rgba(0, 0, 0, 0) 100%);
-                    -webkit-mask-size: 100% 100%;
-                    -webkit-mask-repeat: no-repeat;
-                    z-index: -1;
+                    background-attachment: fixed;
+                    -webkit-mask-image:
+                    linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    mask-image:
+                    linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%),
+                    linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 0%),
+                    linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 40%);
+                    -webkit-mask-composite: destination-in;
+                    mask-composite: intersect;
                     border-radius: 0 10px 10px 0;
+                    z-index: 3;
                 }
             }
             .mes_text,
@@ -1330,6 +1502,7 @@ body.echostyle #chat {
         .mes_text,
         .last_mes .mes_text {
             padding: 10px 20px !important;
+            min-height: unset !important;
         }
         .mes_text::before {
             display: none !important;
@@ -1351,6 +1524,7 @@ body.echostyle #chat {
         gap: 8px;
         flex-wrap: wrap;
         min-height: 45px;
+        padding-top: 5px;
     }
     .mesIDDisplay {
         background: rgba(225, 225, 225, 0.2);
@@ -1367,7 +1541,6 @@ body.echostyle #chat {
 
     .mes_reasoning_summary {
         left: calc(var(--custom-echo-avatar) + 5px + 8px);
-        max-width: calc(100% - (var(--custom-echo-avatar) + 5px + 8px));
     }
     .mes_reasoning_header > .icon-svg {
         display: block;
@@ -1376,6 +1549,10 @@ body.echostyle #chat {
     }
 
     .last_mes {
+        .mes_text {
+            margin-bottom: 10px;
+        }
+
         .mesAvatarWrapper {
             padding-bottom: unset;
         }
@@ -1388,9 +1565,6 @@ body.echostyle #chat {
         .swipeRightBlock {
             bottom: 10px !important;
         }
-        .swipe_left {
-            right: 85px;
-        }
         .swipeRightBlock {
             position: absolute;
             display: flex;
@@ -1401,11 +1575,10 @@ body.echostyle #chat {
         .swipes-counter {
             width: 60px;
             text-align: center;
-            overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             opacity: 0.9 !important;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
     }
 
@@ -1413,6 +1586,7 @@ body.echostyle #chat {
         margin-top: 15px;
         border-top: var(--customlastInContext) !important;
         opacity: 1 !important;
+        border-radius: 0;
     }
 }
 
@@ -1427,7 +1601,7 @@ body.whisperstyle #chat {
         width: 100%;
         color: var(--SmartThemeBodyColor);
         position: relative;
-        padding: 20px 25px;
+        padding: 1em;
         padding-top: 45px !important;
         border-radius: 15px;
 
@@ -1440,10 +1614,10 @@ body.whisperstyle #chat {
             height: 100px;
             background: var(--mes-avatar-url) var(--customWhisperAvatarAlign) no-repeat;
             background-size: cover;
-            mask-image: linear-gradient(to bottom, black 50%, rgba(0, 0, 0, 0) 100%);
+            mask-image: linear-gradient(to bottom, black 60%, rgba(0, 0, 0, 0) 100%);
             mask-size: 100% 100%;
             mask-repeat: no-repeat;
-            -webkit-mask-image: linear-gradient(to left, black 50%, rgba(0, 0, 0, 0) 100%);
+            -webkit-mask-image: linear-gradient(to left, black 60%, rgba(0, 0, 0, 0) 100%);
             -webkit-mask-size: 100% 100%;
             -webkit-mask-repeat: no-repeat;
             z-index: 0;
@@ -1456,10 +1630,10 @@ body.whisperstyle #chat {
         &::after {
             content: "";
             position: absolute;
-            top: 50px;
+            top: 70px;
             right: 0;
             width: 5px;
-            height: 50px;
+            height: 30px;
             opacity: 0.9;
             z-index: 3;
         }
@@ -1470,7 +1644,7 @@ body.whisperstyle #chat {
                 min-height: 125px !important;
             }
             &::after {
-                top: 75px;
+                top: 95px;
             }
 
         }
@@ -1480,7 +1654,7 @@ body.whisperstyle #chat {
             background-color: var(--SmartThemeUserMesBlurTintColor) !important;
 
             &::after {
-                border-right: 3px solid var(--customThemeColor);
+                border-right: 3.5px solid var(--customThemeColor);
             }
         }
         /* Whisper: Character Message 低語：角色訊息 */
@@ -1488,7 +1662,7 @@ body.whisperstyle #chat {
             background-color: var(--SmartThemeBotMesBlurTintColor) !important;
 
             &::after {
-                border-right: 3px solid var(--SmartThemeBodyColor);
+                border-right: 3.5px solid var(--SmartThemeBodyColor);
             }
         }
 
@@ -1534,6 +1708,7 @@ body.whisperstyle #chat {
 
     .ch_name {
         margin-left: calc(var(--custom-echo-avatar) + 5px + 8px);
+        margin-bottom: 10px;
 
         .name_text {
             display: inline-block !important;
@@ -1549,23 +1724,25 @@ body.whisperstyle #chat {
         min-height: 45px;
     }
     .mesIDDisplay {
-        background: rgb(225, 225, 225, 0.2);
+        background: var(--customBgColor1);
         padding: 0 8px;
         border-radius: 8px;
         opacity: 0.8;
     }
     .timestamp {
-    font-size: calc(var(--mainFontSize) * 0.7);
+        font-size: calc(var(--mainFontSize) * 0.7);
         font-weight: 400;
         white-space: nowrap;
         margin-right: 5px;
     }
     .mes_reasoning_summary {
         left: calc(var(--custom-echo-avatar) + 5px + 8px);
-        max-width: calc(100% - (var(--custom-echo-avatar) + 5px + 8px));
+
     }
 
     .last_mes {
+        padding-bottom: 5px !important;
+
         .mesAvatarWrapper {
             padding-bottom: unset;
         }
@@ -1580,9 +1757,6 @@ body.whisperstyle #chat {
         .swipeRightBlock {
             bottom: 10px !important;
         }
-        .swipe_left {
-            right: 105px;
-        }
         .swipeRightBlock {
             position: absolute;
             display: flex;
@@ -1593,16 +1767,19 @@ body.whisperstyle #chat {
         .swipes-counter {
             width: 60px;
             text-align: center;
-            overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             opacity: 0.9 !important;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
+    }
+
+    .menu_button {
+        background: color-mix(in srgb, var(--SmartThemeBlurTintColor) 25%, transparent) !important;
     }
 }
 
-/* --- Chat Style: Soft 聊天風格：「輕聲」 --- */
+/* --- Chat Style: Hush 聊天風格：「輕聲」 --- */
 
 body.hushstyle #chat {
     .mes {
@@ -1635,7 +1812,7 @@ body.hushstyle #chat {
             background-color: var(--SmartThemeUserMesBlurTintColor) !important;
 
             &::after {
-                border-right: 3px solid var(--customThemeColor);
+                border-right: 3.5px solid var(--customThemeColor);
             }
         }
         /* Soft: Character Message 輕聲：角色訊息 */
@@ -1643,7 +1820,7 @@ body.hushstyle #chat {
             background-color: var(--SmartThemeBotMesBlurTintColor) !important;
 
             &::after {
-                border-right: 3px solid var(--SmartThemeBodyColor);
+                border-right: 3.5px solid var(--SmartThemeBodyColor);
             }
         }
 
@@ -1705,7 +1882,7 @@ body.hushstyle #chat {
         min-height: 45px;
     }
     .mesIDDisplay {
-        background: rgb(225, 225, 225, 0.2);
+        background: var(--customBgColor1);
         padding: 0 8px;
         border-radius: 8px;
         opacity: 0.8;
@@ -1718,7 +1895,7 @@ body.hushstyle #chat {
     }
     .mes_reasoning_summary {
         left: calc(var(--custom-echo-avatar) + 5px + 8px);
-        max-width: calc(100% - (var(--custom-echo-avatar) + 5px + 8px));
+
     }
 
     .last_mes {
@@ -1735,9 +1912,6 @@ body.hushstyle #chat {
         .swipeRightBlock {
             bottom: 10px !important;
         }
-        .swipe_left {
-            right: 105px;
-        }
         .swipeRightBlock {
             position: absolute;
             display: flex;
@@ -1749,11 +1923,10 @@ body.hushstyle #chat {
         .swipes-counter {
             width: 60px;
             text-align: center;
-            overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             opacity: 0.9 !important;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
     }
 }
@@ -1765,7 +1938,7 @@ body.ripplestyle #chat {
         background: var(--SmartThemeBotMesBlurTintColor) !important;
         border-radius: 15px;
         padding: 0 !important;
-        margin-bottom: 15px !important;
+        margin: 8px 0 !important;
 
         &[is_user="true"] {
             background-color: var(--SmartThemeUserMesBlurTintColor) !important;
@@ -1894,6 +2067,201 @@ body.ripplestyle.big-avatars #chat .mes {
     }
 }
 
+/* --- Chat Style: Tide 聊天風格：「潮汐」 --- */
+
+body.tidestyle #chat {
+    padding: 0 15px;
+
+    @media screen and (max-width: 1000px) {
+        padding: 0 1em;
+    }
+
+    .mes {
+        display: block;
+        flex-direction: column;
+        align-items: flex-start;
+        color: var(--SmartThemeBodyColor);
+        position: relative;
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 0 !important;
+
+        .ch_name .flex-container {
+            margin-bottom: 5px !important;
+        }
+
+        .mes_block {
+            display: block;
+            padding: 0;
+            overflow: visible;
+            position: relative;
+            transform: translateY(calc(var(--custom-ChatAvatar) * (-1 + 0.325))) !important;
+            background-color: unset !important;
+            box-shadow: none !important;
+
+            .flex-container {
+                flex-wrap: wrap;
+            }
+        }
+
+        .mes_text {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 0;
+            padding-top: 10px;
+            padding-bottom: 0 !important;
+            max-width: 70%;
+
+            p {
+                display: block;
+                width: fit-content;
+                margin: 0;
+                margin-bottom: 8px !important;
+                background: var(--SmartThemeBotMesBlurTintColor);
+                padding: 6px 14px !important;
+                border-radius: 18px;
+            }
+
+            @media screen and (max-width: 1000px) {
+                max-width: 90%;
+            }
+        }
+
+        .mes_timer,
+        .mesIDDisplay,
+        .tokenCounterDisplay {
+            display: inline-block;
+            transform: translateY(calc(var(--custom-ChatAvatar) * -0.375));
+        }
+
+        /* Tide: User Message 潮汐：使用者訊息 */
+        &[is_user="true"] {
+            .avatar {
+                margin-right: 0;
+                margin-left: 5px;
+            }
+            .mesAvatarWrapper {
+                flex-direction: row-reverse;
+                padding-right: 0 !important;
+                padding-left: 2%;
+            }
+            .ch_name {
+                flex-direction: row-reverse;
+                float: right;
+                clear: both;
+                margin-right: calc(var(--custom-echo-avatar) + 5px + 8px);
+                margin-left: 0;
+                width: calc(100% - (var(--custom-echo-avatar) + 5px + 8px));
+
+                .flex-container {
+                    flex-direction: row-reverse;
+                    margin-right: 6px;
+                }
+            }
+
+            .mes_text {
+                float: right;
+                clear: both;
+                position: relative;
+                right: 0;
+                left: auto;
+                border-radius: 10px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .name_text {
+                margin-right: 0;
+                text-align: right;
+                color: var(--customThemeColor) !important;
+            }
+
+            p {
+                background: var(--SmartThemeUserMesBlurTintColor);
+                border-radius: 18px;
+            }
+        }
+    }
+
+    .ch_name {
+        margin-left: calc(var(--custom-echo-avatar) + 5px + 8px);
+
+        .name_text {
+            display: inline-block !important;
+            margin-right: 5px;
+        }
+    }
+
+    .mesAvatarWrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        min-height: 45px;
+        padding-top: 10px;
+    }
+    .mesIDDisplay {
+        background: rgba(225, 225, 225, 0.2);
+        padding: 0 8px;
+        border-radius: 8px;
+        opacity: 0.8;
+    }
+    .timestamp {
+        font-size: calc(var(--mainFontSize) * 0.7);
+        font-weight: 400;
+        white-space: nowrap;
+        margin-right: 5px;
+    }
+
+    .mes_reasoning_summary {
+        left: calc(var(--custom-echo-avatar) + 5px + 8px);
+
+    }
+    .mes_reasoning_header > .icon-svg {
+        display: block;
+        opacity: 0.8 !important;
+        margin-right: 3px;
+    }
+
+    .last_mes {
+        .mesAvatarWrapper {
+            padding-bottom: unset;
+        }
+        .swipe_right,
+        .swipe_left {
+            opacity: 0.6;
+            transform: scale(0.8);
+        }
+        .swipe_left,
+        .swipeRightBlock {
+            bottom: 8px !important;
+        }
+        .swipeRightBlock {
+            position: absolute;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            right: 0px;
+        }
+        .swipes-counter {
+            width: 60px;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            opacity: 0.9 !important;
+            letter-spacing: 1.5px;
+        }
+    }
+
+    .lastInContext {
+        margin-top: 15px;
+        border-top: var(--customlastInContext) !important;
+        opacity: 1 !important;
+    }
+}
+
 /* Character Name Field Fix 角色名稱欄位修正 */
 body:not(.echostyle):not(.whisperstyle):not(.ripplestyle) .name_text {
     display: inline-block !important;
@@ -1907,19 +2275,38 @@ body:not(.echostyle):not(.whisperstyle):not(.ripplestyle) .name_text {
 }
 
 /* System Message Display Fix 系統訊息顯示修正 */
-body.whisperstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"],
-body.hushstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"],
-body.ripplestyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
-    .mesAvatarWrapper {
-        visibility: hidden;
+body.echostyle,
+body.whisperstyle,
+body.ripplestyle,
+body.tidestyle {
+    #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
+        &::before {
+            display: none;
+        }
+        &::after {
+            display: none;
+        }
+        .mesAvatarWrapper {
+            display: none;
+        }
     }
 }
-body.echostyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
-    .mesAvatarWrapper {
-    display: none !important;
+#chat:has(.mes[ch_name="SillyTavern System"]) {
+    .lacommon--quickActions[data-lacommon--anchor="bottom"] {
+        display: none;
     }
-    .mes_text {
-        padding: 10px !important;
+}
+body.echostyle {
+    #chat .mes[is_system="true"] {
+        .mes_text {
+            padding: 10px !important;
+            min-height: unset;
+        }
+    }
+}
+body.hushstyle #chat .mes[mesid="1"][ch_name="SillyTavern System"] {
+    .mesAvatarWrapper {
+        visibility: hidden;
     }
 }
 
@@ -1938,7 +2325,7 @@ body.bubblechat,
 body.documentstyle,
 body.ripplestyle {
     .mesIDDisplay {
-        background: rgba(255, 255, 255, 0.1) !important;
+        background: var(--customBgColor2) !important;
         width: fit-content;
         padding: 0 8px;
         border-radius: 8px;
@@ -1951,10 +2338,17 @@ body.ripplestyle {
 
 /* --- Chat Input 聊天訊息輸入 --- */
 
-/* Chat Input Overall 聊天輸入欄位整體 */
+/* Chat Input Overall 整體聊天輸入欄位 */
+#form_sheld {
+    @media screen and (max-width: 1000px) {
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Chat Input Box 聊天輸入框 */
 #send_form {
-    border-radius: 15px;
-    border: 2px solid var(--SmartThemeBodyColor);
+    border-radius: 10px;
+    border: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 60%, transparent);
     background-color: var(--SmartThemeBlurTintColor);
     opacity: 0.6;
     margin-bottom: 5px !important;
@@ -1962,31 +2356,52 @@ body.ripplestyle {
 
     &:hover {
         opacity: 0.8;
+        border: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 80%, transparent);
+
+        #send_but {
+            text-shadow: 0 0 5px color-mix(in srgb, var(--SmartThemeBodyColor) 80%, transparent);
+        }
     }
 
     &:focus-within {
-        border: 2px solid var(--customThemeColor) !important;
+        border: 1.25px solid var(--customThemeColor) !important;
         opacity: 1;
 
         #send_but {
             color: var(--customThemeColor);
-            text-shadow: 0 0 10px rgb(225, 225, 225, 0.5);
+            text-shadow: 0 0 5px color-mix(in srgb, var(--customThemeColor) 80%, transparent);
             opacity: 1;
             transition: all 0.5s ease !important;
         }
     }
 }
-
-/* Chat Input Box 聊天輸入框 */
-#form_sheld {
-    @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
+    #send_form {
         margin-bottom: 0 !important;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 1px 20px color-mix(in srgb, var(--SmartThemeBlurTintColor) 50%, transparent);
+        border: 0 !important;
+        border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
+
+        &:visited,
+        &:focus,
+        &:focus-within,
+        &:focus-visible {
+            border: 0 !important;
+            border-top: 1.25px solid var(--customThemeColor) !important;
+            opacity: 1;
+        }
     }
 }
 
 #send_textarea {
-    --progColor: var(--customThemeColor);
-    --progSuccessColor: var(--customThemeColor2);
+    --progColor: color-mix(in srgb, var(--SmartThemeBodyColor) 30%, transparent) !important;
+    --progFlashColor: color-mix(in srgb, var(--SmartThemeBodyColor) 20%, transparent) !important;
+    --progSuccessColor: var(--customThemeColor);
+    --progErrorColor: rgb(189, 54, 47);
+    --progAbortedColor: color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
+    --progWidth: 1.25px;
+    border: 0 !important;
 
     &::placeholder {
         font-size: 14px;
@@ -2039,22 +2454,24 @@ body.ripplestyle {
     padding-right: 1.2%;
     border-radius: 0;
     border: 0;
-    border-top: 2px solid var(--customThemeColor);
+    border-top: 1.25px solid var(--SmartThemeBodyColor);
     width: calc(((100dvw - var(--sheldWidth)) / 2)) !important;
 }
 #extensionsMenu,
 .options-content {
     padding: 5px 8px;
+    box-shadow: 0 0 25px color-mix(in srgb, var(--SmartThemeBlurTintColor) 80%, transparent);
 }
 .options-content {
+    font-size: calc(var(--mainFontSize) * 1);
+
     a {
-        font-weight: 400;
+        font-weight: 500;
     }
     hr {
         margin: 5px 0;
     }
 }
-
 
 
 /* CHARACTER EXPRESSIONS 角色表情圖示
@@ -2117,34 +2534,38 @@ body.waifuMode {
     text-align: center;
     color: var(--customThemeColor);
     font-style: italic;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
 }
 
 /* AI Config Title AI 配置標題 */
 .fillLeft {
     .title_restorable {
-        margin: 12px 0 10px 0;
-        padding: 5px;
-        padding-left: 10px !important;
-        padding-bottom: 0 !important;
-        background-color: var(--SmartThemeBlurTintColor);
+        margin: 15px 0;
+        padding: 0;
+        min-height: 33px;
+        padding-bottom: 8px;
         background-image: none !important;
         border-radius: 0px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
+        display: flex;
         align-items: center;
         border: 0;
-        border-bottom: 2px solid var(--customThemeColor);
+        border-bottom: 1.25px solid var(--SmartThemeBodyColor);
+        font-weight: 500;
     }
 }
 
-/* Prompt Sorting 提示詞排序 */#completion_prompt_manager {
+/* Prompt Sorting 提示詞排序 */
+.openai_logit_bias_preset_form {
+    margin: 5px 0;
+}
+#completion_prompt_manager {
     .completion_prompt_manager_footer {
         padding: 0;
     }
 
     #completion_prompt_manager_list {
-        padding: 10px 15px 15px 15px;
+        padding: 5px;
         margin: 5px 0;
 
         .completion_prompt_manager_prompt_name {
@@ -2161,6 +2582,8 @@ body.waifuMode {
 }
 #prompt-manager-reset-character,
 #completion_prompt_manager_popup {
+    border: 0;
+
     .completion_prompt_manager_popup_entry_form_footer {
         #completion_prompt_manager_popup_entry_form_reset {
         color: var(--customThemeColor);
@@ -2170,25 +2593,23 @@ body.waifuMode {
 
 
 
+/* API CONNECTIONS
+    AI 連線設定
+- - - - - - - - - - - - - - - - - */
+#rm_api_block {
+    h4 {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        letter-spacing: 0.8px;
+    }
+}
+
+
+
 /* ADVANCED FORMATTING
     進階格式化
 - - - - - - - - - - - - - - - - - */
 #AdvancedFormatting {
-    .standoutHeader {
-        margin: 12px 0 10px 0;
-        padding: 5px;
-        padding-left: 10px !important;
-        background-color: var(--SmartThemeBlurTintColor);
-        background-image: none !important;
-        border-radius: 0px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: flex;
-        align-items: center;
-        border: 0;
-        border-bottom: 2px solid var(--customThemeColor);
-    }
-
     .spaceEvenly {
         gap: 15px !important;
     }
@@ -2205,14 +2626,15 @@ body.waifuMode {
         margin: 5px 0;
         padding: 10px;
         border-radius: 10px !important;
-        font-weight: bold;
-        background: rgba(255, 255, 255, 0.05);
+        font-weight: 500;
+        background: var(--customBgColor1);
         transition: all 0.5s ease;
         border: 0px solid var(--SmartThemeBodyColor);
     }
 
     .select2_multi_sameline+span.select2-container .select2-selection--multiple {
         margin: 5px 0;
+        padding: unset;
     }
 }
 
@@ -2222,13 +2644,13 @@ body.waifuMode {
         cursor: initial;
         margin: 0;
         padding: 5px 10px;
-        background: rgba(255, 255, 255, 0);
         border-radius: 0;
         border: 0;
-        font-weight: bold;
+        font-weight: 500;
+        background: none;
 
         &:hover {
-        background: none;
+            background: none;
         }
     }
 }
@@ -2238,11 +2660,15 @@ body.waifuMode {
     border-radius: 10px;
     padding: 5px;
     margin: 10px 0;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--customBgColor2);
     transition: all 0.5s ease;
 
     &:hover {
         filter: brightness(1.25);
+    }
+
+    &:active {
+        background: var(--customBgColor1);
     }
 }
 
@@ -2281,6 +2707,8 @@ body.waifuMode {
     .select2-selection--single {
         .select2-selection__choice {
             background-color: var(--SmartThemeBlurTintColor);
+            padding: 8px;
+            margin: 5px 0;
         }
     }
     &.select2-selection--multiple,
@@ -2301,8 +2729,8 @@ span.select2.select2-container {
         transition: all 0.5s ease;
 
         &:hover {
-        color: var(--customThemeColor);
-        background-color: var(--SmartThemeBlurTintColor);
+            color: var(--customThemeColor);
+            background-color: var(--SmartThemeBlurTintColor);
         }
     }
 }
@@ -2315,19 +2743,19 @@ span.select2.select2-container {
 /* User Settings Title 使用者設定標題 */
 #user-settings-block {
     h4 {
-        margin: 12px 0 10px 0;
-        padding: 5px;
-        padding-left: 10px !important;
-        background-color: var(--SmartThemeBlurTintColor);
+        margin: 15px 0;
+        padding: 0;
+        min-height: 33px;
+        padding-bottom: 8px;
         background-image: none !important;
         border-radius: 0px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         display: flex;
         align-items: center;
         border: 0;
-        border-bottom: 2px solid var(--customThemeColor);
-        }
+        color: var(--SmartThemeBodyColor);
+        border-bottom: 1.25px solid var(--SmartThemeBodyColor);
+    }
 }
 
 /* Field Spacing 欄位間距 */
@@ -2340,14 +2768,16 @@ span.select2.select2-container {
 
 /* Expand & Collapse Options 展開＆收合選項 */
 .userSettingsInnerExpandable {
-    border: 0px solid var(--SmartThemeBodyColor);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    background: var(--customBgColor1);
     padding: 5px 10px !important;
     margin-top: 8px;
     transition: all 0.5s ease;
+    letter-spacing: 0.6px;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--customBgColor2);
+        border: 1px solid var(--SmartThemeBorderColor);
         filter: brightness(1.2) !important;
     }
 }
@@ -2359,13 +2789,13 @@ span.select2.select2-container {
 
 /* Background Image Preview Title 背景圖片預覽標題 */
 .BGSampleTitle {
-    font-weight: bold;
+    font-weight: 600;
     background-color: transparent;
     padding: 5px 10px;
     font-style: italic;
     box-sizing: border-box;
     color: #FFF;
-    text-shadow: 0 1px 2px var(--SmartThemeBlurTintColor);
+    text-shadow: 0 0px 5px var(--SmartThemeBlurTintColor) !important;
 }
 
 /* Menu Adjustments 選單調整 */
@@ -2383,25 +2813,24 @@ span.select2.select2-container {
 
 /* Background Image Preview Style 背景圖片預覽樣式 */
 .bg_example {
-    margin: 10px 5px;
     background-repeat: no-repeat;
-    background-size: 102%;
     background-position: center;
     border-radius: 15px;
     transition: all 0.5s ease;
     box-sizing: border-box;
+    border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent);
 
     &:hover {
-        box-shadow: 0 0 5px var(--SmartThemeBodyColor);
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent);
+        box-shadow: 0 0 10px color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent);
     }
 
     &.locked {
-        outline: 1.5px solid var(--customThemeColor);
+        outline: 1.25px solid var(--customThemeColor);
     }
 
     @media screen and (max-width: 1000px) {
         flex: 1 1 calc(45%);
-        max-width: calc(45%);
     }
 }
 
@@ -2414,9 +2843,10 @@ span.select2.select2-container {
     > .extension_container {
         > div {
             transition: all 0.5s ease;
+
             &:hover {
-            color: var(--customThemeColor);
-            filter: none;
+                color: var(--SmartThemeBodyColor);
+                filter: none;
             }
         }
     }
@@ -2432,7 +2862,7 @@ span.select2.select2-container {
     a {
         transition: all 0.5s ease;
         &:hover {
-            color: var(--customThemeColor);
+            color: var(--SmartThemeBodyColor);
             filter: none;
         }
     }
@@ -2455,12 +2885,16 @@ span.select2.select2-container {
     .inline-drawer-toggle.inline-drawer-header {
         padding: 5px 10px !important;
         border-radius: 10px;
-        font-weight: bold;
-        background: rgba(255, 255, 255, 0.05);
+        font-weight: 500;
+        background: var(--customBgColor2) !important;
+        border: 1px solid transparent;
         transition: all 0.5s ease;
+        letter-spacing: 0.6px;
+
         &:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        filter: brightness(1.2) !important;
+            background: var(--customBgColor1) !important;
+            border: 1px solid var(--SmartThemeBorderColor);
+            filter: brightness(1.2) !important;
         }
     }
     .note-link-span {
@@ -2481,7 +2915,7 @@ span.select2.select2-container {
             .chatStats {
                 .counterBlock {
                     &::after {
-                    color: var(--white30a);
+                        color: var(--white30a);
                     }
                 }
             }
@@ -2489,6 +2923,17 @@ span.select2.select2-container {
     }
 }
 
+.extensions_info .extension_block {
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    border: 0;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+
+    &:hover {
+        background: color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+    }
+}
 
 
 /* PERSONA MANAGEMENT 使用者角色管理
@@ -2498,22 +2943,6 @@ span.select2.select2-container {
 #persona_controls .persona_name {
     color: var(--customThemeColor);
     opacity: 1 !important;
-}
-
-/* 項目標題 */
-.standoutHeader {
-    margin: 12px 0 10px 0;
-    padding: 5px;
-    padding-left: 10px !important;
-    background-color: var(--SmartThemeBlurTintColor);
-    background-image: none !important;
-    border-radius: 0px !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    border: 0;
-    border-bottom: 2px solid var(--customThemeColor);
 }
 
 #user_avatar_block {
@@ -2528,17 +2957,17 @@ span.select2.select2-container {
         border-radius: 12px;
         cursor: pointer;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.05) !important;
+        background-color: var(--customBgColor2) !important;
         transition: all 0.5s ease;
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.1) !important;
+            background-color: var(--customBgColor1) !important;
             filter: brightness(1.1) !important;
         }
 
         &.selected {
-            border: 1.5px solid var(--customThemeColor);
-            background-color: rgba(255, 255, 255, 0) !important;
+            border: 1.25px solid var(--customThemeColor) !important;
+            background-color: transparent !important;
         }
 
         &.default_persona {
@@ -2587,20 +3016,19 @@ span.select2.select2-container {
 
 #rm_button_selected_ch {
     opacity: 1;
-    margin: 12px 0 10px 0;
-    padding: 5px;
+    margin-bottom: 8px;
     padding-left: 10px !important;
-    background: linear-gradient(
-        to right,
-        var(--SmartThemeBlurTintColor) 65%,
-        rgba(0, 0, 0, 0) 100%
-    );
     border-radius: 0px !important;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     display: flex;
     align-items: center;
     border: 0;
-    border-left: 5px solid var(--customThemeColor);
+    border-left: 3.5px solid var(--customThemeColor);
+
+    h2 {
+        font-size: calc(var(--mainFontSize) * 1.1);
+        font-weight: 600;
+    }
 }
 
 /* --- Transition Effects 過渡動畫 --- */
@@ -2644,7 +3072,7 @@ body.charListGrid {
 
 .avatar {
     img {
-        border: 1.5px solid var(--SmartThemeBodyColor) !important;
+        border: 1.25px solid var(--SmartThemeBodyColor) !important;
     }
 }
 .add_avatar {
@@ -2714,12 +3142,21 @@ body.charListGrid {
 }
 
 #character_popup {
-    padding: 20px;
+    padding: 1em;
     box-shadow: none;
     min-height: calc(100dvh - var(--topBarBlockSize)) !important;
     border-radius: 0;
     border: none !important;
-    border-top: 2px solid var(--customThemeColor) !important;
+    border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
+
+    .inline-drawer-header {
+        margin: 0;
+        padding: 5px 10px;
+
+        h4 {
+            margin-top: 0px;
+        }
+    }
 }
 @media screen and (max-width: 1000px) {
     #character_popup {
@@ -2728,7 +3165,7 @@ body.charListGrid {
         max-height: calc(100dvh - var(--topBarBlockSize)) !important;
         border: none !important;
         bottom: 0 !important;
-        border-top: 2px solid var(--customThemeColor) !important;
+        border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
     }
 }
 
@@ -2743,6 +3180,14 @@ body.charListGrid {
         margin-bottom: 15px;
         }
     }
+
+    .title_restorable {
+        margin: 0;
+        padding: 0;
+        min-height: unset;
+        padding-bottom: unset;
+        border: 0 !important;
+    }
 }
 
 #export_format_popup {
@@ -2755,6 +3200,14 @@ body.charListGrid {
         margin-left: 8px;
         min-height: 28px;
     }
+}
+
+.buttons_block .menu_button {
+    min-width: 30px;
+    min-height: 30px;
+}
+#result_info .right_menu_button {
+    font-size: unset !important;
 }
 
 /* --- Favorite Name Effects 最愛角色名稱特效 --- */
@@ -2774,10 +3227,10 @@ body.charListGrid {
 
         /* 特殊符號與閃爍特效 */
         &::before {
-        content: "♥︎";
-        color: var(--customThemeColor);
-        margin-right: 5px;
-        animation: pulse 1s infinite;
+            content: "♥︎";
+            color: var(--customThemeColor);
+            margin-right: 5px;
+            animation: pulse 1s infinite;
         }
     }
 }
@@ -2827,7 +3280,7 @@ body.charListGrid {
     width: fit-content;
     cursor: pointer;
     transition: all 0.5s ease;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.25px;
     font-style: italic;
     min-height: 23.5px;
 }
@@ -2908,4 +3361,145 @@ body.charListGrid {
     margin-top: 15px;
     border-top: var(--customlastInContext) !important;
     opacity: 1 !important;
+}
+
+
+
+/* --- Chat Messages Fixed 聊天訊息修正 --- */
+
+/* 訊息邊框修正 */
+body.flatchat,
+body.bubblechat {
+    #chat .mes_block {
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+    }
+}
+body.echostyle {
+    #chat .mes_text {
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+    }
+}
+body.whisperstyle,
+body.hushstyle,
+body.ripplestyle {
+    #chat .mes {
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent);
+    }
+
+}
+body.tidestyle {
+    #chat .mes_text p {
+        border: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 10%, transparent) !important;
+    }
+}
+
+/* 滑動訊息編號 */
+body.swipeAllMessages .mes:not(.last_mes) .swipes-counter {
+    opacity: 0.8 !important;
+    margin-bottom: 20px !important;
+    margin-right: var(--customMesPadding) !important;
+}
+body.echostyle.swipeAllMessages .mes:not(.last_mes) .swipes-counter {
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+}
+
+/* 訊息推理區塊間距 */
+body.echostyle,
+body.whisperstyle,
+body.hushstyle,
+body.tidestyle {
+    .mes_reasoning_summary {
+        margin-top: 15px !important;
+    }
+}
+
+/* 最大上下文標記 */
+.lastInContext {
+    margin-top: 15px;
+
+    .mesAvatarWrapper,
+    .mes_block {
+        margin-top: 10px;
+    }
+}
+
+body.flatchat, body.bubblechat {
+    #chat .mes_block {
+        padding-bottom: 0;
+    }
+    #chat .last_mes .mes_block {
+        padding-bottom: 25px;
+    }
+}
+body.whisperstyle #chat {
+    .mes {
+        padding-bottom: 0;
+    }
+}
+
+/* 行動裝置選單高度更正 */
+@media screen and (max-width: 1000px) {
+    #right-nav-panel,
+    #left-nav-panel,
+    #floatingPrompt,
+    #cfgConfig,
+    #WorldInfo,
+    #logprobsViewer,
+    #movingDivs > div {
+        min-height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        height: calc(100dvh - var(--topBarBlockSize) + 5px) !important;
+        min-width: 100% !important;
+        padding: 15px !important;
+        border: 0;
+    }
+
+    #select_chat_popup {
+        max-height: 100dvh !important;
+        min-height: 100dvh !important;
+        margin: 0;
+    }
+
+    .large_dialogue_popup {
+        border: 0;
+    }
+}
+
+/* 滑動訊息左側按鈕修正 */
+.swipes-counter {
+    margin-right: 10px;
+    margin-bottom: 2px;
+}
+
+#chat {
+    .swipe_left {
+        position: absolute;
+        right: calc(var(--customMesPadding) + 100px) !important;
+        left: auto;
+        bottom: 20px;
+    }
+}
+body.bubblechat #chat .swipe_left {
+    right: calc((var(--customMesPadding) * 2) + 95px) !important;
+    bottom: 10px;
+}
+body.documentstyle #chat .swipe_left {
+    left: unset !important;
+    right: calc(var(--customMesPadding) + 100px) !important;
+}
+body.echostyle #chat .swipe_left {
+    right: calc(var(--customMesPadding) + 85px) !important;
+}
+
+body.whisperstyle #chat .swipe_left {
+    right: calc(var(--customMesPadding) + 105px) !important;
+}
+body.hushstyle #chat .swipe_left {
+    right: calc(var(--customMesPadding) + 105px) !important;
+}
+body.ripplestyle #chat .swipe_left {
+    right: calc(var(--customMesPadding) + 100px) !important;
+}
+body.tidestyle #chat .swipe_left {
+    right: calc(var(--customMesPadding) + 90px) !important;
 }
