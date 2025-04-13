@@ -74,6 +74,11 @@ body:has(#extensionTopBar) {
 
     }
 }
+body.waifuMode:has(#extensionTopBar) {
+    #sheld {
+        padding-top: 0 !important;
+    }
+}
 
 #extensionTopBar {
     /* 定位 */
