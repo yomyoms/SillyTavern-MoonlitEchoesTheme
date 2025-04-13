@@ -598,7 +598,10 @@ body.bubblechat .qvink_memory_display {
 
 /* --- Dialogue Colorizer 自定義對話顏色 --- */
 
-#xdc-char_color_override label {
-    font-weight: 600;
-    letter-spacing: 0.8px;
+#xdc-char_color_override,
+#xdc-persona_color_override {
+    label {
+        font-weight: 600;
+        letter-spacing: 0.8px;
+    }
 }
