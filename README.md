@@ -49,20 +49,19 @@ In the **SillyTavern Extension Manager**, use "Install from URL" and paste the f
 
 ### 2. **Update to `/SillyTavern/config.yaml` for thumbnail settings**
 Previously, I recommended disabling thumbnails, but this can slow down image loading on mobile. Here’s a tested configuration I now recommend:
-   ```
-   thumbnails:
-     thumbnails:
-        enabled: true
-        format: png
-        quality: 100
-        dimensions:
-          bg:
-            - 240
-            - 135
-          avatar:
-            - 864
-            - 1280
-   ```
+```
+thumbnails:
+  enabled: true
+  format: png
+  quality: 100
+  dimensions:
+    bg:
+      - 240
+      - 135
+    avatar:
+      - 864
+      - 1280
+```
 Before applying and restarting SillyTavern, consider deleting the entire thumbnails folder (likely located at `/SillyTavern/data/default-user/thumbnails`) Don’t worry—it will regenerate automatically with better image quality after restart.
 
 ### 3. **Download and Enable the Theme (Highly Recommended!)**
