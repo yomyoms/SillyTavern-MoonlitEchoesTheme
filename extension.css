@@ -186,6 +186,7 @@ body:has(#extensionConnectionProfiles.visible) #extensionTopBar {
     position: relative !important;
     transition: all 0.8s ease;
     margin-left: -2.5px;
+    margin-top: 5px !important;
 
     @media (max-width: 1000px) {
         width: 100% !important;

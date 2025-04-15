@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.5.0";
+const THEME_VERSION = "2.5.1";
 
 import { t } from '../../../i18n.js';
 
@@ -476,6 +476,46 @@ const themeCustomSettings = [
                 text-align: justify;
                 text-justify: inter-ideograph;
                 }
+        `
+    },
+    {
+        "type": "checkbox",
+        "varId": "increaseMobileInputPadding",
+        "displayText": t`Increase Chat Input Field Spacing`,
+        "default": false,
+        "category": "features",
+        "description": t`Add extra bottom padding to chat input fields, especially suitable for tablets and mobile phones (using PWA, etc.)`,
+        "cssBlock": `
+            #form_sheld {
+                margin-bottom: 10px;
+
+                @media only screen and (min-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (pointer: fine) {
+                    margin-bottom: 20px;
+                }
+            }
+            @media screen and (max-width: 1000px) {
+                #send_form {
+                    padding-bottom: 20px;
+                }
+            }
+        `
+    },
+    {
+        "type": "checkbox",
+        "varId": "fixTabletMenuLayout",
+        "displayText": t`Fix Tablet Menu Layout`,
+        "default": false,
+        "category": "features",
+        "description": t`Optimized for tablet users to prevent menu layout issues. Note: Tablet support in SillyTavern is currently limited and may not address all issues`,
+        "cssBlock": `
+            .drawer-content {
+                top: -3px !important;
+            }
+            .fillLeft,
+            .fillRight {
+                width: 100dvw !important;
+                min-width: 100dvw !important;
+            }
         `
     }
 ];
