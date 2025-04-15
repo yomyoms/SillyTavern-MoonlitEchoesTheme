@@ -8,17 +8,15 @@
 
 Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服器公開並更新至今，期間得到許多人的回饋和支持。最終，為了可維護性並方便使用者更新、在其他地方找到它（以及滿足我對更美觀主題的執著），我將其製作為 SillyTavern 擴充功能並於 GitHub 開源。
 
-| UI Interface Preview | Visual Novel Mode |
+| UI Interface | System Messages |
 |----------------------|-------------------|
-| ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ui_overview_preview.jpg)     | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/visual_novel_mode_preview.jpg)    |
+| <img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/ui_overview.png"> | <img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/system_messages.png"> |
 
 ## 功能與特色
 
 ### 核心功能
-- 與 SillyTavern 預設主題兼容，並確保與其他 SillyTavern 擴充功能協作順暢
-- 適配桌機與行動裝置，針對行動設備調整，提供更寬敞的輸入欄位與其他調整，致力為介面美觀強迫症帶來更舒適的使用體驗
-- 新增多種聊天風格，除了 SillyTavern 內建的 「Flat」、「Bubble」、「Document」 之外，還有 「Echo」（回音）、「Whisper」（低語）、「Hush」（靜默），以及全新的隱藏款「Ripple」（漣漪）
-- 提供多項自訂設定，可根據個人喜好自由調整
+- **多種訊息樣式**：除了 SillyTavern 預設的「平面 (Flat)」、「氣泡 (Bubble)」和「文件 (Document)」訊息風格外，還設計了額外的聊天訊息樣式，如「回聲 (Echo)」、「低語 (Whisper)」、「寂靜 (Hush)」、「漣漪 (Ripple)」和「潮汐 (Tide)」——為不同的聊天場景設計，並提供額外的客製化選項。
+- **跨平台友好**：致力於改善桌面端和在行動設備上的使用體驗，如具有更寬的輸入欄位和自適應佈局——非常適合注重細節或想喜歡跨設備使用的使用者。
   
 ### Moonlit Echoes 主題預設設定檔
 使用者現在可以輕鬆分享基於 Moonlit Echoes Theme 的配色與主題，並與 SillyTavern 內建 UI 主題無縫切換。
@@ -27,32 +25,60 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 
 
 ## 螢幕截圖
-截圖來自 **1.0.0 版本**，展示於 MacBook（Chrome），僅供參考。於 iPhone（Safari PWA）展示之更多截圖請見本項目的 [.github 資料夾](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/tree/main/.github)。
+以下截圖來自 **2.5.0** 版本，在使用 Chrome 的 MacBook 上截取，展示了 2.5.0 中新增的 **「微光 (Glimmer)」** 主題。
 
-| **Flat** | **Bubble** | **Document** |
-|:------:|:--------:|:----------:|
-| ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_flat_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_bubble_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_document_preview.jpg) |
-| **Echo** | **Whisper** | **Hush** |
-| ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_echo_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_whisper_preview.jpg) | ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_style_hush_preview.jpg) |
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/1chatstyle_flat.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/2chatstyle_bubble.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/3chatstyle_document.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/4chatstyle_echo.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/5chatstyle_whisper.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/6chatstyle_hush.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/7chatstyle_ripple.png)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/8chatstyle_tide.png)
 
-## 安裝方式
+## 安裝說明
+
 ### 前提條件
 建議使用 **最新版** 的 SillyTavern（無論是 Release 或 Staging 版本）與 Chrome 瀏覽器。
 
 ### 安裝步驟
-1. **安裝 Moonlit Echoes Theme**：在 **SillyTavern 擴充管理器**中，使用「Install from URL」，貼入以下 Git URL：
-   ```
-   https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
-   ```
-2. **關閉縮圖縮放（建議）**：某些訊息風格會將角色頭像顯示於背景中，而 SillyTavern 預設開啟縮圖縮放，可能導致影像模糊。若要關閉此功能，請修改 `config.yaml`（位於 `/SillyTavern/config.yaml`），將 `thumbnails.enabled` 設為 `false`：
-   ```
-   thumbnails:
-     enabled: false
-   ```
-3. **下載並啟用主題（可選）**：Moonlit Echoes Theme 安裝後即可使用。若要使用 預覽圖中的樣式，請下載 `Moonlit Echoes - by Rivelle.json`，並匯入 User Settings 的 UI Theme。請勿更改檔名，否則可能導致擴充無法正常運作。
+
+#### 1. 安裝 Moonlit Echoes Theme
+在 **SillyTavern 擴充管理器**中，點選「安裝擴充功能（Install from URL）」，貼入以下 Git URL：
+```
+https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
+```
+
+#### 2. 更新 `/SillyTavern/config.yaml` 的縮圖設定
+雖然先前建議直接禁用縮圖功能，但這可能會影響行動設備的圖片載入速度。以下是目前推薦並經過測試的設定：
+```
+thumbnails:
+ thumbnails:
+    enabled: true
+    format: png
+    quality: 100
+    dimensions:
+      bg:
+        - 240
+        - 135
+      avatar:
+        - 864
+        - 1280
+```
+建議在應用設定前刪除整個縮圖資料夾（通常位於 `/SillyTavern/data/default-user/thumbnails`）。別擔心——SillyTavern 會在重新啟動後自動產生新的縮圖。
+
+#### 3. 下載並啟用主題（強烈建議！）
+安裝後即可使用月下回聲主題擴充。不過，若想完全重現預覽圖中的畫面，建議下載 **「Glimmer（微光）」** 主題設定檔並匯入 SillyTavern 使用者設定中。
+特別推薦 2.5.0 版本中新增的 **「微光（Glimmer）」** 主題。這個主題是專為本次發布設計的——極簡、通用，非常適合在晚上用手機躲在被窩裡使用。
+
+你可以在 GitHub 主題（theme）文件夾中找到它，或直接透過連結下載：
+- [Glimmer - by Rivelle.json](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/theme/Glimmer%20-%20by%20Rivelle.json) → 用於 SillyTavern 使用者設定（User Settings）
+- [[Moonlit] Glimmer - by Rivelle.json](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/theme/%5BMoonlit%5D%20Glimmer%20-%20by%20Rivelle.json) → 用於月下回聲主題預設（Moonlit Echoes Theme Presets）
+
+無需進行任何調整或修改檔名——匯入後即可使用！
 
 ### 給 Termux 使用者 📱
-如果你透過 Termux 使用 SillyTavern，以下是修改 `config.yaml` 的方法。
+若你透過 Termux 使用 SillyTavern，以下是修改 `config.yaml` 的方法。
 
 > [!Warning]
 > 我對 Android 設備或 Termux 沒有經驗，因此無法解答相關問題、測試步驟或保證結果。以下方法由其他使用者提供。
@@ -68,20 +94,44 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 2. 新增後，你應該會看到類似 `/SillyTavern` 和 `/data/user/0/com.winlator` 等結構
 3. 打開 SillyTavern 資料夾，直接編輯 `config.yaml`
 
-## 使用指南
-Moonlit Echoes 主題預設與 SillyTavern 的 UI 主題「部分同步」。若選單中有對應的選項，切換任一方都會同步設定。
-然而，Moonlit Echoes 主題預設本質上與 SillyTavern 的 UI 主題是獨立的。Moonlit Echoes 主題「不會」創建或修改任何 SillyTavern 的 UI 主題。
+# 使用指南
+
+## 如何使用月下回聲主題預設？
+月下回聲主題預設與 SillyTavern 的 UI 主題部分同步。若有對應名稱，切換其中一個會自動同步設定。不過，，兩者本質上是獨立存在的。月下回聲主題不會創建或修改任何 SillyTavern UI 主題。
 
 ### 匯入與匯出
 - Moonlit Echoes 主題預設設定檔的文件名稱格式為 `[Moonlit] 預設名稱.json`（如：`[Moonlit] Honey Cream.json`）。`[Moonlit]` 之後有一個半形空格
-- 這不會影響功能，您 **「不需要」** 在匯入前移除 `[Moonlit] `前綴，只需直接匯入文件即可
+- 這不會影響功能，你 **「不需要」** 在匯入前移除 `[Moonlit] `前綴，只需直接匯入文件即可
 - 若匯入的預設未與 SillyTavern 的 UI 主題同步，請重新載入頁面或選擇其他主題來套用變更
 
-## 回饋與建議
+## 常見問題
+
+### Ｑ：介面損壞、跑版或與不兼容其他擴充？
+**Ａ：** 是的，儘管我盡了最大努力，但我無法保證與每個第三方 SillyTavern 擴充完全兼容。如果你遇到任何問題，請依序嘗試以下排除方式：
+
+1. 確保你使用的是最新版本的 SillyTavern 和最新版本的 Chrome。
+2. 暫時禁用此主題擴充，檢查是否是它造成的問題。如果是——或者你使用的第三方擴充尚未得到支持——隨時歡迎回報！
+
+月下回聲是第三方主題擴充，與官方 SillyTavern 項目無關。它是源於對 SillyTavern 的熱愛和對視覺設計的強烈偏好的個人項目。如果你遇到任何問題，請先聯繫我——我會盡力提供協助！
+
+### Ｑ：在預覽圖片中使用了哪些其他擴充？
+**Ａ：** 以下是我強烈推薦並確認與月下回聲完全兼容的擴充：
+- **[SillyTavern / Extension-TopInfoBar](https://github.com/SillyTavern/Extension-TopInfoBar)**：官方擴充。讓你快速切換聊天、跳轉文件和搜索訊息。我的絕對最愛——強烈推薦！
+- **[SillyTavern / Extension-QuickPersona](https://github.com/SillyTavern/Extension-QuickPersona)**：官方擴充。從聊天輸入區域輕鬆切換角色，帶有時尚的視覺提示。
+- **[SillyTavern / Extension-TypingIndicator](https://github.com/SillyTavern/Extension-TypingIndicator)**：官方擴充。在角色回應時顯示可愛的 `{{char}} 正在輸入...` 指示器。
+- **[zerofata / SillyTavern-Dialogue-Colorizer-Plus](https://github.com/zerofata/SillyTavern-Dialogue-Colorizer-Plus)**：原始 [SillyTavern-Dialogue-Colorizer](https://github.com/XanadusWorks/SillyTavern-Dialogue-Colorizer) 的分支，改進了自定義角色對話顏色的變數支持。
+- **[qvink / SillyTavern-MessageSummarize](https://github.com/qvink/SillyTavern-MessageSummarize)**：進階版的聊天摘要功能，可為 LLM 模擬長期和短期記憶——非常強大且有用！
+- **[LenAnderson / SillyTavern-MoreFlexibleContinues](https://github.com/LenAnderson/SillyTavern-MoreFlexibleContinues/)**：為繼續生成文本添加更多靈活性，並可快速進行切換。
+- **[splitclover / rewrite-extension](https://github.com/splitclover/rewrite-extension)**：允許快速部分重寫和刪除訊息內容。
+
+### Ｑ：使用月下回聲切換主題時出現延遲和卡頓？
+**Ａ：** 是的，這是行動裝置上的已知問題，而我暫時束手無策。切換時，畫面可能會短暫凍結數秒，請耐心等待載入完成。此問題在桌面端幾乎不會出現。
+
+# 回饋與建議
 若有任何問題或功能建議，請在 Issues 頁面提交回饋，並使用提供的模板填寫詳細資訊。
 歡迎在 Discussions 區分享配色方案！無論是 SillyTavern UI 主題還是 Moonlit Echoes 主題預設，我都很期待看到美麗的配色。
 
-## 特別感謝
+# 特別感謝
 由衷感謝所有人一路上的幫助與喜愛。
 
 - 感謝 ceruleandeep 在 SillyTavern Discord 群組的初期支援——這一切都是從你開始的。
@@ -91,5 +141,5 @@ Moonlit Echoes 主題預設與 SillyTavern 的 UI 主題「部分同步」。若
 
 最後，特別、特別感謝 Wolfsblvt 和 Cohee，為 SillyTavern 增加了 讓第三方擴充能夠使用 SillyTavern i18n（國際化系統） 的功能。這極大地改善了非英語使用者的體驗，真的非常感謝！
 
-## 授權協議
+# 授權協議
 AGPLv3
