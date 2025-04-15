@@ -2,7 +2,7 @@
 
 [English](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/)｜**繁體中文**
 
-![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/chat_screen_demo_preview.jpg)
+![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/visual_novel_mode.png)
 
 **「Moonlit Echoes 月下回聲」** 是一款供 SillyTavern 使用的介面主題。依據我的個人喜好進行調整和修改，旨在讓其更加現代、優雅、簡潔，並盡可能提供桌面與行動端的更舒服的使用體驗。
 
@@ -21,8 +21,7 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 ### Moonlit Echoes 主題預設設定檔
 使用者現在可以輕鬆分享基於 Moonlit Echoes Theme 的配色與主題，並與 SillyTavern 內建 UI 主題無縫切換。
 
-<img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/Moonlit%20Echoes%20Theme%20Presets.png" width="500">  
-
+<img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/moonlit_theme_presets.png" width="500">
 
 ## 螢幕截圖
 以下截圖來自 **2.5.0** 版本，在使用 Chrome 的 MacBook 上截取，展示了 2.5.0 中新增的 **「微光 (Glimmer)」** 主題。
