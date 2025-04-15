@@ -90,16 +90,15 @@ thumbnails:
 2. 接著輸入並執行：`nano config.yaml` 以編輯檔案
 ### 方法 2：使用 Material Files（Android 檔案管理器）
 1. 開啟 Material Files > 新增儲存空間 > 前往 Termux > SillyTavern
-2. 新增後，你應該會看到類似 `/SillyTavern` 和 `/data/user/0/com.winlator` 等結構
-3. 打開 SillyTavern 資料夾，直接編輯 `config.yaml`
+2. 打開 SillyTavern 資料夾，直接編輯 `config.yaml`
 
 # 使用指南
 
 ## 如何使用月下回聲主題預設？
-月下回聲主題預設與 SillyTavern 的 UI 主題部分同步。若有對應名稱，切換其中一個會自動同步設定。不過，，兩者本質上是獨立存在的。月下回聲主題不會創建或修改任何 SillyTavern UI 主題。
+月下回聲主題預設與 SillyTavern 的 UI 主題部分同步。若有對應名稱，切換其中一個會自動同步設定。不過，兩者本質上是獨立存在的。月下回聲主題不會創建或修改任何 SillyTavern UI 主題。
 
 ### 匯入與匯出
-- Moonlit Echoes 主題預設設定檔的文件名稱格式為 `[Moonlit] 預設名稱.json`（如：`[Moonlit] Honey Cream.json`）。`[Moonlit]` 之後有一個半形空格
+- Moonlit Echoes 主題預設設定檔的檔案名稱格式為 `[Moonlit] 預設名稱.json`（如：`[Moonlit] Honey Cream.json`）。`[Moonlit]` 之後有一個半形空格
 - 這不會影響功能，你 **「不需要」** 在匯入前移除 `[Moonlit] `前綴，只需直接匯入文件即可
 - 若匯入的預設未與 SillyTavern 的 UI 主題同步，請重新載入頁面或選擇其他主題來套用變更
 
