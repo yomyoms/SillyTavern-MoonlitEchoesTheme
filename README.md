@@ -24,7 +24,7 @@ Users can now easily share color schemes and themes based on Moonlit Echoes Them
 <img src="https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/moonlit_theme_presets.png" width="500">
 
 ## Screenshots
-The following screenshots are from **version 2.5.0**, taken on a MacBook using Chrome, showcasing the newly added "Glimmer（微光）" theme introduced in 2.5.0.
+The following screenshots are from **version 2.5.0**, taken on a MacBook using Chrome, showcasing the newly added "Glimmer (微光)" theme introduced in 2.5.0.
 
 ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/1chatstyle_flat.png)
 ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/2chatstyle_bubble.png)
@@ -69,7 +69,7 @@ Before applying and restarting SillyTavern, consider deleting the entire thumbna
 
 The Moonlit Echoes theme extension is ready to use after installation. However, if you’d like your interface to match the style shown in the preview images, please download the theme file and import it into your User Settings, then set it as your UI theme.
 
-The newly added **"Glimmer（微光）"** theme in version 2.5.0 is especially recommended. This theme was specially designed for this release—minimalist, versatile, and perfect for using your phone under the covers at night.
+The newly added **"Glimmer (微光)"** theme in version 2.5.0 is especially recommended. This theme was specially designed for this release—minimalist, versatile, and perfect for using your phone under the covers at night.
 You can find it in the GitHub theme folder or download it directly below:
 
 - [Glimmer - by Rivelle.json](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/theme/Glimmer%20-%20by%20Rivelle.json) → for SillyTavern User Settings
