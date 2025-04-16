@@ -16,7 +16,7 @@ Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服�
 
 ### 核心功能
 - **多種訊息樣式**：除了 SillyTavern 預設的「平面 (Flat)」、「氣泡 (Bubble)」和「文件 (Document)」訊息風格外，還設計了額外的聊天訊息樣式，如「回聲 (Echo)」、「低語 (Whisper)」、「寂靜 (Hush)」、「漣漪 (Ripple)」和「潮汐 (Tide)」——為不同的聊天場景設計，並提供額外的客製化選項。
-- **跨平台友好**：致力於改善桌面端和在行動設備上的使用體驗，如具有更寬的輸入欄位和自適應佈局——非常適合注重細節或想喜歡跨設備使用的使用者。
+- **跨平台友好**：致力於改善桌面端和在行動裝置上的使用體驗，如具有更寬的輸入欄位和自適應佈局——非常適合注重細節或想喜歡跨設備使用的使用者。
   
 ### Moonlit Echoes 主題預設設定檔
 使用者現在可以輕鬆分享基於 Moonlit Echoes Theme 的配色與主題，並與 SillyTavern 內建 UI 主題無縫切換。
@@ -49,7 +49,7 @@ https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme
 ```
 
 #### 2. 更新 `/SillyTavern/config.yaml` 的縮圖設定
-雖然先前建議直接禁用縮圖功能，但這可能會影響行動設備的圖片載入速度。以下是目前推薦並經過測試的設定：
+雖然先前建議直接禁用縮圖功能，但這可能會影響行動裝置的圖片載入速度。以下是目前推薦並經過測試的設定：
 ```
 thumbnails:
  thumbnails:
