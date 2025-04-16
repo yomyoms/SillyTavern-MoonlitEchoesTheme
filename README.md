@@ -16,7 +16,7 @@ Moonlit Echoes was first released on the SillyTavern Discord server on November 
 
 ### Core Features
 - **Multiple Message Styles**: In addition to SillyTavern’s default "Flat," "Bubble," and "Document" layouts, this theme introduces unique styles like "Echo," "Whisper," "Hush," "Ripple," and "Tide," designed for different chat scenarios with extra customization options available.
-- **Cross-Platform Friendly**: Optimized for both desktop and mobile, with wider input fields and adaptive layouts—ideal for detail-oriented users and those on mobile devices
+- **Cross-Platform Friendly**: Optimized for both desktop and mobile, with wider input fields and adaptive layouts—ideal for detail-oriented users and those on mobile devices.
 
 ### Moonlit Echoes Theme Presets
 Users can now easily share color schemes and themes based on Moonlit Echoes Theme. These presets can sync with SillyTavern’s built-in UI themes for a seamless transition.
