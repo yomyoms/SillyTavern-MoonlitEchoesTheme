@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.5.2";
+const THEME_VERSION = "2.5.3";
 
 import { t } from '../../../i18n.js';
 
@@ -381,6 +381,30 @@ const themeCustomSettings = [
                 }
             }
     `
+    },
+    {
+        "type": "checkbox",
+        "varId": "enableMobile-hidden_scrollbar",
+        "displayText": t`Enable Mobile Hidden Scrollbar`,
+        "default": true,
+        "category": "features",
+        "description": t`Hides scrollbars for a clean mobile interface`,
+        "cssBlock":  `
+            /* Mobile Hidden Scrollbar 移動端隱藏捲軸 */
+            @media screen and (max-width: 1000px) {
+                * {
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    &::-webkit-scrollbar {
+                        display: none !important;
+                    }
+                }
+
+                .scrollableInner {
+                    padding: 0 !important;
+                }
+            }
+        `
     },
     {
         "type": "checkbox",

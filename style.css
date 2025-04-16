@@ -166,6 +166,8 @@ h3 {
     letter-spacing: 1px;
     border: 0;
     border-left: 3.5px solid var(--customThemeColor);
+}
+.drawer-content h3 {
     white-space: nowrap;
 }
 h4 {
@@ -598,7 +600,7 @@ input[type="range"]::-webkit-slider-thumb {
     /* Scrollbar Thumb 捲軸拇指 */
     &-thumb {
         background-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
-        border-radius: 5px;
+        border-radius: 5px !important;
         transition: background-color 0.5s ease, opacity 0.5s ease;
 
     &:hover {
@@ -620,20 +622,48 @@ input[type="range"]::-webkit-slider-thumb {
     }
 }
 
+/* General Scrollbar 通用捲軸 */
+::-webkit-scrollbar {
+    width: 5px;
+    max-width: 5px;
+    height: 10px;
 
-/* Mobile Hidden Scrollbar 移動端隱藏捲軸 */
-@media screen and (max-width: 1000px) {
-    * {
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+    /* Scrollbar Track 捲軸軌道 */
+    &-track {
+        background: transparent;
+    }
+    /* Scrollbar Thumb 捲軸拇指 */
+    &-thumb {
+        background-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
+        border-radius: 5px !important;
+        transition: background-color 0.5s ease, opacity 0.5s ease;
 
-        &::-webkit-scrollbar {
-        display: none;
+    &:hover {
+        background-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
+    }
+    &:active {
+        background-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
         }
     }
+}
+@media screen and (max-width: 1000px) {
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
+    }
 
-    .scrollableInner {
-        padding: 0 !important;
+    * {
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5));
+    }
+}
+
+/* Firefox Scrollbar Firefox 捲軸樣式 */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
+
+    &::-webkit-scrollbar {
+        scrollbar-color: var(--customScrollbarColor, rgba(255, 255, 255, 0.5)) transparent;
     }
 }
 
@@ -2743,8 +2773,8 @@ body.waifuMode {
         transition: all 0.5s ease;
 
         &:hover {
-        background-color: transparent;
-        color: var(--customThemeColor);
+            background-color: transparent;
+            color: var(--customThemeColor);
         }
     }
 }
@@ -2753,7 +2783,6 @@ body.waifuMode {
     .select2-selection--single {
         .select2-selection__choice {
             background-color: var(--SmartThemeBlurTintColor);
-            padding: 8px;
             margin: 5px 0;
         }
     }

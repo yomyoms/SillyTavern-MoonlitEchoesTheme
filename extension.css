@@ -194,6 +194,7 @@ body:has(#extensionConnectionProfiles.visible) #extensionTopBar {
         border: none !important;
         border-bottom: 1px solid color-mix(in srgb, var(--SmartThemeBodyColor) 25%, transparent) !important;
         margin-left: 0;
+        margin-top: 0 !important;
         opacity: 0.65;
     }
 }

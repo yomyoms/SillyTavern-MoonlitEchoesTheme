@@ -103,5 +103,7 @@
     "Increase Chat Input Field Spacing": "增加聊天輸入欄位間距",
     "Add extra bottom padding to chat input fields, especially suitable for tablets and mobile phones (using PWA, etc.)": "為聊天輸入欄位添加額外的底部填充，特別適用於平板和手機（尤其使用 PWA 等）",
     "Fix Tablet Menu Layout": "修復平板選單佈局",
-    "Optimized for tablet users to prevent menu layout issues. Note: Tablet support in SillyTavern is currently limited and may not address all issues": "修復平板橫放時，主要選單出現的問題。請注意：目前 SillyTavern 對平板電腦的支援有限，可能無法解決所有問題"
+    "Optimized for tablet users to prevent menu layout issues. Note: Tablet support in SillyTavern is currently limited and may not address all issues": "修復平板橫放時，主要選單出現的問題。請注意：目前 SillyTavern 對平板電腦的支援有限，可能無法解決所有問題",
+    "Enable Mobile Hidden Scrollbar": "在行動裝置上隱藏捲軸",
+    "Hides scrollbars for a clean mobile interface": "在行動裝置的螢幕上隱藏捲軸，提供更簡潔流暢的介面。"
 }
