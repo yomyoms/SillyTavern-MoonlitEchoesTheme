@@ -4,7 +4,7 @@
 
 ![](https://github.com/RivelleDays/SillyTavern-MoonlitEchoesTheme/blob/main/.github/ImagePreview/visual_novel_mode.png)
 
-**「Moonlit Echoes 月下回聲」** 是一款供 SillyTavern 使用的介面主題。依據我的個人喜好進行調整和修改，旨在讓其更加現代、優雅、簡潔，並盡可能提供桌面與行動端的更舒服的使用體驗。
+**「Moonlit Echoes 月下回聲」** 是一款供 SillyTavern 使用的介面主題。依據我的個人喜好進行調整和修改，旨在讓其更加現代、優雅、簡潔，並盡可能提供桌面與行動端更舒服的使用體驗。
 
 Moonlit Echoes 最初於 2024 年 11 月 25 日在 SillyTavern Disocord 伺服器公開並更新至今，期間得到許多人的回饋和支持。最終，為了可維護性並方便使用者更新、在其他地方找到它（以及滿足我對更美觀主題的執著），我將其製作為 SillyTavern 擴充功能並於 GitHub 開源。
 
@@ -114,7 +114,7 @@ thumbnails:
 
 ### Ｑ：在預覽圖片中使用了哪些其他擴充？
 **Ａ：** 以下是我強烈推薦並確認與月下回聲完全兼容的擴充：
-- **[SillyTavern / Extension-TopInfoBar](https://github.com/SillyTavern/Extension-TopInfoBar)**：官方擴充。讓你快速切換聊天、跳轉文件和搜索訊息。我的絕對最愛——強烈推薦！
+- **[SillyTavern / Extension-TopInfoBar](https://github.com/SillyTavern/Extension-TopInfoBar)**：官方擴充。支援快速切換聊天、搜尋訊息關鍵字、顯示目前的連線設定⋯我的最愛——強烈推薦！
 - **[SillyTavern / Extension-QuickPersona](https://github.com/SillyTavern/Extension-QuickPersona)**：官方擴充。從聊天輸入區域輕鬆切換角色，帶有時尚的視覺提示。
 - **[SillyTavern / Extension-TypingIndicator](https://github.com/SillyTavern/Extension-TypingIndicator)**：官方擴充。在角色回應時顯示可愛的 `{{char}} 正在輸入...` 指示器。
 - **[zerofata / SillyTavern-Dialogue-Colorizer-Plus](https://github.com/zerofata/SillyTavern-Dialogue-Colorizer-Plus)**：原始 [SillyTavern-Dialogue-Colorizer](https://github.com/XanadusWorks/SillyTavern-Dialogue-Colorizer) 的分支，改進了自定義角色對話顏色的變數支持。
