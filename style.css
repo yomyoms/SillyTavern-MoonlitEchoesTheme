@@ -12,6 +12,11 @@
 body {
     --interactable-outline-color: transparent;
     --interactable-outline-color-faint: transparent;
+    
+    /* Apply typography settings */
+    font-family: var(--primaryFontFamily, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+    font-size: var(--baseFontSize, 14px);
+    line-height: var(--lineHeight, 1.5);
 }
 
 
@@ -43,6 +48,13 @@ body {
     --topBarBlockSize: calc(var(--topBarIconSize) + var(--topBarBlockPadding) - 1px);
     --bottomInputAreaHeight: 115px;
     --custom-echo-avatar: calc(var(--custom-ChatAvatar, 40px) + 12px);
+    
+    /* Animation settings */
+    --transition-speed: var(--animationSpeed, 0.3s);
+    --transition-function: ease;
+    
+    /* Apply background overlay if set */
+    --bg-overlay: var(--backgroundOverlayEffect, none);
 }
 @media screen and (max-width: 1000px) {
     :root {
@@ -108,6 +120,19 @@ input[type='checkbox'] {
     filter: blur(calc(var(--customCSS-bg-blur) * 1px)) !important;
 }
 
+/* Background Overlay Effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: var(--bg-overlay);
+    pointer-events: none;
+}
+
 /* Hyperlinks 超連結 */
 a {
     color: var(--customThemeColor);
@@ -135,6 +160,147 @@ hr {
     min-height: 1px;
     border: 0;
     opacity: 0.3;
+}
+
+/* --- Apply border settings --- */
+button, input, select, textarea, .select2-container .select2-selection, .mes_block {
+    border-radius: var(--borderRadius, 8px);
+    border-style: var(--borderStyle, solid);
+    border-width: var(--borderWidth, 1px);
+}
+
+.mes_block {
+    border-radius: var(--messageBorderRadius, 12px) !important;
+    padding: calc(var(--messagePadding, 15px) * 1px);
+}
+
+/* Message spacing */
+#chat .mes {
+    margin-bottom: calc(var(--messageSpacing, 10px) * 1px);
+}
+
+/* Message text color */
+.mes_text {
+    color: var(--messageTextColor, rgba(255, 255, 255, 0.9));
+}
+
+/* Set background colors for messages */
+#chat .mes[is_user="true"] .mes_block {
+    background-color: var(--messageUserBgColor, rgba(35, 35, 40, 0.7));
+}
+
+#chat .mes[is_user="false"] .mes_block {
+    background-color: var(--messageAIBgColor, rgba(30, 30, 35, 0.7));
+}
+
+/* Apply hover effects to buttons */
+.menu_button, .custom-drawer-icon, .inline-drawer-icon, .right_menu_button {
+    transition: all var(--transition-speed) var(--transition-function);
+}
+
+.menu_button:hover, .custom-drawer-icon:hover, .inline-drawer-icon:hover, .right_menu_button:hover {
+    background-color: var(--buttonHoverColor, rgba(255, 255, 255, 0.1));
+}
+
+/* Button hover effects */
+.menu_button, .right_menu_button, .custom-drawer-icon, .inline-drawer-icon {
+    transition: all var(--transition-speed) var(--transition-function);
+}
+
+/* Scale effect */
+.buttonHoverEffect-scale .menu_button:hover,
+.buttonHoverEffect-scale .right_menu_button:hover,
+.buttonHoverEffect-scale .custom-drawer-icon:hover,
+.buttonHoverEffect-scale .inline-drawer-icon:hover,
+html[data-buttonHoverEffect="scale"] .menu_button:hover,
+html[data-buttonHoverEffect="scale"] .right_menu_button:hover,
+html[data-buttonHoverEffect="scale"] .custom-drawer-icon:hover,
+html[data-buttonHoverEffect="scale"] .inline-drawer-icon:hover {
+    transform: scale(1.05);
+}
+
+/* Glow effect */
+.buttonHoverEffect-glow .menu_button:hover,
+.buttonHoverEffect-glow .right_menu_button:hover,
+.buttonHoverEffect-glow .custom-drawer-icon:hover,
+.buttonHoverEffect-glow .inline-drawer-icon:hover,
+html[data-buttonHoverEffect="glow"] .menu_button:hover,
+html[data-buttonHoverEffect="glow"] .right_menu_button:hover,
+html[data-buttonHoverEffect="glow"] .custom-drawer-icon:hover,
+html[data-buttonHoverEffect="glow"] .inline-drawer-icon:hover {
+    box-shadow: 0 0 10px var(--customThemeColor);
+}
+
+/* Shadow effect */
+.buttonHoverEffect-shadow .menu_button:hover,
+.buttonHoverEffect-shadow .right_menu_button:hover,
+.buttonHoverEffect-shadow .custom-drawer-icon:hover,
+.buttonHoverEffect-shadow .inline-drawer-icon:hover,
+html[data-buttonHoverEffect="shadow"] .menu_button:hover,
+html[data-buttonHoverEffect="shadow"] .right_menu_button:hover,
+html[data-buttonHoverEffect="shadow"] .custom-drawer-icon:hover,
+html[data-buttonHoverEffect="shadow"] .inline-drawer-icon:hover {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Underline effect */
+.buttonHoverEffect-underline .menu_button:hover,
+.buttonHoverEffect-underline .right_menu_button:hover,
+.buttonHoverEffect-underline .custom-drawer-icon:hover,
+.buttonHoverEffect-underline .inline-drawer-icon:hover,
+html[data-buttonHoverEffect="underline"] .menu_button:hover,
+html[data-buttonHoverEffect="underline"] .right_menu_button:hover,
+html[data-buttonHoverEffect="underline"] .custom-drawer-icon:hover,
+html[data-buttonHoverEffect="underline"] .inline-drawer-icon:hover {
+    border-bottom: 2px solid var(--customThemeColor);
+}
+
+/* Message transitions */
+html[data-messageTransition="none"] #chat .mes {
+    animation: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+html[data-messageTransition="fadeIn"] #chat .mes {
+    animation: fadeIn var(--transition-speed) var(--transition-function);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+html[data-messageTransition="slideIn"] #chat .mes {
+    animation: slideIn var(--transition-speed) var(--transition-function);
+}
+
+@keyframes bounce {
+    0% { transform: translateY(20px); opacity: 0; }
+    70% { transform: translateY(-5px); }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+html[data-messageTransition="bounce"] #chat .mes {
+    animation: bounce calc(var(--transition-speed) * 1.2) var(--transition-function);
+}
+
+@keyframes scale {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+html[data-messageTransition="scale"] #chat .mes {
+    animation: scale var(--transition-speed) var(--transition-function);
+}
+
+/* Disable animations if set */
+html[data-enableAnimations="false"] * {
+    transition: none !important;
+    animation: none !important;
 }
 
 /* --- Headings 標題樣式 --- */

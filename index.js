@@ -10,7 +10,7 @@ const EXTENSION_NAME = 'Moonlit Echoes Theme 月下回聲';
 const settingsKey = 'SillyTavernMoonlitEchoesTheme';
 const extensionName = "SillyTavern-MoonlitEchoesTheme";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
-const THEME_VERSION = "2.5.3";
+const THEME_VERSION = "2.5.4";
 
 import { t } from '../../../i18n.js';
 
@@ -60,6 +60,14 @@ const themeCustomSettings = [
     },
     {
         "type": "color",
+        "varId": "customThemeColor3",
+        "displayText": t`Tertiary Theme Color`,
+        "default": "rgba(190, 120, 220, 1)",
+        "category": "colors",
+        "description": t`A third theme color for additional accents and highlights`
+    },
+    {
+        "type": "color",
         "varId": "customBgColor1",
         "displayText": t`Main Background Color`,
         "default": "rgba(255, 255, 255, 0.1)",
@@ -106,6 +114,38 @@ const themeCustomSettings = [
         "category": "colors",
         "description": t`The scrollbar color on SillyTavern`
     },
+    {
+        "type": "color",
+        "varId": "buttonHoverColor",
+        "displayText": t`Button Hover Color`,
+        "default": "rgba(255, 255, 255, 0.1)",
+        "category": "colors",
+        "description": t`The color of buttons when hovered`
+    },
+    {
+        "type": "color",
+        "varId": "messageTextColor",
+        "displayText": t`Message Text Color`,
+        "default": "rgba(255, 255, 255, 0.9)",
+        "category": "colors",
+        "description": t`The color of text in chat messages`
+    },
+    {
+        "type": "color",
+        "varId": "messageUserBgColor",
+        "displayText": t`User Message Background`,
+        "default": "rgba(35, 35, 40, 0.7)",
+        "category": "colors",
+        "description": t`Background color for user messages`
+    },
+    {
+        "type": "color",
+        "varId": "messageAIBgColor",
+        "displayText": t`AI Message Background`,
+        "default": "rgba(30, 30, 35, 0.7)",
+        "category": "colors",
+        "description": t`Background color for AI messages`
+    },
 
     // 背景和模糊設定 (Background and blur settings)
     {
@@ -140,6 +180,32 @@ const themeCustomSettings = [
         "step": 0.05,
         "category": "background",
         "description": t`Adjusts the opacity level of the background image`
+    },
+    {
+        "type": "select",
+        "varId": "backgroundOverlayEffect",
+        "displayText": t`Background Overlay Effect`,
+        "default": "none",
+        "options": [
+            {
+                "label": t`None`,
+                "value": "none"
+            },
+            {
+                "label": t`Gradient Overlay`,
+                "value": "linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+            },
+            {
+                "label": t`Radial Dark`,
+                "value": "radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%)"
+            },
+            {
+                "label": t`Radial Light`,
+                "value": "radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%)"
+            }
+        ],
+        "category": "background",
+        "description": t`Adds an overlay effect to the background for better readability`
     },
 
     // 聊天介面設定 (Chat interface settings)
@@ -198,349 +264,244 @@ const themeCustomSettings = [
         "varId": "customWhisperAvatarWidth",
         "displayText": t`[Whisper] Message Background Avatar Width`,
         "default": "50%",
-        "category": "chat",
-        "description": t`Width of character avatars in the message background for the Whisper style`
-    },
-    {
-        "type": "select",
-        "varId": "customWhisperAvatarAlign",
-        "displayText": t`[Whisper] Avatar Alignment`,
-        "default": "center",
-        "options": [
-            {
-                "label": t`Top Aligned`,
-                "value": "top"
-            },
-            {
-                "label": t`Center Aligned`,
-                "value": "center"
-            },
-            {
-                "label": t`Bottom Aligned`,
-                "value": "bottom"
-            }
-        ],
-        "category": "chat",
-        "description": t`Vertical alignment of character avatars in the message background for the Whisper style`
-    },
-    {
-        "type": "text",
-        "varId": "customRippleAvatarWidth",
-        "displayText": t`[Ripple] Message Avatar Width`,
-        "default": "180px",
-        "category": "chat",
-        "description": t`Width of character avatars in the message for the Ripple style`
-    },
-    {
-        "type": "text",
-        "varId": "customRippleAvatarMobileWidth",
-        "displayText": t`[Ripple] Mobile Message Avatar Width`,
-        "default": "100px",
-        "category": "chat",
-        "description": t`Width of character avatars in the message for the mobile Ripple style`
-    },
-    {
-        "type": "text",
-        "varId": "messageDetailsAnimationDuration",
-        "displayText": t`[Advanced] Message Details Animation Duration`,
-        "default": "0.8s",
-        "category": "chat",
-        "description": t`Controls the animation speed for message details appearing/disappearing (e.g. 0.5s, 1.2s)`
+        "category": "chat"
     },
 
-    // 視覺小說模式設定 (Visual novel mode settings)
+    // New Section: Typography Settings
     {
         "type": "select",
-        "varId": "VN-sheld-height",
-        "displayText": t`Visual Novel Mode Chat Field Height`,
-        "default": "40dvh",
+        "varId": "primaryFontFamily",
+        "displayText": t`Primary Font Family`,
+        "default": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
         "options": [
             {
-                "label": "40dvh",
-                "value": "40dvh"
+                "label": t`System Default`,
+                "value": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
             },
             {
-                "label": "50dvh",
-                "value": "50dvh"
+                "label": t`Sans-serif Elegant`,
+                "value": "'Open Sans', 'Helvetica Neue', Arial, sans-serif"
             },
             {
-                "label": "60dvh",
-                "value": "60dvh"
+                "label": t`Serif Classic`,
+                "value": "'Georgia', 'Times New Roman', serif"
+            },
+            {
+                "label": t`Monospace`,
+                "value": "'Courier New', monospace"
+            },
+            {
+                "label": t`Playful`,
+                "value": "'Comic Sans MS', cursive, sans-serif"
             }
         ],
-        "category": "visualNovel",
-        "description": t`Maximum height of the chat field (#sheld) in Visual Novel mode`
+        "category": "typography",
+        "description": t`The primary font family used throughout the interface`
+    },
+    {
+        "type": "slider",
+        "varId": "baseFontSize",
+        "displayText": t`Base Font Size`,
+        "default": "14",
+        "min": 10,
+        "max": 20,
+        "step": 1,
+        "category": "typography",
+        "description": t`Base font size in pixels, other elements will scale proportionally`
+    },
+    {
+        "type": "slider",
+        "varId": "lineHeight",
+        "displayText": t`Line Height`,
+        "default": "1.5",
+        "min": 1,
+        "max": 2,
+        "step": 0.1,
+        "category": "typography",
+        "description": t`Line height multiplier for better readability`
+    },
+    {
+        "type": "slider",
+        "varId": "messagePadding",
+        "displayText": t`Message Padding`,
+        "default": "15",
+        "min": 5,
+        "max": 30,
+        "step": 1,
+        "category": "chat",
+        "description": t`Padding inside message bubbles in pixels`
+    },
+    {
+        "type": "slider",
+        "varId": "messageSpacing",
+        "displayText": t`Message Spacing`,
+        "default": "10",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "category": "chat",
+        "description": t`Vertical space between messages in pixels`
+    },
+
+    // New Section: Animation Settings
+    {
+        "type": "checkbox",
+        "varId": "enableAnimations",
+        "displayText": t`Enable Animations`,
+        "default": true,
+        "category": "animations",
+        "description": t`Enable or disable all animations throughout the interface`
     },
     {
         "type": "select",
-        "varId": "VN-expression-holder",
-        "displayText": t`Visual Novel Mode Character Portrait Gradient Transparency`,
-        "default": "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)",
+        "varId": "animationSpeed",
+        "displayText": t`Animation Speed`,
+        "default": "0.3s",
         "options": [
             {
-                "label": t`Enabled`,
-                "value": "linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%)"
+                "label": t`Fast`,
+                "value": "0.2s"
             },
             {
-                "label": t`Disabled`,
+                "label": t`Medium`,
+                "value": "0.3s"
+            },
+            {
+                "label": t`Slow`,
+                "value": "0.5s"
+            },
+            {
+                "label": t`Very Slow`,
+                "value": "0.8s"
+            }
+        ],
+        "category": "animations",
+        "description": t`Speed of transition animations throughout the interface`
+    },
+    {
+        "type": "select",
+        "varId": "buttonHoverEffect",
+        "displayText": t`Button Hover Effect`,
+        "default": "scale",
+        "options": [
+            {
+                "label": t`None`,
+                "value": "none"
+            },
+            {
+                "label": t`Scale`,
+                "value": "scale"
+            },
+            {
+                "label": t`Glow`,
+                "value": "glow"
+            },
+            {
+                "label": t`Shadow`,
+                "value": "shadow"
+            },
+            {
+                "label": t`Underline`,
+                "value": "underline"
+            }
+        ],
+        "category": "animations",
+        "description": t`Visual effect when hovering over buttons`
+    },
+    {
+        "type": "select",
+        "varId": "messageTransition",
+        "displayText": t`Message Appearance Animation`,
+        "default": "fadeIn",
+        "options": [
+            {
+                "label": t`None`,
+                "value": "none"
+            },
+            {
+                "label": t`Fade In`,
+                "value": "fadeIn"
+            },
+            {
+                "label": t`Slide In`,
+                "value": "slideIn"
+            },
+            {
+                "label": t`Bounce`,
+                "value": "bounce"
+            },
+            {
+                "label": t`Scale`,
+                "value": "scale"
+            }
+        ],
+        "category": "animations",
+        "description": t`Animation effect when new messages appear`
+    },
+
+    // New Section: Border and Shape Settings
+    {
+        "type": "slider",
+        "varId": "borderRadius",
+        "displayText": t`Border Radius`,
+        "default": "8",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "category": "borders",
+        "description": t`Roundness of corners on UI elements in pixels`
+    },
+    {
+        "type": "slider",
+        "varId": "messageBorderRadius",
+        "displayText": t`Message Border Radius`,
+        "default": "12",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "category": "borders",
+        "description": t`Roundness of corners on message bubbles in pixels`
+    },
+    {
+        "type": "select",
+        "varId": "borderStyle",
+        "displayText": t`Border Style`,
+        "default": "solid",
+        "options": [
+            {
+                "label": t`Solid`,
+                "value": "solid"
+            },
+            {
+                "label": t`Dashed`,
+                "value": "dashed"
+            },
+            {
+                "label": t`Dotted`,
+                "value": "dotted"
+            },
+            {
+                "label": t`Double`,
+                "value": "double"
+            },
+            {
+                "label": t`None`,
                 "value": "none"
             }
         ],
-        "category": "visualNovel",
-        "description": t`Bottom transparency effect for character portraits in Visual Novel mode`
-    },
-
-    // 進階設定 (Advanced settings)
-    {
-        "type": "checkbox",
-        "varId": "enableMobile-send_form",
-        "displayText": t`Enable New Mobile Input Field`,
-        "default": true,
-        "category": "features",
-        "description": t`A message input field designed for mobile, providing a wider input box`,
-        "cssBlock":  `
-            /* Mobile Input Field 手機端輸入欄位 */
-            @media screen and (max-width: 1000px) {
-                /* Mobile Chat Input Overall 聊天輸入欄位整體 */
-                #send_form {
-                    margin-bottom: 0 !important;
-                    min-height: 100% !important;
-                    padding: 5px 20px;
-                    padding-top: 10px;
-                    border-radius: 15px 15px 0 0 !important;
-                    transition: all 0.5s ease;
-                    border: 0 !important;
-                    border-top: 1.25px solid color-mix(in srgb, var(--SmartThemeBodyColor) 50%, transparent) !important;
-
-                    &:focus-within {
-                        bborder: 0 !important;
-                        border-top: 1.25px solid var(--customThemeColor) !important;
-                        box-shadow: 0 0 5px var(--customThemeColor);
-                    }
-
-                    &.compact {
-                        #leftSendForm,
-                        #rightSendForm {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            flex-wrap: nowrap;
-                            width: unset;
-                        }
-                    }
-                }
-
-                /* Mobile Chat Menu 聊天輸選單 */
-                #nonQRFormItems {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-template-rows: auto auto;
-                    grid-template-areas:
-                    "textarea textarea"
-                    "left right";
-                    gap: 0;
-                    padding: 0;
-
-                    #send_textarea {
-                        grid-area: textarea;
-                        box-sizing: border-box;
-                        width: 100%;
-                        padding: 5px 0;
-                    }
-                }
-
-                /* Mobile Left & Right Chat Menu 左右側聊天選單 */
-                #leftSendForm,
-                #rightSendForm {
-                    margin: 3px 0;
-                }
-                #leftSendForm {
-                    grid-area: left;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start !important;
-                }
-                #rightSendForm {
-                    grid-area: right;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-end !important;
-                }
-
-                #rightSendForm > div,
-                #leftSendForm > div,
-                #nonQRFormItems #options_button {
-                    font-size: 16px;
-                }
-                #nonQRFormItems #options_button {
-                    margin-right: 10px;
-                }
-
-                #qr--bar > .qr--buttons {
-                    padding: 0px !important;
-                }
-            }
-    `
+        "category": "borders",
+        "description": t`Style of borders on UI elements`
     },
     {
-        "type": "checkbox",
-        "varId": "enableMobile-hidden_scrollbar",
-        "displayText": t`Enable Mobile Hidden Scrollbar`,
-        "default": true,
-        "category": "features",
-        "description": t`Hides scrollbars for a clean mobile interface`,
-        "cssBlock":  `
-            /* Mobile Hidden Scrollbar 移動端隱藏捲軸 */
-            @media screen and (max-width: 1000px) {
-                * {
-                    scrollbar-width: none;
-                    -ms-overflow-style: none;
-                    &::-webkit-scrollbar {
-                        display: none !important;
-                    }
-                }
-
-                .scrollableInner {
-                    padding: 0 !important;
-                }
-            }
-        `
-    },
-    {
-        "type": "checkbox",
-        "varId": "enableMessageDetails",
-        "displayText": t`Hide Additional Message Details`,
-        "default": false,
-        "category": "features",
-        "description": t`Message additional details (name, ID, time, token counter, etc.) show only on hover or click`,
-        "cssBlock": `
-            .mes .ch_name,
-            .mes .mesIDDisplay,
-            .mes .mes_timer,
-            .mes .tokenCounterDisplay {
-                visibility: hidden !important;
-                opacity: 0 !important;
-                transition: all var(--messageDetailsAnimationDuration) cubic-bezier(0.4, 0, 0.2, 1),
-                            visibility 0s ease var(--messageDetailsAnimationDuration) !important;
-                z-index: 10 !important;
-                pointer-events: auto !important;
-            }
-
-            .mes:hover .ch_name,
-            .mes:hover .mesIDDisplay,
-            .mes:hover .mes_timer,
-            .mes:hover .tokenCounterDisplay,
-            .mes.active-message .ch_name,
-            .mes.active-message .mesIDDisplay,
-            .mes.active-message .mes_timer,
-            .mes.active-message .tokenCounterDisplay {
-                visibility: visible !important;
-                opacity: 1 !important;
-                transition: all var(--messageDetailsAnimationDuration) cubic-bezier(0.4, 0, 0.2, 1),
-                            visibility var(--messageDetailsAnimationDuration) ease !important;
-            }
-
-            body.flatchat,
-            body.bubblechat,
-            body.ripplestyle {
-                .mes .ch_name,
-                .mes .mesIDDisplay,
-                .mes .mes_timer,
-                .mes .tokenCounterDisplay {
-                    margin-top: -40px;
-                    background: none;
-                }
-
-                .mes:hover .ch_name,
-                .mes:hover .mesIDDisplay,
-                .mes:hover .mes_timer,
-                .mes:hover .tokenCounterDisplay,
-                .mes.active-message .ch_name,
-                .mes.active-message .mesIDDisplay,
-                .mes.active-message .mes_timer,
-                .mes.active-message .tokenCounterDisplay {
-                    margin-top: unset;
-                    background: unset;
-                }
-            }
-
-            body.flatchat,
-            body.bubblechat,
-            body.documentstyle,
-            body.ripplestyle {
-                .mes .ch_name,
-                .mes .mesIDDisplay,
-                .mes .mes_timer,
-                .mes .tokenCounterDisplay {
-                    transform: translateY(-40px);
-                }
-
-                .mes:hover .ch_name,
-                .mes:hover .mesIDDisplay,
-                .mes:hover .mes_timer,
-                .mes:hover .tokenCounterDisplay,
-                .mes.active-message .ch_name,
-                .mes.active-message .mesIDDisplay,
-                .mes.active-message .mes_timer,
-                .mes.active-message .tokenCounterDisplay {
-                    transform: translateY(0);
-                }
-            }
-        `
-    },
-    {
-        "type": "checkbox",
-        "varId": "justifyParagraphText",
-        "displayText": t`Justify Paragraph Text`,
-        "default": false,
-        "category": "features",
-        "description": t`Aligns paragraph text for Chinese, Japanese, and Korean for better readability; not suitable for English layout`,
-        "cssBlock": `
-            p {
-                text-align: justify;
-                text-justify: inter-ideograph;
-                }
-        `
-    },
-    {
-        "type": "checkbox",
-        "varId": "increaseMobileInputPadding",
-        "displayText": t`Increase Chat Input Field Spacing`,
-        "default": false,
-        "category": "features",
-        "description": t`Add extra bottom padding to chat input fields, especially suitable for tablets and mobile phones (using PWA, etc.)`,
-        "cssBlock": `
-            #form_sheld {
-                margin-bottom: 10px;
-
-                @media only screen and (min-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (pointer: fine) {
-                    margin-bottom: 20px;
-                }
-            }
-            @media screen and (max-width: 1000px) {
-                #send_form {
-                    padding-bottom: 20px;
-                }
-            }
-        `
-    },
-    {
-        "type": "checkbox",
-        "varId": "fixTabletMenuLayout",
-        "displayText": t`Fix Tablet Menu Layout`,
-        "default": false,
-        "category": "features",
-        "description": t`Optimized for tablet users to prevent menu layout issues. Note: Tablet support in SillyTavern is currently limited and may not address all issues`,
-        "cssBlock": `
-            .drawer-content {
-                top: -3px !important;
-            }
-            .fillLeft,
-            .fillRight {
-                width: 100dvw !important;
-                min-width: 100dvw !important;
-            }
-        `
+        "type": "slider",
+        "varId": "borderWidth",
+        "displayText": t`Border Width`,
+        "default": "1",
+        "min": 0,
+        "max": 5,
+        "step": 1,
+        "category": "borders",
+        "description": t`Width of borders on UI elements in pixels`
     }
 ];
 
@@ -3422,36 +3383,40 @@ function initAvatarInjector() {
 * Apply all CSS variables from settings
 */
 function applyAllThemeSettings() {
-    const context = SillyTavern.getContext();
-    const settings = context.extensionSettings[settingsKey];
+    const settings = extension_settings[settingsKey];
+    if (!settings) return;
 
-    // 確保有專用的style元素 (Ensure dedicated style element)
-    let themeStyleElement = document.getElementById('dynamic-theme-styles');
-    if (!themeStyleElement) {
-        themeStyleElement = document.createElement('style');
-        themeStyleElement.id = 'dynamic-theme-styles';
-        document.head.appendChild(themeStyleElement);
+    // Apply each custom theme setting
+    for (const setting of themeCustomSettings) {
+        const value = settings[setting.varId];
+        if (value !== undefined) {
+            applyThemeSetting(setting.varId, value);
+        } else {
+            // Use default if value not set
+            applyThemeSetting(setting.varId, setting.default);
+        }
     }
 
-    // 構建CSS變量定義 (Build CSS variable definitions)
-    let cssVars = ':root {\n';
-
-    // 處理所有設定項 (Process all settings)
-    themeCustomSettings.forEach(setting => {
-        const { varId } = setting;
-        const value = settings[varId];
-
-        if (value !== undefined) {
-            cssVars += `  --${varId}: ${value} !important;\n`;
+    // Apply any inline CSS blocks from checkbox settings
+    for (const setting of themeCustomSettings) {
+        if (setting.type === 'checkbox' && setting.cssBlock) {
+            const value = settings[setting.varId];
+            const enabled = value !== undefined ? value : setting.default;
+            updateInlineCssBlock(enabled, setting.varId, setting.cssBlock);
         }
-    });
-
-    cssVars += '}';
-
-    // 應用CSS變量 (Apply CSS variables)
-    themeStyleElement.textContent = cssVars;
-
-    console.debug(`[${EXTENSION_NAME}]`, 'Applied all theme settings');
+    }
+    
+    // Add CSS classes for button hover effects
+    const buttonHoverEffect = settings.buttonHoverEffect || 'scale';
+    document.documentElement.setAttribute('data-buttonHoverEffect', buttonHoverEffect);
+    
+    // Add data attribute for message transitions
+    const messageTransition = settings.messageTransition || 'fadeIn';
+    document.documentElement.setAttribute('data-messageTransition', messageTransition);
+    
+    // Handle animations toggle
+    const enableAnimations = settings.enableAnimations !== undefined ? settings.enableAnimations : true;
+    document.documentElement.setAttribute('data-enableAnimations', enableAnimations);
 }
 
 
@@ -3462,15 +3427,30 @@ function applyAllThemeSettings() {
 * @param {string} value - 設定值 (Setting value)
 */
 function applyThemeSetting(varId, value) {
-    // 直接設定CSS變量 (Directly set CSS variable)
-    document.documentElement.style.setProperty(`--${varId}`, value, 'important');
-
-    // 觸發自定義事件 (Trigger custom event)
-    document.dispatchEvent(new CustomEvent('themeSettingChanged', {
-        detail: { varId, value }
-    }));
-
-    console.debug(`[${EXTENSION_NAME}]`, `Applied setting: --${varId} = ${value}`);
+    // Apply CSS variable
+    document.documentElement.style.setProperty(`--${varId}`, value);
+    
+    // Handle special cases
+    if (varId === 'buttonHoverEffect') {
+        document.documentElement.setAttribute('data-buttonHoverEffect', value);
+    }
+    else if (varId === 'messageTransition') {
+        document.documentElement.setAttribute('data-messageTransition', value);
+    }
+    else if (varId === 'enableAnimations') {
+        document.documentElement.setAttribute('data-enableAnimations', value);
+    }
+    else if (varId === 'borderRadius' || varId === 'messageBorderRadius' || 
+             varId === 'borderWidth' || varId === 'messagePadding' || 
+             varId === 'messageSpacing' || varId === 'baseFontSize') {
+        // These are numerical values, ensure they're applied properly
+        document.documentElement.style.setProperty(`--${varId}`, value + 'px');
+    }
+    
+    // For color pickers, update the color slider thumb
+    if (varId.includes('Color') && !varId.includes('customScrollbarColor')) {
+        updateColorSliderThumb(varId, value);
+    }
 }
 
 /**
